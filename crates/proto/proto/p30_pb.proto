@@ -1,0 +1,182 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p30;
+
+// cmd_id = 30002
+message cs_30002 {
+  required uint32 type = 1;
+  required uint32 index_begin = 2;
+  required uint32 index_end = 3;
+}
+
+// cmd_id = 30004
+message cs_30004 {
+  required uint32 index_begin = 1;
+  required uint32 index_end = 2;
+}
+
+// cmd_id = 30006
+message cs_30006 {
+  required uint32 cmd = 1;
+  repeated match_expression match_list = 2;
+}
+
+// cmd_id = 30008
+message cs_30008 {
+  required uint32 mail_id = 1;
+}
+
+// cmd_id = 30010
+message cs_30010 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 30012
+message cs_30012 {
+  required uint32 oil = 1;
+  required uint32 gold = 2;
+}
+
+// cmd_id = 30014
+message cs_30014 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 30016
+message cs_30016 {
+  required uint32 item_id = 1;
+  required uint32 groupid = 2;
+}
+
+// cmd_id = 30018
+message cs_30018 {
+  required uint32 item_id = 1;
+  optional uint32 year = 2;
+  optional uint32 groupid = 3;
+}
+
+// cmd_id = 30102
+message cs_30102 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 30104
+message cs_30104 {
+  required uint32 reward_id = 1;
+}
+
+message mail_info {
+  required uint32 id = 1;
+  required uint32 date = 2;
+  required string title = 3;
+  required string content = 4;
+  repeated .common.dropinfo attachment_list = 5;
+  required uint32 attach_flag = 6;
+  required uint32 read_flag = 7;
+  required uint32 imp_flag = 8;
+}
+
+message mail_simple_info {
+  required uint32 id = 1;
+  required uint32 date = 2;
+  required string title = 3;
+  required string content = 4;
+  repeated .common.dropinfo attachment_list = 5;
+}
+
+message mail_title {
+  required uint32 id = 1;
+  required string title = 2;
+}
+
+message match_expression {
+  required uint32 type = 1;
+  repeated uint32 arg_list = 2;
+}
+
+// cmd_id = 30001
+message sc_30001 {
+  required uint32 unread_number = 1;
+  required uint32 total_number = 2;
+}
+
+// cmd_id = 30003
+message sc_30003 {
+  repeated mail_info mail_list = 1;
+}
+
+// cmd_id = 30005
+message sc_30005 {
+  repeated mail_simple_info mail_list = 1;
+}
+
+// cmd_id = 30007
+message sc_30007 {
+  required uint32 result = 1;
+  repeated uint32 mail_id_list = 2;
+  repeated .common.dropinfo drop_list = 3;
+  required uint32 unread_number = 4;
+}
+
+// cmd_id = 30009
+message sc_30009 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 30011
+message sc_30011 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 30013
+message sc_30013 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 30015
+message sc_30015 {
+  repeated mail_title mail_title_list = 2;
+}
+
+// cmd_id = 30017
+message sc_30017 {
+  repeated uint32 years = 1;
+}
+
+// cmd_id = 30019
+message sc_30019 {
+  required uint32 ret = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 30101
+message sc_30101 {
+  required uint32 number = 1;
+  required uint32 max_timestamp = 2;
+}
+
+// cmd_id = 30103
+message sc_30103 {
+  repeated time_reward_info time_reward_list = 1;
+}
+
+// cmd_id = 30105
+message sc_30105 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  required uint32 number = 3;
+  required uint32 max_timestamp = 4;
+}
+
+message time_reward_info {
+  required uint32 id = 1;
+  required uint32 timestamp = 2;
+  required string title = 3;
+  required string text = 4;
+  repeated .common.dropinfo attachment_list = 5;
+  required uint32 attach_flag = 6;
+  required uint32 send_time = 7;
+}
+

@@ -1,0 +1,173 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p14;
+
+// cmd_id = 14002
+message cs_14002 {
+  required uint32 ship_id = 1;
+  required uint32 pos = 2;
+  required uint32 lv = 3;
+}
+
+// cmd_id = 14004
+message cs_14004 {
+  required uint32 equip_id = 1;
+  required uint32 lv = 2;
+}
+
+// cmd_id = 14006
+message cs_14006 {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+// cmd_id = 14008
+message cs_14008 {
+  repeated equipinfo equip_list = 1;
+}
+
+// cmd_id = 14010
+message cs_14010 {
+  required uint32 equip_id = 1;
+}
+
+// cmd_id = 14013
+message cs_14013 {
+  required uint32 ship_id = 1;
+  required uint32 pos = 2;
+  required uint32 upgrade_id = 3;
+}
+
+// cmd_id = 14015
+message cs_14015 {
+  required uint32 equip_id = 1;
+  required uint32 upgrade_id = 2;
+}
+
+// cmd_id = 14201
+message cs_14201 {
+  required uint32 ship_id = 1;
+  required uint32 spweapon_id = 2;
+}
+
+// cmd_id = 14203
+message cs_14203 {
+  required uint32 ship_id = 1;
+  required uint32 spweapon_id = 2;
+  repeated uint32 item_id_list = 3;
+  repeated uint32 spweapon_id_list = 4;
+}
+
+// cmd_id = 14205
+message cs_14205 {
+  required uint32 ship_id = 1;
+  required uint32 spweapon_id = 2;
+}
+
+// cmd_id = 14207
+message cs_14207 {
+  required uint32 ship_id = 1;
+  required uint32 spweapon_id = 2;
+  required uint32 cmd = 3;
+}
+
+// cmd_id = 14209
+message cs_14209 {
+  required uint32 template_id = 1;
+  repeated uint32 item_id_list = 2;
+  repeated uint32 spweapon_id_list = 3;
+}
+
+message equipinfo {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message equipskininfo {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 14001
+message sc_14001 {
+  repeated equipinfo equip_list = 1;
+  repeated uint32 ship_id_list = 2;
+  repeated .common.spweaponinfo spweapon_list = 3;
+  required uint32 spweapon_bag_size = 4;
+}
+
+// cmd_id = 14003
+message sc_14003 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14005
+message sc_14005 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14007
+message sc_14007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14009
+message sc_14009 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14011
+message sc_14011 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14014
+message sc_14014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14016
+message sc_14016 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14101
+message sc_14101 {
+  repeated equipskininfo equip_skin_list = 1;
+}
+
+// cmd_id = 14200
+message sc_14200 {
+  repeated .common.spweaponinfo spweapon_list = 1;
+}
+
+// cmd_id = 14202
+message sc_14202 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14204
+message sc_14204 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14206
+message sc_14206 {
+  required uint32 result = 1;
+  required uint32 attr_temp_1 = 2;
+  required uint32 attr_temp_2 = 3;
+}
+
+// cmd_id = 14208
+message sc_14208 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 14210
+message sc_14210 {
+  required uint32 result = 1;
+  optional .common.spweaponinfo spweapon = 2;
+}
+

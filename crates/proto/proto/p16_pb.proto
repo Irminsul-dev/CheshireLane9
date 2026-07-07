@@ -1,0 +1,124 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p16;
+
+// cmd_id = 16001
+message cs_16001 {
+  required uint32 id = 1;
+  required uint32 number = 2;
+}
+
+// cmd_id = 16100
+message cs_16100 {
+  required uint32 cnt = 1;
+}
+
+// cmd_id = 16104
+message cs_16104 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 16106
+message cs_16106 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 16108
+message cs_16108 {
+  required uint32 flash_time = 1;
+  required uint32 shopid = 2;
+  repeated selected_info selected = 3;
+}
+
+// cmd_id = 16201
+message cs_16201 {
+  required uint32 type = 1;
+  required uint32 id = 2;
+  required uint32 count = 3;
+}
+
+// cmd_id = 16203
+message cs_16203 {
+  required uint32 flag = 1;
+}
+
+// cmd_id = 16205
+message cs_16205 {
+  required uint32 id = 1;
+  required uint32 cost_type = 2;
+}
+
+message goods_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 16002
+message sc_16002 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 16101
+message sc_16101 {
+  required uint32 result = 1;
+  repeated .common.shipinfo ship_list = 2;
+}
+
+// cmd_id = 16105
+message sc_16105 {
+  repeated uint32 first_pay_list = 1;
+  repeated shopinfo pay_list = 2;
+  repeated shopinfo normal_list = 3;
+  repeated shopinfo normal_group_list = 4;
+}
+
+// cmd_id = 16107
+message sc_16107 {
+  required uint32 result = 1;
+  required uint32 item_flash_time = 2;
+  repeated goods_info good_list = 3;
+}
+
+// cmd_id = 16109
+message sc_16109 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 16200
+message sc_16200 {
+  repeated shopinfo core_shop_list = 1;
+  repeated shopinfo blue_shop_list = 2;
+  repeated shopinfo normal_shop_list = 3;
+  required uint32 month = 4;
+}
+
+// cmd_id = 16202
+message sc_16202 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 16204
+message sc_16204 {
+  required uint32 ret = 1;
+}
+
+// cmd_id = 16206
+message sc_16206 {
+  required uint32 ret = 1;
+}
+
+message selected_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message shopinfo {
+  required uint32 shop_id = 1;
+  required uint32 pay_count = 2;
+}
+

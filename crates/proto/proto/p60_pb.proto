@@ -1,0 +1,338 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+import "guild_pb.proto";
+
+package p60;
+
+// cmd_id = 60001
+message cs_60001 {
+  required uint32 faction = 1;
+  required uint32 policy = 2;
+  required string name = 3;
+  required string manifesto = 4;
+}
+
+// cmd_id = 60003
+message cs_60003 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 60005
+message cs_60005 {
+  required uint32 id = 1;
+  required string content = 2;
+}
+
+// cmd_id = 60007
+message cs_60007 {
+  required string chat = 1;
+}
+
+// cmd_id = 60010
+message cs_60010 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 60012
+message cs_60012 {
+  required uint32 player_id = 1;
+  required uint32 duty_id = 2;
+}
+
+// cmd_id = 60014
+message cs_60014 {
+  required uint32 player_id = 1;
+}
+
+// cmd_id = 60016
+message cs_60016 {
+  required uint32 player_id = 1;
+}
+
+// cmd_id = 60018
+message cs_60018 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 60020
+message cs_60020 {
+  required uint32 player_id = 1;
+}
+
+// cmd_id = 60022
+message cs_60022 {
+  required uint32 player_id = 1;
+}
+
+// cmd_id = 60024
+message cs_60024 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 60026
+message cs_60026 {
+  required uint32 type = 1;
+  optional uint32 int = 2;
+  optional string str = 3;
+}
+
+// cmd_id = 60028
+message cs_60028 {
+  required uint32 type = 1;
+  required string keyword = 2;
+}
+
+// cmd_id = 60033
+message cs_60033 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 60035
+message cs_60035 {
+  required uint32 goodsid = 1;
+  required uint32 index = 2;
+  repeated guild_shop_info selected = 3;
+}
+
+// cmd_id = 60037
+message cs_60037 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 60100
+message cs_60100 {
+  required uint32 count = 1;
+}
+
+// cmd_id = 60102
+message cs_60102 {
+  required uint32 type = 1;
+}
+
+message goods_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  required uint32 index = 3;
+}
+
+message guide_chat {
+  required player_info player = 1;
+  required string content = 2;
+  required uint32 time = 3;
+}
+
+message guild_base_info {
+  required uint32 id = 1;
+  required uint32 policy = 2;
+  required uint32 faction = 3;
+  required string name = 4;
+  required uint32 level = 5;
+  required string announce = 6;
+  required string manifesto = 7;
+  required uint32 exp = 8;
+  required uint32 member_count = 9;
+  required uint32 change_faction_cd = 10;
+  required uint32 kick_leader_cd = 11;
+}
+
+message guild_expansion_info {
+  required uint32 capital = 1;
+  required .guild.weekly_task this_weekly_tasks = 2;
+  required uint32 benefit_finish_time = 3;
+  repeated .guild.guild_technology technologys = 4;
+  required uint32 retreat_cnt = 5;
+  required uint32 tech_cancel_cnt = 6;
+  required uint32 last_benefit_finish_time = 7;
+  required uint32 active_event_cnt = 8;
+}
+
+message guild_info {
+  required guild_base_info base = 1;
+  repeated member_info member = 2;
+  repeated log_info log = 3;
+  required guild_expansion_info guild_ex = 4;
+}
+
+message guild_shop_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message guild_simple_info {
+  required guild_base_info base = 1;
+  required player_info leader = 2;
+  required uint32 tech_seat = 3;
+}
+
+message log_info {
+  required uint32 cmd = 1;
+  required uint32 time = 2;
+  required uint32 user_id = 3;
+  required string name = 4;
+  optional uint32 arg1 = 5;
+}
+
+message member_info {
+  required uint32 liveness = 1;
+  required uint32 duty = 2;
+  required uint32 id = 3;
+  required string name = 4;
+  required uint32 lv = 5;
+  required string adv = 6;
+  required uint32 online = 7;
+  required uint32 pre_online_time = 8;
+  optional .common.displayinfo display = 9;
+  required uint32 join_time = 12;
+}
+
+message msg_info {
+  required uint32 timestamp = 1;
+  required player_info player = 2;
+  required string content = 3;
+}
+
+message player_info {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 lv = 3;
+  optional .common.displayinfo display = 4;
+}
+
+// cmd_id = 60000
+message sc_60000 {
+  required guild_info guild = 1;
+}
+
+// cmd_id = 60002
+message sc_60002 {
+  required uint32 result = 1;
+  required uint32 id = 2;
+}
+
+// cmd_id = 60004
+message sc_60004 {
+  repeated msg_info request_list = 2;
+}
+
+// cmd_id = 60006
+message sc_60006 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60008
+message sc_60008 {
+  required guide_chat chat = 1;
+}
+
+// cmd_id = 60009
+message sc_60009 {
+  required uint32 count = 1;
+}
+
+// cmd_id = 60011
+message sc_60011 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60013
+message sc_60013 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60015
+message sc_60015 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60017
+message sc_60017 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60019
+message sc_60019 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60021
+message sc_60021 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60023
+message sc_60023 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60025
+message sc_60025 {
+  repeated guild_simple_info guild_list = 1;
+}
+
+// cmd_id = 60027
+message sc_60027 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 60029
+message sc_60029 {
+  required uint32 result = 1;
+  repeated guild_simple_info guild = 2;
+}
+
+// cmd_id = 60030
+message sc_60030 {
+  required guild_base_info guild = 1;
+}
+
+// cmd_id = 60031
+message sc_60031 {
+  repeated member_info member_list = 1;
+  repeated log_info log_list = 2;
+}
+
+// cmd_id = 60032
+message sc_60032 {
+  required uint32 lv = 1;
+  required uint32 exp = 2;
+}
+
+// cmd_id = 60034
+message sc_60034 {
+  required uint32 result = 1;
+  required shop_info info = 2;
+}
+
+// cmd_id = 60036
+message sc_60036 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 60101
+message sc_60101 {
+  repeated guide_chat chat_list = 1;
+}
+
+// cmd_id = 60103
+message sc_60103 {
+  required user_guild_info user_info = 1;
+}
+
+message shop_info {
+  required uint32 refresh_count = 1;
+  required uint32 next_refresh_time = 2;
+  repeated goods_info good_list = 3;
+}
+
+message user_guild_info {
+  required uint32 donate_count = 1;
+  repeated uint32 donate_tasks = 2;
+  required uint32 benefit_time = 3;
+  repeated uint32 tech_id = 4;
+  required uint32 weekly_task_flag = 5;
+  required uint32 extra_donate = 6;
+  required uint32 extra_operation = 7;
+}
+

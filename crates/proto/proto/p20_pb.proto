@@ -1,0 +1,265 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p20;
+
+message act_task {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+}
+
+message act_task_init_list {
+  required uint32 act_id = 1;
+  repeated act_task tasks = 2;
+  repeated uint32 finish_ids = 3;
+}
+
+message act_task_list {
+  required uint32 act_id = 1;
+  repeated act_task tasks = 2;
+}
+
+message act_task_update {
+  required uint32 act_id = 1;
+  required uint32 task_id = 2;
+  required uint32 mode = 3;
+  required uint32 progress = 4;
+}
+
+// cmd_id = 20005
+message cs_20005 {
+  required uint32 id = 1;
+  repeated .common.dropinfo choice_award = 2;
+}
+
+// cmd_id = 20007
+message cs_20007 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 20009
+message cs_20009 {
+  repeated task_update progressinfo = 1;
+}
+
+// cmd_id = 20011
+message cs_20011 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 20013
+message cs_20013 {
+  required uint32 id = 1;
+  required uint32 item_cost = 2;
+}
+
+// cmd_id = 20016
+message cs_20016 {
+  required uint32 event_type = 1;
+  required uint32 event_target = 2;
+  required uint32 event_count = 3;
+}
+
+// cmd_id = 20106
+message cs_20106 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 20108
+message cs_20108 {
+  repeated uint32 id = 1;
+}
+
+// cmd_id = 20110
+message cs_20110 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 20205
+message cs_20205 {
+  required uint32 act_id = 1;
+  repeated uint32 task_ids = 2;
+}
+
+// cmd_id = 20207
+message cs_20207 {
+  required uint32 act_id = 1;
+  required uint32 task_id = 2;
+  required uint32 item_cost = 3;
+}
+
+// cmd_id = 20209
+message cs_20209 {
+  repeated act_task_update progressinfo = 1;
+}
+
+// cmd_id = 20001
+message sc_20001 {
+  repeated .common.taskinfo info = 1;
+}
+
+// cmd_id = 20002
+message sc_20002 {
+  repeated task_progress info = 1;
+}
+
+// cmd_id = 20003
+message sc_20003 {
+  repeated task_add info = 1;
+}
+
+// cmd_id = 20004
+message sc_20004 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 20006
+message sc_20006 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 20008
+message sc_20008 {
+  required uint32 result = 1;
+  optional task_add task = 2;
+}
+
+// cmd_id = 20010
+message sc_20010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 20012
+message sc_20012 {
+  repeated uint32 id_list = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 20014
+message sc_20014 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 20015
+message sc_20015 {
+  required uint32 time = 1;
+}
+
+// cmd_id = 20017
+message sc_20017 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 20101
+message sc_20101 {
+  required weekly_info info = 1;
+}
+
+// cmd_id = 20102
+message sc_20102 {
+  repeated weekly_task task = 1;
+}
+
+// cmd_id = 20103
+message sc_20103 {
+  repeated uint32 id = 1;
+}
+
+// cmd_id = 20104
+message sc_20104 {
+  repeated uint32 id = 1;
+}
+
+// cmd_id = 20105
+message sc_20105 {
+  required uint32 pt = 1;
+}
+
+// cmd_id = 20107
+message sc_20107 {
+  required uint32 result = 1;
+  optional weekly_task next = 2;
+}
+
+// cmd_id = 20109
+message sc_20109 {
+  required uint32 result = 1;
+  required uint32 pt = 2;
+  repeated weekly_task next = 3;
+}
+
+// cmd_id = 20111
+message sc_20111 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 20201
+message sc_20201 {
+  repeated act_task_init_list info = 1;
+}
+
+// cmd_id = 20202
+message sc_20202 {
+  repeated act_task_list info = 1;
+}
+
+// cmd_id = 20203
+message sc_20203 {
+  repeated act_task_list info = 1;
+}
+
+// cmd_id = 20204
+message sc_20204 {
+  repeated act_task_list info = 1;
+}
+
+// cmd_id = 20206
+message sc_20206 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 20208
+message sc_20208 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 20210
+message sc_20210 {
+  required uint32 result = 1;
+}
+
+message task_add {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+  required uint32 accept_time = 3;
+  optional uint32 submit_time = 4;
+}
+
+message task_progress {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+}
+
+message task_update {
+  required uint32 id = 1;
+  required uint32 mode = 2;
+  required uint32 progress = 3;
+}
+
+message weekly_info {
+  repeated weekly_task task = 1;
+  required uint32 pt = 2;
+  required uint32 reward_lv = 3;
+}
+
+message weekly_task {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+}
+

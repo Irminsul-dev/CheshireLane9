@@ -1,0 +1,400 @@
+syntax = "proto2";
+
+package p27;
+
+message child_attr {
+  required uint32 id = 1;
+  required uint32 val = 2;
+}
+
+message child_buff {
+  required uint32 id = 1;
+  required child_time time = 2;
+}
+
+message child_drop {
+  required uint32 type = 1;
+  required uint32 id = 2;
+  required int32 number = 3;
+}
+
+message child_favor {
+  required uint32 lv = 1;
+  required uint32 exp = 2;
+}
+
+message child_info {
+  required uint32 tid = 1;
+  required child_time cur_time = 2;
+  required uint32 mood = 3;
+  required uint32 money = 4;
+  required uint32 site_number = 5;
+  repeated child_attr attrs = 6;
+  required child_favor favor = 7;
+  repeated child_item items = 8;
+  repeated child_plan_history plan_history = 9;
+  repeated uint32 memorys = 10;
+  repeated child_plan_cell plans = 11;
+  repeated child_polaroid polaroids = 12;
+  required uint32 target = 13;
+  repeated child_task tasks = 14;
+  repeated uint32 realized_wish = 15;
+  repeated child_buff buffs = 16;
+  required string user_name = 17;
+  repeated uint32 spec_events = 18;
+  required uint32 can_trigger_home_event = 19;
+  repeated uint32 home_events = 20;
+  repeated uint32 discount_event_id = 21;
+  repeated child_shop_data shop = 22;
+  repeated child_option_record option_records = 23;
+  repeated uint32 favor_award_history = 24;
+  required uint32 is_ending = 25;
+  required uint32 new_game_plus_count = 26;
+  required uint32 had_target_stage_award = 27;
+  required uint32 had_adjustment = 28;
+  required uint32 is_special_secretary_valid = 29;
+  required uint32 ending_buy_count = 30;
+  required uint32 memory_buy_count = 31;
+  required uint32 polaroid_buy_count = 32;
+}
+
+message child_item {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message child_option_record {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message child_plan_cell {
+  required uint32 day = 1;
+  required uint32 index = 2;
+  repeated child_plan_val value = 3;
+}
+
+message child_plan_history {
+  required uint32 plan_id = 1;
+  required uint32 count = 2;
+}
+
+message child_plan_result {
+  required uint32 day = 1;
+  required uint32 index = 2;
+  repeated child_drop plan_drops = 3;
+  repeated child_drop event_drops = 4;
+  repeated child_drop spec_event_drops = 5;
+}
+
+message child_plan_val {
+  optional uint32 plan_id = 1;
+  optional uint32 event_id = 2;
+  optional uint32 spec_event_id = 3;
+}
+
+message child_polaroid {
+  required uint32 id = 1;
+  required child_time time = 2;
+}
+
+message child_progress {
+  required uint32 task_id = 1;
+  required uint32 progress = 2;
+}
+
+message child_shop_data {
+  required uint32 shop_id = 1;
+  repeated child_shop_goods goods = 2;
+}
+
+message child_shop_goods {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message child_site_option {
+  required uint32 site_id = 1;
+  repeated uint32 option_ids = 2;
+}
+
+message child_task {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+}
+
+message child_time {
+  required uint32 month = 1;
+  required uint32 week = 2;
+  required uint32 day = 3;
+}
+
+// cmd_id = 27000
+message cs_27000 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27002
+message cs_27002 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27004
+message cs_27004 {
+  required uint32 siteid = 1;
+  required uint32 optionid = 2;
+}
+
+// cmd_id = 27006
+message cs_27006 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27008
+message cs_27008 {
+  required uint32 ending_id = 1;
+  repeated uint32 qualified_id = 2;
+}
+
+// cmd_id = 27010
+message cs_27010 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27012
+message cs_27012 {
+  repeated child_plan_cell plans = 1;
+}
+
+// cmd_id = 27014
+message cs_27014 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27016
+message cs_27016 {
+  required uint32 eventid = 1;
+}
+
+// cmd_id = 27019
+message cs_27019 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 27023
+message cs_27023 {
+  required uint32 id = 1;
+  required uint32 system = 2;
+}
+
+// cmd_id = 27027
+message cs_27027 {
+  required uint32 spec_events_id = 1;
+}
+
+// cmd_id = 27029
+message cs_27029 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27031
+message cs_27031 {
+  required string name = 1;
+}
+
+// cmd_id = 27033
+message cs_27033 {
+  required uint32 shop_id = 1;
+  repeated child_shop_goods goods = 2;
+}
+
+// cmd_id = 27035
+message cs_27035 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27037
+message cs_27037 {
+  required uint32 type_1 = 1;
+  repeated child_progress progresses = 2;
+}
+
+// cmd_id = 27039
+message cs_27039 {
+  required uint32 attr_id = 1;
+}
+
+// cmd_id = 27041
+message cs_27041 {
+  required uint32 ending_id = 1;
+}
+
+// cmd_id = 27043
+message cs_27043 {
+  required uint32 shop_id = 1;
+}
+
+// cmd_id = 27045
+message cs_27045 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27047
+message cs_27047 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 27049
+message cs_27049 {
+  required uint32 type = 1;
+  required uint32 ids = 2;
+}
+
+// cmd_id = 27001
+message sc_27001 {
+  required uint32 result = 1;
+  required child_info child = 2;
+}
+
+// cmd_id = 27003
+message sc_27003 {
+  required uint32 result = 1;
+  repeated child_plan_result plan_results = 2;
+  repeated child_plan_cell events = 3;
+}
+
+// cmd_id = 27005
+message sc_27005 {
+  required uint32 result = 1;
+  repeated child_drop drops = 2;
+  repeated child_drop event_drops = 3;
+  repeated uint32 events = 4;
+  required uint32 branch_id = 5;
+}
+
+// cmd_id = 27007
+message sc_27007 {
+  required uint32 result = 1;
+  repeated child_drop drops = 2;
+}
+
+// cmd_id = 27009
+message sc_27009 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27011
+message sc_27011 {
+  repeated uint32 endings = 1;
+  repeated uint32 qualifieds = 2;
+}
+
+// cmd_id = 27013
+message sc_27013 {
+  required uint32 result = 1;
+  repeated child_plan_cell plans = 2;
+}
+
+// cmd_id = 27015
+message sc_27015 {
+  required uint32 result = 1;
+  repeated uint32 events = 2;
+}
+
+// cmd_id = 27017
+message sc_27017 {
+  required uint32 result = 1;
+  repeated child_drop drops = 2;
+}
+
+// cmd_id = 27020
+message sc_27020 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27021
+message sc_27021 {
+  repeated child_task tasks = 1;
+}
+
+// cmd_id = 27022
+message sc_27022 {
+  repeated uint32 ids = 1;
+}
+
+// cmd_id = 27024
+message sc_27024 {
+  required uint32 result = 1;
+  repeated child_drop awards = 2;
+}
+
+// cmd_id = 27025
+message sc_27025 {
+  repeated child_task tasks = 1;
+}
+
+// cmd_id = 27028
+message sc_27028 {
+  required uint32 result = 1;
+  repeated child_drop drops = 2;
+}
+
+// cmd_id = 27030
+message sc_27030 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27032
+message sc_27032 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27034
+message sc_27034 {
+  required uint32 result = 1;
+  repeated child_drop drops = 2;
+}
+
+// cmd_id = 27036
+message sc_27036 {
+  required uint32 result = 1;
+  repeated child_drop drops = 2;
+}
+
+// cmd_id = 27038
+message sc_27038 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27040
+message sc_27040 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27042
+message sc_27042 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27044
+message sc_27044 {
+  required uint32 result = 1;
+  required child_shop_data shop_data = 2;
+}
+
+// cmd_id = 27046
+message sc_27046 {
+  required uint32 result = 1;
+  repeated child_site_option opts = 2;
+}
+
+// cmd_id = 27048
+message sc_27048 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 27050
+message sc_27050 {
+  required uint32 result = 1;
+}
+

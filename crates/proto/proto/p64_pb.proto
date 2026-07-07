@@ -1,0 +1,100 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p64;
+
+// cmd_id = 64001
+message cs_64001 {
+  required uint32 tech_group_id = 1;
+  required uint32 tech_id = 2;
+}
+
+// cmd_id = 64003
+message cs_64003 {
+  required uint32 tech_group_id = 1;
+}
+
+// cmd_id = 64005
+message cs_64005 {
+  required uint32 group_id = 1;
+  required uint32 tech_id = 2;
+}
+
+// cmd_id = 64007
+message cs_64007 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 64009
+message cs_64009 {
+  repeated techset techset_list = 1;
+}
+
+// cmd_id = 64990
+message cs_64990 {
+  required uint32 test = 1;
+}
+
+message fleettech {
+  required uint32 group_id = 1;
+  required uint32 effect_tech_id = 2;
+  required uint32 study_tech_id = 3;
+  required uint32 study_finish_time = 4;
+  required uint32 rewarded_tech = 5;
+}
+
+// cmd_id = 64000
+message sc_64000 {
+  repeated fleettech tech_list = 1;
+  repeated techset techset_list = 2;
+}
+
+// cmd_id = 64002
+message sc_64002 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 64004
+message sc_64004 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 64006
+message sc_64006 {
+  required uint32 result = 1;
+  repeated .common.dropinfo rewards = 2;
+}
+
+// cmd_id = 64008
+message sc_64008 {
+  required uint32 result = 1;
+  repeated .common.dropinfo rewards = 2;
+}
+
+// cmd_id = 64010
+message sc_64010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 64991
+message sc_64991 {
+  required temp_test test = 1;
+  optional temp_test test2 = 2;
+}
+
+message techset {
+  required uint32 ship_type = 1;
+  required uint32 attr_type = 2;
+  required uint32 set_value = 3;
+}
+
+message temp_test {
+  optional testtt message_test = 1;
+  optional uint32 int_test = 2;
+}
+
+message testtt {
+  required uint32 test = 1;
+}
+

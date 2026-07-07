@@ -1,0 +1,854 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p11;
+
+message activityinfo {
+  required uint32 id = 1;
+  required uint32 stop_time = 2;
+  optional uint32 data1 = 3;
+  optional uint32 data2 = 4;
+  optional uint32 data3 = 5;
+  optional uint32 data4 = 6;
+  repeated uint32 data1_list = 7;
+  repeated uint32 data2_list = 8;
+  repeated uint32 data3_list = 9;
+  repeated keyvaluelist date1_key_value_list = 10;
+  repeated groupinfo group_list = 11;
+  repeated .common.collectioninfo collection_list = 13;
+  repeated .common.taskinfo task_list = 14;
+  repeated benefitbuff buff_list = 15;
+  optional string str_data1 = 16;
+  repeated uint32 data4_list = 17;
+  optional pb_activity_mall mall = 18;
+}
+
+message benefitbuff {
+  required uint32 id = 1;
+  required uint32 timestamp = 2;
+}
+
+message cardinfo {
+  required uint32 type = 1;
+  required uint32 left_date = 2;
+}
+
+message cooldown {
+  required uint32 key = 1;
+  required uint32 timestamp = 2;
+}
+
+// cmd_id = 11001
+message cs_11001 {
+  required uint32 timestamp = 1;
+}
+
+// cmd_id = 11005
+message cs_11005 {
+  required uint32 type = 1;
+  required uint32 id = 2;
+}
+
+// cmd_id = 11007
+message cs_11007 {
+  required uint32 type = 1;
+  required string name = 2;
+}
+
+// cmd_id = 11009
+message cs_11009 {
+  required string adv = 1;
+}
+
+// cmd_id = 11011
+message cs_11011 {
+  repeated .common.kvdata character = 1;
+}
+
+// cmd_id = 11013
+message cs_11013 {
+  required uint32 type = 1;
+  required uint32 number = 2;
+}
+
+// cmd_id = 11016
+message cs_11016 {
+  required uint32 guide_index = 1;
+  required uint32 type = 2;
+}
+
+// cmd_id = 11017
+message cs_11017 {
+  required uint32 story_id = 1;
+}
+
+// cmd_id = 11019
+message cs_11019 {
+  required uint32 flag_id = 1;
+}
+
+// cmd_id = 11021
+message cs_11021 {
+  required uint32 flag_id = 1;
+}
+
+// cmd_id = 11023
+message cs_11023 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11025
+message cs_11025 {
+  required uint32 survey_id = 1;
+}
+
+// cmd_id = 11027
+message cs_11027 {
+  required uint32 survey_id = 1;
+}
+
+// cmd_id = 11029
+message cs_11029 {
+  required uint32 track_typ = 1;
+  required uint32 int_arg1 = 2;
+  required uint32 int_arg2 = 3;
+  required uint32 int_arg3 = 4;
+  required string str_arg1 = 5;
+}
+
+// cmd_id = 11030
+message cs_11030 {
+  required uint32 livingarea_cover_id = 1;
+}
+
+// cmd_id = 11032
+message cs_11032 {
+  repeated uint32 story_ids = 1;
+}
+
+// cmd_id = 11034
+message cs_11034 {
+  required uint32 loading_pic_open_flag = 1;
+  repeated uint32 loading_pic_id_list_1 = 2;
+  repeated uint32 loading_pic_id_list_2 = 3;
+}
+
+// cmd_id = 11100
+message cs_11100 {
+  required string cmd = 1;
+  optional string arg1 = 2;
+  optional string arg2 = 3;
+  optional string arg3 = 4;
+  optional string arg4 = 5;
+}
+
+// cmd_id = 11202
+message cs_11202 {
+  required uint32 activity_id = 1;
+  required uint32 cmd = 2;
+  optional uint32 arg1 = 3;
+  optional uint32 arg2 = 4;
+  optional uint32 arg3 = 5;
+  repeated uint32 arg_list = 6;
+  repeated uint32 arg_list2 = 7;
+  repeated .common.kvdata kvargs1 = 8;
+}
+
+// cmd_id = 11204
+message cs_11204 {
+  required uint32 activity_id = 1;
+  repeated groupinfo group_list = 2;
+}
+
+// cmd_id = 11206
+message cs_11206 {
+  required uint32 activity_id = 1;
+}
+
+// cmd_id = 11208
+message cs_11208 {
+  required uint32 activity_id = 1;
+}
+
+// cmd_id = 11212
+message cs_11212 {
+  required uint32 track_typ = 1;
+  required uint32 ship_tid = 2;
+  required uint32 from = 3;
+}
+
+// cmd_id = 11401
+message cs_11401 {
+  required uint32 room_id = 1;
+}
+
+// cmd_id = 11501
+message cs_11501 {
+  required uint32 shop_id = 1;
+  required uint32 device = 2;
+}
+
+// cmd_id = 11504
+message cs_11504 {
+  required string pay_id = 1;
+  required string pay_id_bili = 2;
+}
+
+// cmd_id = 11506
+message cs_11506 {
+  required uint32 state = 1;
+}
+
+// cmd_id = 11508
+message cs_11508 {
+  required string key = 1;
+  required string platform = 2;
+}
+
+// cmd_id = 11510
+message cs_11510 {
+  required string pay_id = 1;
+  required uint32 code = 2;
+}
+
+// cmd_id = 11513
+message cs_11513 {
+  required uint32 shop_id = 1;
+  required uint32 device = 2;
+}
+
+// cmd_id = 11515
+message cs_11515 {
+  required string key = 1;
+}
+
+// cmd_id = 11601
+message cs_11601 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11603
+message cs_11603 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11605
+message cs_11605 {
+  required string password = 1;
+  repeated uint32 system_list = 2;
+  required string notice = 3;
+}
+
+// cmd_id = 11607
+message cs_11607 {
+  required string password = 1;
+  repeated uint32 system_list = 2;
+}
+
+// cmd_id = 11609
+message cs_11609 {
+  required string password = 1;
+}
+
+// cmd_id = 11701
+message cs_11701 {
+  required uint32 id = 1;
+  required uint32 cmd = 2;
+}
+
+// cmd_id = 11703
+message cs_11703 {
+  required uint32 id = 1;
+  required uint32 discuss = 2;
+  required uint32 index = 3;
+}
+
+// cmd_id = 11705
+message cs_11705 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 11710
+message cs_11710 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11712
+message cs_11712 {
+  required uint32 chat_group_id = 1;
+  required uint32 chat_id = 2;
+  required uint32 value = 3;
+}
+
+// cmd_id = 11714
+message cs_11714 {
+  required uint32 group_id = 1;
+  required uint32 skin_id = 2;
+}
+
+// cmd_id = 11716
+message cs_11716 {
+  required uint32 group_id = 1;
+  required uint32 value = 2;
+}
+
+// cmd_id = 11718
+message cs_11718 {
+  required uint32 chat_group_id = 1;
+}
+
+// cmd_id = 11720
+message cs_11720 {
+  repeated uint32 chat_group_id_list = 1;
+}
+
+// cmd_id = 11722
+message cs_11722 {
+  repeated uint32 chat_group_id_list = 1;
+}
+
+// cmd_id = 11751
+message cs_11751 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11753
+message cs_11753 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11755
+message cs_11755 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 11800
+message cs_11800 {
+  required uint32 type = 1;
+}
+
+message groupinfo {
+  required uint32 id = 1;
+  repeated uint32 ship_list = 2;
+  repeated .common.commandersinfo commanders = 3;
+}
+
+message ins_message {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  required string text = 3;
+  optional string picture = 4;
+  repeated ins_player player_discuss = 5;
+  repeated ins_npc npc_discuss = 6;
+  repeated ins_npc npc_reply = 7;
+  required uint32 good = 8;
+  required uint32 is_good = 9;
+  required uint32 is_read = 10;
+  optional string oalist_pic = 11;
+}
+
+message ins_npc {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  required string text = 3;
+  repeated uint32 npc_reply = 4;
+}
+
+message ins_player {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  repeated string text_list = 3;
+  required string text = 4;
+  repeated uint32 npc_reply = 5;
+}
+
+message juus_chat_group {
+  required uint32 id = 1;
+  required uint32 op_time = 2;
+  required uint32 read_flag = 3;
+  repeated keyvalue reply_list = 4;
+}
+
+message juus_group {
+  required uint32 id = 1;
+  required uint32 skin_id = 2;
+  required uint32 favorite = 3;
+  required uint32 cur_chat_group = 4;
+  repeated juus_chat_group chat_group_list = 5;
+}
+
+message keyvalue {
+  required uint32 key = 1;
+  required uint32 value = 2;
+}
+
+message keyvaluelist {
+  required uint32 key = 1;
+  repeated keyvalue value_list = 2;
+  optional uint32 value = 3;
+}
+
+message livingarea_cover {
+  required uint32 id = 1;
+  repeated uint32 covers = 2;
+}
+
+message mulkeyvalue {
+  required uint32 key = 1;
+  required uint32 value1 = 2;
+  optional uint32 value2 = 3;
+  optional uint32 value3 = 4;
+}
+
+message noticeinfo {
+  required uint32 id = 1;
+  required string version = 2;
+  required string btn_title = 3;
+  required string title = 4;
+  required string title_image = 5;
+  required string time_desc = 6;
+  required string content = 7;
+  required uint32 tag_type = 8;
+  required uint32 icon = 9;
+  required string track = 10;
+  required uint32 priority = 11;
+  required uint32 need_level = 12;
+}
+
+message pb_activity_mall {
+  required uint32 level = 1;
+  required uint32 gold = 2;
+  required uint32 round = 3;
+  required pb_order order = 4;
+  repeated uint32 story_list = 5;
+  repeated pb_employee employee_list = 6;
+  repeated pb_floor floor_list = 7;
+  optional pb_last_round last_round = 8;
+}
+
+message pb_employee {
+  required uint32 id = 1;
+  required uint32 tid = 2;
+  repeated keyvalue attr_list = 3;
+}
+
+message pb_floor {
+  required uint32 id = 1;
+  repeated uint32 employee_list = 2;
+}
+
+message pb_last_round {
+  required uint32 balance = 1;
+  repeated uint32 floor_income = 2;
+}
+
+message pb_order {
+  required uint32 cur_order = 1;
+  required uint32 active_time = 2;
+  repeated uint32 employee_list = 3;
+  repeated uint32 finish_order_list = 4;
+}
+
+message resource {
+  required uint32 type = 1;
+  required uint32 num = 2;
+}
+
+message return_user_info {
+  required .common.usersimpleinfo user = 1;
+  required uint32 pt = 2;
+}
+
+// cmd_id = 11000
+message sc_11000 {
+  required uint32 timestamp = 1;
+  required uint32 monday_0oclock_timestamp = 2;
+}
+
+// cmd_id = 11002
+message sc_11002 {
+  required uint32 timestamp = 1;
+  required uint32 monday_0oclock_timestamp = 2;
+  required uint32 ship_count = 3;
+}
+
+// cmd_id = 11003
+message sc_11003 {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 level = 3;
+  required uint32 exp = 4;
+  repeated resource resource_list = 5;
+  required uint32 attack_count = 6;
+  required uint32 win_count = 7;
+  required string adv = 8;
+  repeated .common.kvdata character = 9;
+  required uint32 ship_bag_max = 10;
+  required uint32 equip_bag_max = 11;
+  required uint32 gm_flag = 12;
+  required uint32 rank = 13;
+  required uint32 pvp_attack_count = 14;
+  required uint32 pvp_win_count = 15;
+  required uint32 collect_attack_count = 16;
+  required uint32 guide_index = 17;
+  required uint32 buy_oil_count = 18;
+  required uint32 chat_room_id = 19;
+  repeated cardinfo card_list = 20;
+  required uint32 max_rank = 21;
+  required uint32 register_time = 22;
+  required uint32 ship_count = 23;
+  required uint32 acc_pay_lv = 24;
+  repeated uint32 story_list = 25;
+  required uint32 guild_wait_time = 26;
+  required uint32 chat_msg_ban_time = 27;
+  repeated uint32 flag_list = 28;
+  repeated cooldown cd_list = 29;
+  required uint32 commander_bag_max = 30;
+  repeated uint32 medal_id = 31;
+  repeated .common.idtimeinfo icon_frame_list = 32;
+  repeated .common.idtimeinfo chat_frame_list = 33;
+  optional .common.displayinfo display = 34;
+  required uint32 rmb = 35;
+  required .common.appreciationinfo appreciation = 36;
+  required uint32 theme_upload_not_allowed_time = 37;
+  repeated .common.refund_shopinfo refund_shop_info_list = 38;
+  repeated uint32 cartoon_read_mark = 39;
+  repeated uint32 cartoon_collect_mark = 40;
+  required uint32 random_ship_mode = 41;
+  repeated .common.kvdata random_ship_list = 42;
+  required uint32 marry_ship = 43;
+  repeated ship_taking_data taking_ship_list = 44;
+  repeated uint32 soundstory = 45;
+  required uint32 child_display = 46;
+  required livingarea_cover cover = 47;
+  required uint32 mail_storeroom_lv = 48;
+  repeated uint32 battle_ui_list = 49;
+  required uint32 battle_ui = 50;
+  repeated .common.kvdata activity_medals = 51;
+  required uint32 new_guide_index = 52;
+  required uint32 loading_pic_open_flag = 53;
+  repeated uint32 loading_pic_id_list_1 = 54;
+  repeated uint32 loading_pic_id_list_2 = 55;
+}
+
+// cmd_id = 11004
+message sc_11004 {
+  repeated resource resource_list = 1;
+}
+
+// cmd_id = 11006
+message sc_11006 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11008
+message sc_11008 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11010
+message sc_11010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11012
+message sc_11012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11014
+message sc_11014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11015
+message sc_11015 {
+  repeated benefitbuff buff_list = 1;
+}
+
+// cmd_id = 11018
+message sc_11018 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 11020
+message sc_11020 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11022
+message sc_11022 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11024
+message sc_11024 {
+  required uint32 result = 1;
+  repeated .common.refund_shopinfo shop_info = 2;
+}
+
+// cmd_id = 11026
+message sc_11026 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11028
+message sc_11028 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11031
+message sc_11031 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11033
+message sc_11033 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11035
+message sc_11035 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11101
+message sc_11101 {
+  required uint32 result = 1;
+  optional string msg = 2;
+}
+
+// cmd_id = 11200
+message sc_11200 {
+  repeated activityinfo activity_list = 1;
+  repeated uint32 hx_list = 2;
+}
+
+// cmd_id = 11201
+message sc_11201 {
+  required activityinfo activity_info = 1;
+}
+
+// cmd_id = 11203
+message sc_11203 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+  repeated .common.buildinfo build = 3;
+  repeated uint32 number = 4;
+  repeated return_user_info return_user_list = 5;
+  repeated .common.collectioninfo collection_list = 7;
+  repeated .common.taskinfo task_list = 8;
+}
+
+// cmd_id = 11205
+message sc_11205 {
+  required uint32 activity_id = 1;
+  required uint32 result = 2;
+}
+
+// cmd_id = 11207
+message sc_11207 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11209
+message sc_11209 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11210
+message sc_11210 {
+  repeated uint32 permanent_activity = 1;
+  required uint32 permanent_now = 2;
+}
+
+// cmd_id = 11300
+message sc_11300 {
+  repeated noticeinfo notice_list = 1;
+}
+
+// cmd_id = 11402
+message sc_11402 {
+  required uint32 result = 1;
+  required uint32 room_id = 2;
+}
+
+// cmd_id = 11502
+message sc_11502 {
+  required uint32 result = 1;
+  required string pay_id = 2;
+  required string url = 3;
+  required string order_sign = 4;
+}
+
+// cmd_id = 11503
+message sc_11503 {
+  required uint32 shop_id = 1;
+  required string pay_id = 2;
+  required uint32 gem = 3;
+  required uint32 gem_free = 4;
+}
+
+// cmd_id = 11505
+message sc_11505 {
+  required uint32 result = 1;
+  required uint32 shop_id = 2;
+  required uint32 gem = 3;
+  required uint32 gem_free = 4;
+}
+
+// cmd_id = 11507
+message sc_11507 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11509
+message sc_11509 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11511
+message sc_11511 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11514
+message sc_11514 {
+  required uint32 result = 1;
+  required string pay_id = 2;
+  required string url = 3;
+  required string order_sign = 4;
+}
+
+// cmd_id = 11516
+message sc_11516 {
+  required string group = 1;
+}
+
+// cmd_id = 11602
+message sc_11602 {
+  repeated uint32 emoji_list = 1;
+}
+
+// cmd_id = 11604
+message sc_11604 {
+  required uint32 state = 1;
+  repeated uint32 system_list = 2;
+  optional uint32 fail_count = 3;
+  optional uint32 fail_cd = 4;
+  optional string notice = 5;
+}
+
+// cmd_id = 11606
+message sc_11606 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11608
+message sc_11608 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11610
+message sc_11610 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11702
+message sc_11702 {
+  required uint32 result = 1;
+  optional ins_message data = 2;
+}
+
+// cmd_id = 11704
+message sc_11704 {
+  required uint32 result = 1;
+  optional ins_message data = 2;
+}
+
+// cmd_id = 11706
+message sc_11706 {
+  repeated ins_message ins_message_list = 1;
+}
+
+// cmd_id = 11711
+message sc_11711 {
+  repeated juus_group groups = 1;
+}
+
+// cmd_id = 11713
+message sc_11713 {
+  required uint32 result = 1;
+  required uint32 op_time = 2;
+  repeated .common.dropinfo drop_list = 3;
+}
+
+// cmd_id = 11715
+message sc_11715 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11717
+message sc_11717 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11719
+message sc_11719 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11721
+message sc_11721 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 11723
+message sc_11723 {
+  repeated uint32 result_list = 1;
+  required uint32 op_time = 2;
+}
+
+// cmd_id = 11752
+message sc_11752 {
+  required uint32 active = 1;
+  optional uint32 return_lv = 2;
+  optional uint32 return_time = 3;
+  optional uint32 ship_number = 4;
+  optional uint32 last_offline_time = 5;
+  optional uint32 pt = 6;
+  optional uint32 sign_cnt = 7;
+  optional uint32 sign_last_time = 8;
+  optional uint32 pt_stage = 9;
+}
+
+// cmd_id = 11754
+message sc_11754 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 11756
+message sc_11756 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 11801
+message sc_11801 {
+  required uint32 ship_count = 1;
+}
+
+// cmd_id = 11802
+message sc_11802 {
+  required uint32 id = 1;
+  required uint32 value = 2;
+}
+
+message ship_taking_data {
+  required uint32 uid = 1;
+  required uint32 isnew = 2;
+}
+

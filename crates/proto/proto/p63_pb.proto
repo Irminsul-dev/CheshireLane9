@@ -1,0 +1,406 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p63;
+
+message bluprintinfo {
+  required uint32 id = 1;
+  required uint32 ship_id = 2;
+  required uint32 start_time = 3;
+  required uint32 blue_print_level = 4;
+  required uint32 exp = 5;
+  optional uint32 start_duration = 6;
+}
+
+// cmd_id = 63001
+message cs_63001 {
+  required uint32 tech_id = 1;
+  required uint32 refresh_id = 2;
+}
+
+// cmd_id = 63003
+message cs_63003 {
+  required uint32 tech_id = 1;
+  required uint32 refresh_id = 2;
+}
+
+// cmd_id = 63005
+message cs_63005 {
+  required uint32 tech_id = 1;
+  required uint32 refresh_id = 2;
+}
+
+// cmd_id = 63007
+message cs_63007 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 63009
+message cs_63009 {
+  required uint32 id = 1;
+  required uint32 target = 2;
+}
+
+// cmd_id = 63011
+message cs_63011 {
+  required uint32 version = 1;
+  required uint32 target = 2;
+}
+
+// cmd_id = 63013
+message cs_63013 {
+  required uint32 tech_id = 1;
+  required uint32 refresh_id = 2;
+}
+
+// cmd_id = 63015
+message cs_63015 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 63200
+message cs_63200 {
+  required uint32 blueprint_id = 1;
+}
+
+// cmd_id = 63202
+message cs_63202 {
+  required uint32 blueprint_id = 1;
+}
+
+// cmd_id = 63204
+message cs_63204 {
+  required uint32 ship_id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 63206
+message cs_63206 {
+  required uint32 blueprint_id = 1;
+}
+
+// cmd_id = 63208
+message cs_63208 {
+  required uint32 blueprint_id = 1;
+}
+
+// cmd_id = 63210
+message cs_63210 {
+  required uint32 blueprintid = 1;
+  required uint32 itemid = 2;
+  required uint32 number = 3;
+  required uint32 task_id = 4;
+}
+
+// cmd_id = 63212
+message cs_63212 {
+  required uint32 ship_id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 63214
+message cs_63214 {
+  required uint32 group = 1;
+  required uint32 itemid = 2;
+}
+
+// cmd_id = 63301
+message cs_63301 {
+  required uint32 ship_id = 1;
+  required uint32 repair_id = 2;
+}
+
+// cmd_id = 63303
+message cs_63303 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 63305
+message cs_63305 {
+  required uint32 meta_id = 1;
+}
+
+// cmd_id = 63307
+message cs_63307 {
+  required uint32 ship_id = 1;
+  required uint32 skill_id = 2;
+}
+
+// cmd_id = 63309
+message cs_63309 {
+  required uint32 ship_id = 1;
+  required uint32 skill_id = 2;
+}
+
+// cmd_id = 63311
+message cs_63311 {
+  required uint32 ship_id = 1;
+  required uint32 skill_id = 2;
+  required uint32 index = 3;
+}
+
+// cmd_id = 63313
+message cs_63313 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 63317
+message cs_63317 {
+  repeated uint32 ship_id_list = 1;
+}
+
+// cmd_id = 63319
+message cs_63319 {
+  required uint32 ship_id = 1;
+  required uint32 skill_id = 2;
+  repeated .common.item_info books = 3;
+}
+
+message dr_number {
+  required uint32 id = 1;
+  required uint32 number = 2;
+}
+
+message finish_task {
+  required uint32 skill_id = 1;
+  required uint32 task_id = 2;
+  required uint32 finish_cnt = 3;
+}
+
+message meta_skill_simple_info {
+  required uint32 ship_id = 1;
+  required uint32 exp = 2;
+  required uint32 skill_id = 3;
+  repeated skill_exp skill_exp = 4;
+}
+
+message metacharinfo {
+  required uint32 id = 1;
+  required uint32 syn_rate = 2;
+}
+
+// cmd_id = 63000
+message sc_63000 {
+  repeated technologyrefresh refresh_list = 1;
+  required uint32 refresh_flag = 2;
+  required technologycatchup catchup = 3;
+  repeated technologyinfo queue = 4;
+}
+
+// cmd_id = 63002
+message sc_63002 {
+  required uint32 result = 1;
+  required uint32 time = 2;
+}
+
+// cmd_id = 63004
+message sc_63004 {
+  required uint32 result = 1;
+  repeated .common.dropinfo common_list = 2;
+  repeated technologyrefresh refresh_list = 3;
+  repeated .common.dropinfo drop_list = 4;
+  repeated .common.dropinfo catchup_list = 5;
+  repeated .common.dropinfo catchupact_list = 6;
+}
+
+// cmd_id = 63006
+message sc_63006 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63008
+message sc_63008 {
+  required uint32 result = 1;
+  repeated technologyrefresh refresh_list = 2;
+}
+
+// cmd_id = 63010
+message sc_63010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63012
+message sc_63012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63014
+message sc_63014 {
+  required uint32 result = 1;
+  repeated technologyrefresh refresh_list = 2;
+}
+
+// cmd_id = 63016
+message sc_63016 {
+  required uint32 result = 1;
+  repeated technologydrop drops = 2;
+}
+
+// cmd_id = 63100
+message sc_63100 {
+  repeated bluprintinfo blueprint_list = 1;
+  required uint32 cold_time = 2;
+  required uint32 daily_catchup_strengthen = 3;
+  required uint32 daily_catchup_strengthen_ur = 4;
+}
+
+// cmd_id = 63201
+message sc_63201 {
+  required uint32 result = 1;
+  required uint32 time = 2;
+}
+
+// cmd_id = 63203
+message sc_63203 {
+  required uint32 result = 1;
+  optional .common.shipinfo ship = 2;
+}
+
+// cmd_id = 63205
+message sc_63205 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63207
+message sc_63207 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63209
+message sc_63209 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63211
+message sc_63211 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63213
+message sc_63213 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63215
+message sc_63215 {
+  required uint32 result = 1;
+  optional .common.shipinfo ship = 2;
+}
+
+// cmd_id = 63300
+message sc_63300 {
+  repeated metacharinfo meta_char_list = 1;
+}
+
+// cmd_id = 63302
+message sc_63302 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63304
+message sc_63304 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63306
+message sc_63306 {
+  required uint32 result = 1;
+  optional .common.shipinfo ship = 2;
+}
+
+// cmd_id = 63308
+message sc_63308 {
+  required uint32 result = 1;
+  required uint32 switch_cnt = 2;
+}
+
+// cmd_id = 63310
+message sc_63310 {
+  required uint32 result = 1;
+  required uint32 switch_cnt = 2;
+}
+
+// cmd_id = 63312
+message sc_63312 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 63314
+message sc_63314 {
+  required uint32 ship_id = 1;
+  required uint32 double_exp = 2;
+  required uint32 exp = 3;
+  required uint32 skill_id = 4;
+  repeated finish_task tasks = 5;
+  required uint32 switch_cnt = 6;
+  repeated skill_exp skill_exp = 7;
+}
+
+// cmd_id = 63315
+message sc_63315 {
+  required uint32 type = 1;
+  repeated uint32 arg1 = 2;
+}
+
+// cmd_id = 63316
+message sc_63316 {
+  repeated skill_info skill_info_list = 1;
+}
+
+// cmd_id = 63318
+message sc_63318 {
+  repeated meta_skill_simple_info info_list = 1;
+}
+
+// cmd_id = 63320
+message sc_63320 {
+  required uint32 ret = 1;
+  optional uint32 level = 2;
+  optional uint32 exp = 3;
+}
+
+message skill_exp {
+  required uint32 skill_id = 1;
+  required uint32 exp = 2;
+}
+
+message skill_info {
+  required uint32 ship_id = 1;
+  required uint32 skill_id = 2;
+  required uint32 skill_level = 3;
+  required uint32 skill_exp = 4;
+  required uint32 day_exp = 5;
+  required uint32 add_exp = 6;
+}
+
+message technologycatchup {
+  required uint32 version = 1;
+  required uint32 target = 2;
+  repeated techpursuing pursuings = 3;
+}
+
+message technologydrop {
+  repeated .common.dropinfo common_list = 1;
+  repeated .common.dropinfo drop_list = 2;
+  repeated .common.dropinfo catchup_list = 3;
+  repeated .common.dropinfo catchupact_list = 4;
+}
+
+message technologyinfo {
+  required uint32 id = 1;
+  required uint32 time = 2;
+}
+
+message technologyrefresh {
+  required uint32 id = 1;
+  required uint32 target = 2;
+  repeated technologyinfo technologys = 3;
+}
+
+message techpursuing {
+  required uint32 version = 1;
+  required uint32 number = 2;
+  repeated dr_number dr_numbers = 3;
+}
+

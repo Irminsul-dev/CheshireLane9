@@ -1,0 +1,94 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p15;
+
+// cmd_id = 15002
+message cs_15002 {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  repeated uint32 arg = 3;
+}
+
+// cmd_id = 15004
+message cs_15004 {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 15006
+message cs_15006 {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+// cmd_id = 15008
+message cs_15008 {
+  repeated iteminfo item_list = 1;
+}
+
+// cmd_id = 15010
+message cs_15010 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 15012
+message cs_15012 {
+  repeated cs_15002 use_list = 1;
+}
+
+// cmd_id = 15300
+message cs_15300 {
+  required uint32 type = 1;
+  required string ver_str = 2;
+}
+
+message iteminfo {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message itemmisc {
+  required uint32 id = 1;
+  required uint32 data = 2;
+}
+
+// cmd_id = 15001
+message sc_15001 {
+  repeated iteminfo item_list = 1;
+  repeated iteminfo limit_list = 2;
+  repeated itemmisc item_misc_list = 3;
+}
+
+// cmd_id = 15003
+message sc_15003 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 15005
+message sc_15005 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 15007
+message sc_15007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 15009
+message sc_15009 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 15011
+message sc_15011 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 15013
+message sc_15013 {
+  repeated sc_15003 ret_list = 1;
+}
+

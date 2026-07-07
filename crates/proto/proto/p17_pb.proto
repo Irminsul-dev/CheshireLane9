@@ -1,0 +1,324 @@
+syntax = "proto2";
+
+package p17;
+
+message achievement_info {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+  required uint32 timestamp = 3;
+}
+
+message attire_info {
+  required uint32 id = 1;
+  required uint32 end_time = 2;
+}
+
+// cmd_id = 17005
+message cs_17005 {
+  required uint32 id = 1;
+  required uint32 award_index = 2;
+}
+
+// cmd_id = 17101
+message cs_17101 {
+  required uint32 ship_group_id = 1;
+}
+
+// cmd_id = 17103
+message cs_17103 {
+  required uint32 ship_group_id = 1;
+  required string context = 2;
+}
+
+// cmd_id = 17105
+message cs_17105 {
+  required uint32 ship_group_id = 1;
+  required uint32 discuss_id = 2;
+  required uint32 good_or_bad = 3;
+}
+
+// cmd_id = 17107
+message cs_17107 {
+  required uint32 ship_group_id = 1;
+}
+
+// cmd_id = 17109
+message cs_17109 {
+  required uint32 ship_group_id = 1;
+  required uint32 discuss_id = 2;
+  required string reason = 3;
+}
+
+// cmd_id = 17201
+message cs_17201 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 17203
+message cs_17203 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 17301
+message cs_17301 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 17401
+message cs_17401 {
+  repeated uint32 medal_id = 1;
+  required uint32 fixed_const = 2;
+}
+
+// cmd_id = 17501
+message cs_17501 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 17503
+message cs_17503 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 17505
+message cs_17505 {
+  required uint32 id = 1;
+  required uint32 action = 2;
+}
+
+// cmd_id = 17507
+message cs_17507 {
+  required uint32 id = 1;
+  required uint32 action = 2;
+}
+
+// cmd_id = 17509
+message cs_17509 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 17511
+message cs_17511 {
+  required uint32 id = 1;
+  required uint32 action = 2;
+}
+
+// cmd_id = 17513
+message cs_17513 {
+  required uint32 music_no = 1;
+  required uint32 music_mode = 2;
+}
+
+// cmd_id = 17601
+message cs_17601 {
+  required uint32 shipgroup = 1;
+}
+
+// cmd_id = 17603
+message cs_17603 {
+  required uint32 shipgroup = 1;
+  required string eqcode = 2;
+}
+
+// cmd_id = 17605
+message cs_17605 {
+  required uint32 shipgroup = 1;
+  required uint32 shareid = 2;
+}
+
+// cmd_id = 17607
+message cs_17607 {
+  required uint32 shipgroup = 1;
+  required uint32 shareid = 2;
+  required uint32 report_type = 3;
+}
+
+message discuss_info {
+  required uint32 id = 1;
+  required uint32 good_count = 2;
+  required string nick_name = 3;
+  required string context = 4;
+  required uint32 bad_count = 5;
+}
+
+message eqcode_share_info {
+  required uint32 id = 1;
+  required string eqcode = 2;
+  required uint32 like = 3;
+  required uint32 eval_point = 4;
+  required uint32 state = 5;
+}
+
+message mulkeyvalue {
+  required uint32 key = 1;
+  required uint32 value1 = 2;
+  optional uint32 value2 = 3;
+  optional uint32 value3 = 4;
+}
+
+// cmd_id = 17001
+message sc_17001 {
+  repeated uint32 finish_list = 1;
+  repeated achievement_info progress_list = 2;
+  repeated ship_statistics_info ship_info_list = 3;
+  repeated ship_statistics_award ship_award_list = 4;
+  required uint32 daily_discuss = 5;
+  repeated uint32 transform_list = 6;
+}
+
+// cmd_id = 17002
+message sc_17002 {
+  repeated achievement_info progress_list = 1;
+}
+
+// cmd_id = 17003
+message sc_17003 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 17004
+message sc_17004 {
+  required ship_statistics_info ship_info = 1;
+}
+
+// cmd_id = 17006
+message sc_17006 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17102
+message sc_17102 {
+  required ship_discuss_info ship_discuss = 1;
+}
+
+// cmd_id = 17104
+message sc_17104 {
+  required uint32 result = 1;
+  optional ship_discuss_info ship_discuss = 2;
+  required uint32 need_level = 3;
+}
+
+// cmd_id = 17106
+message sc_17106 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17108
+message sc_17108 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17110
+message sc_17110 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17202
+message sc_17202 {
+  required uint32 daily_vote = 1;
+  required uint32 love_vote = 2;
+  repeated uint32 daily_ship_list = 3;
+}
+
+// cmd_id = 17204
+message sc_17204 {
+  repeated mulkeyvalue list = 1;
+}
+
+// cmd_id = 17302
+message sc_17302 {
+  required uint32 result = 1;
+  optional uint32 timestamp = 2;
+  repeated achievement_info next = 3;
+}
+
+// cmd_id = 17402
+message sc_17402 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17502
+message sc_17502 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17504
+message sc_17504 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17506
+message sc_17506 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17508
+message sc_17508 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17510
+message sc_17510 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17512
+message sc_17512 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17514
+message sc_17514 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17602
+message sc_17602 {
+  required uint32 result = 1;
+  repeated eqcode_share_info infos = 2;
+  repeated eqcode_share_info recent_infos = 3;
+}
+
+// cmd_id = 17604
+message sc_17604 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17606
+message sc_17606 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 17608
+message sc_17608 {
+  required uint32 result = 1;
+}
+
+message ship_discuss_info {
+  required uint32 ship_group_id = 1;
+  required uint32 discuss_count = 2;
+  required uint32 heart_count = 3;
+  repeated discuss_info discuss_list = 4;
+  required uint32 daily_discuss_count = 5;
+}
+
+message ship_statistics_award {
+  required uint32 id = 1;
+  repeated uint32 award_index = 2;
+}
+
+message ship_statistics_info {
+  required uint32 id = 1;
+  required uint32 star = 2;
+  required uint32 heart_flag = 3;
+  required uint32 heart_count = 4;
+  required uint32 marry_flag = 5;
+  required uint32 intimacy_max = 6;
+  required uint32 lv_max = 7;
+}
+
+message voteinfo {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+

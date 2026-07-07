@@ -1,0 +1,319 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p61;
+
+message bosseventfleet {
+  required uint32 fleet_id = 1;
+  repeated team_cell ships = 2;
+  repeated .common.commandersinfo commanders = 3;
+}
+
+// cmd_id = 61001
+message cs_61001 {
+  required uint32 chapter_id = 1;
+}
+
+// cmd_id = 61003
+message cs_61003 {
+  repeated shipid_pos shipIds = 1;
+}
+
+// cmd_id = 61005
+message cs_61005 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61007
+message cs_61007 {
+  required uint32 event_tid = 1;
+  repeated uint32 ship_ids = 2;
+}
+
+// cmd_id = 61009
+message cs_61009 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61011
+message cs_61011 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61013
+message cs_61013 {
+  repeated bosseventfleet fleet = 1;
+}
+
+// cmd_id = 61015
+message cs_61015 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61017
+message cs_61017 {
+  required uint32 index = 1;
+}
+
+// cmd_id = 61019
+message cs_61019 {
+  repeated uint32 ids = 1;
+}
+
+// cmd_id = 61023
+message cs_61023 {
+  required uint32 event_tid = 1;
+}
+
+// cmd_id = 61025
+message cs_61025 {
+  repeated event_performance perf = 1;
+}
+
+// cmd_id = 61027
+message cs_61027 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61029
+message cs_61029 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61031
+message cs_61031 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61033
+message cs_61033 {
+  required uint32 recommend_uid = 1;
+  required uint32 recommend_shipid = 2;
+  required uint32 cmd = 3;
+}
+
+// cmd_id = 61035
+message cs_61035 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61037
+message cs_61037 {
+  required uint32 id = 1;
+}
+
+message current_operation {
+  required uint32 operation_id = 1;
+  required uint32 start_time = 2;
+  repeated event_base base_events = 3;
+  optional event_boss boss_event = 4;
+  repeated event_performance perfs = 5;
+  repeated keyvalue formation_time = 6;
+  repeated event_base_completed completed_events = 7;
+  required uint32 daily_count = 8;
+  repeated bosseventfleet fleets = 9;
+  required uint32 join_times = 10;
+  required uint32 is_participant = 11;
+}
+
+message event_base {
+  required uint32 event_id = 1;
+  required uint32 position = 2;
+  required uint32 start_time = 3;
+  required uint32 complete_time = 4;
+  repeated ship_in_event shipinevent = 5;
+  repeated keyvalue attr_acc_list = 6;
+  repeated keyvalue attr_count_list = 7;
+  repeated event_node eventnodes = 8;
+  required uint32 efficiency = 9;
+  repeated person_ship_in_page personship = 10;
+}
+
+message event_base_completed {
+  required uint32 event_id = 1;
+  required uint32 position = 2;
+}
+
+message event_boss {
+  required uint32 boss_id = 1;
+  required uint32 damage = 2;
+  required uint32 hp = 3;
+}
+
+message event_node {
+  required uint32 position = 1;
+  required uint32 node_id = 2;
+  required uint32 status = 3;
+}
+
+message event_performance {
+  required uint32 event_id = 1;
+  required uint32 index = 2;
+}
+
+message keyvalue {
+  required uint32 key = 1;
+  required uint32 value = 2;
+}
+
+message person_ship_in_page {
+  required uint32 page_id = 1;
+  repeated uint32 ship_ids = 2;
+}
+
+message rank_info {
+  required uint32 user_id = 1;
+  required uint32 damage = 2;
+}
+
+message report {
+  required uint32 id = 1;
+  required uint32 event_id = 2;
+  required uint32 event_type = 3;
+  required uint32 score = 4;
+  repeated report_node nodes = 5;
+  required uint32 status = 6;
+}
+
+message report_node {
+  required uint32 id = 1;
+  required uint32 status = 2;
+}
+
+// cmd_id = 61002
+message sc_61002 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61004
+message sc_61004 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61006
+message sc_61006 {
+  required uint32 result = 1;
+  optional current_operation operation = 2;
+}
+
+// cmd_id = 61008
+message sc_61008 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61010
+message sc_61010 {
+  required uint32 result = 1;
+  repeated shipid_pos_info person_ships = 2;
+}
+
+// cmd_id = 61012
+message sc_61012 {
+  required uint32 result = 1;
+  repeated team_chunk ships = 2;
+  repeated team_cell recommends = 3;
+}
+
+// cmd_id = 61014
+message sc_61014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61016
+message sc_61016 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61018
+message sc_61018 {
+  repeated report reports = 1;
+}
+
+// cmd_id = 61020
+message sc_61020 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 61021
+message sc_61021 {
+  required uint32 user_id = 1;
+}
+
+// cmd_id = 61022
+message sc_61022 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 61024
+message sc_61024 {
+  required uint32 result = 1;
+  optional event_base event_info = 2;
+  optional event_base_completed completed_info = 3;
+}
+
+// cmd_id = 61026
+message sc_61026 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61028
+message sc_61028 {
+  required uint32 result = 1;
+  required event_boss boss_event = 2;
+}
+
+// cmd_id = 61030
+message sc_61030 {
+  repeated rank_info list = 1;
+}
+
+// cmd_id = 61032
+message sc_61032 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61034
+message sc_61034 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 61036
+message sc_61036 {
+  repeated team_cell recommends = 1;
+}
+
+// cmd_id = 61038
+message sc_61038 {
+  repeated rank_info list = 1;
+}
+
+message ship_in_event {
+  required uint32 user_id = 1;
+  required uint32 ship_id = 2;
+  required uint32 template_id = 3;
+  required uint32 skin = 4;
+}
+
+message shipid_pos {
+  required uint32 pos = 1;
+  required uint32 shipId = 2;
+}
+
+message shipid_pos_info {
+  required uint32 pos = 1;
+  required .common.shipinfo ship = 2;
+  required uint32 last_time = 3;
+}
+
+message team_cell {
+  required uint32 user_id = 1;
+  required uint32 ship_id = 2;
+}
+
+message team_chunk {
+  required uint32 user_id = 1;
+  repeated .common.shipinfo ships = 2;
+}
+

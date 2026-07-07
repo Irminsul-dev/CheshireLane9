@@ -1,0 +1,419 @@
+syntax = "proto2";
+
+package p19;
+
+message childinfo {
+  required string id = 1;
+  required uint32 x = 2;
+  required uint32 y = 3;
+}
+
+// cmd_id = 19002
+message cs_19002 {
+  required uint32 ship_id = 1;
+  required uint32 type = 2;
+}
+
+// cmd_id = 19004
+message cs_19004 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 19006
+message cs_19006 {
+  repeated uint32 furniture_id = 1;
+  required uint32 currency = 2;
+}
+
+// cmd_id = 19008
+message cs_19008 {
+  required uint32 floor = 1;
+  repeated furnitureputinfo furniture_put_list = 2;
+}
+
+// cmd_id = 19009
+message cs_19009 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 19011
+message cs_19011 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 19013
+message cs_19013 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 19016
+message cs_19016 {
+  required string name = 1;
+}
+
+// cmd_id = 19018
+message cs_19018 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 19020
+message cs_19020 {
+  required uint32 id = 1;
+  required string name = 2;
+  repeated furnitureputinfo furniture_put_list = 3;
+}
+
+// cmd_id = 19022
+message cs_19022 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 19024
+message cs_19024 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 19026
+message cs_19026 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 19101
+message cs_19101 {
+  required uint32 user_id = 1;
+}
+
+// cmd_id = 19103
+message cs_19103 {
+  required int32 typ = 1;
+}
+
+// cmd_id = 19105
+message cs_19105 {
+  required int32 typ = 1;
+}
+
+// cmd_id = 19107
+message cs_19107 {
+  required int32 typ = 1;
+}
+
+// cmd_id = 19109
+message cs_19109 {
+  required uint32 pos = 1;
+  required string name = 2;
+  repeated furnitureputinfo furniture_put_list = 3;
+  required string icon_image_md5 = 4;
+  required string image_md5 = 5;
+}
+
+// cmd_id = 19111
+message cs_19111 {
+  required uint32 pos = 1;
+}
+
+// cmd_id = 19113
+message cs_19113 {
+  required string theme_id = 1;
+}
+
+// cmd_id = 19115
+message cs_19115 {
+  required int32 typ = 1;
+}
+
+// cmd_id = 19117
+message cs_19117 {
+  required int32 typ = 1;
+  required int32 page = 2;
+  required int32 num = 3;
+}
+
+// cmd_id = 19119
+message cs_19119 {
+  required string theme_id = 1;
+  required uint32 upload_time = 2;
+}
+
+// cmd_id = 19121
+message cs_19121 {
+  required string theme_id = 1;
+  required uint32 upload_time = 2;
+}
+
+// cmd_id = 19123
+message cs_19123 {
+  required uint32 pos = 1;
+}
+
+// cmd_id = 19125
+message cs_19125 {
+  required uint32 pos = 1;
+}
+
+// cmd_id = 19127
+message cs_19127 {
+  required string theme_id = 1;
+}
+
+// cmd_id = 19129
+message cs_19129 {
+  required uint32 target_id = 1;
+  required string target_name = 2;
+  required string theme_id = 3;
+  required string theme_name = 4;
+  required uint32 reason = 5;
+}
+
+// cmd_id = 19131
+message cs_19131 {
+  repeated string id_list = 1;
+}
+
+message dormtheme {
+  required string id = 1;
+  required string name = 2;
+  repeated furnitureputinfo furniture_put_list = 3;
+  required uint32 user_id = 4;
+  required uint32 pos = 5;
+  required uint32 like_count = 6;
+  required uint32 fav_count = 7;
+  required uint32 upload_time = 8;
+  required string icon_image_md5 = 9;
+  required string image_md5 = 10;
+}
+
+message dormtheme_profile {
+  required string id = 1;
+  required uint32 upload_time = 2;
+}
+
+message furfloorputinfo {
+  required uint32 floor = 1;
+  repeated furnitureputinfo furniture_put_list = 2;
+}
+
+message furnitureinfo {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  optional uint32 get_time = 3;
+}
+
+message furnitureputinfo {
+  required string id = 1;
+  required uint32 x = 2;
+  required uint32 y = 3;
+  required uint32 dir = 4;
+  repeated childinfo child = 5;
+  required uint64 parent = 6;
+  required uint32 shipId = 7;
+}
+
+message pop_info {
+  required uint32 id = 1;
+  required uint32 intimacy = 2;
+  required uint32 dorm_icon = 3;
+}
+
+// cmd_id = 19001
+message sc_19001 {
+  required uint32 lv = 1;
+  required uint32 food = 2;
+  required uint32 food_max_increase = 3;
+  required uint32 food_max_increase_count = 4;
+  repeated shipinfo_in_dorm ship_list = 5;
+  repeated furnitureinfo furniture_id_list = 6;
+  required uint32 floor_num = 7;
+  required uint32 exp_pos = 8;
+  repeated furfloorputinfo furniture_put_list = 9;
+  required uint32 next_timestamp = 10;
+  required uint32 load_exp = 11;
+  required uint32 load_food = 12;
+  required uint32 load_time = 13;
+  required string name = 14;
+}
+
+// cmd_id = 19003
+message sc_19003 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19005
+message sc_19005 {
+  required uint32 result = 1;
+  required uint32 exp = 2;
+}
+
+// cmd_id = 19007
+message sc_19007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19010
+message sc_19010 {
+  repeated pop_info pop_list = 1;
+}
+
+// cmd_id = 19012
+message sc_19012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19014
+message sc_19014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19017
+message sc_19017 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19019
+message sc_19019 {
+  repeated dormtheme theme_list = 1;
+}
+
+// cmd_id = 19021
+message sc_19021 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19023
+message sc_19023 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 19025
+message sc_19025 {
+  repeated furfloorputinfo furniture_put_list = 1;
+  optional visitor visitor = 2;
+}
+
+// cmd_id = 19027
+message sc_19027 {
+  required uint32 exp = 1;
+  required uint32 food = 2;
+  required uint32 next_timestamp = 3;
+}
+
+// cmd_id = 19102
+message sc_19102 {
+  required uint32 lv = 1;
+  required uint32 food = 2;
+  required uint32 food_max_increase = 3;
+  required uint32 food_max_increase_count = 4;
+  repeated shipinfo_in_dorm ship_list = 5;
+  repeated furnitureinfo furniture_id_list = 6;
+  required uint32 floor_num = 7;
+  required uint32 exp_pos = 8;
+  repeated furfloorputinfo furniture_put_list = 9;
+  required string name = 10;
+}
+
+// cmd_id = 19104
+message sc_19104 {
+  required uint32 result = 1;
+  required string access_id = 2;
+  required string access_secret = 3;
+  required uint32 expire_time = 4;
+  required string security_token = 5;
+}
+
+// cmd_id = 19106
+message sc_19106 {
+  required uint32 result = 1;
+  repeated dormtheme theme_list = 2;
+}
+
+// cmd_id = 19108
+message sc_19108 {
+  required uint32 result = 1;
+  repeated dormtheme theme_list = 2;
+}
+
+// cmd_id = 19110
+message sc_19110 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19112
+message sc_19112 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19114
+message sc_19114 {
+  required int32 result = 1;
+  required dormtheme theme = 2;
+  required bool has_fav = 3;
+  required bool has_like = 4;
+}
+
+// cmd_id = 19116
+message sc_19116 {
+  required int32 result = 1;
+  repeated dormtheme_profile theme_profile_list = 2;
+}
+
+// cmd_id = 19118
+message sc_19118 {
+  required int32 result = 1;
+  repeated string theme_id_list = 2;
+}
+
+// cmd_id = 19120
+message sc_19120 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19122
+message sc_19122 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19124
+message sc_19124 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19126
+message sc_19126 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19128
+message sc_19128 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19130
+message sc_19130 {
+  required int32 result = 1;
+}
+
+// cmd_id = 19132
+message sc_19132 {
+  repeated theme_md5 list = 1;
+}
+
+message shipinfo_in_dorm {
+  required uint32 id = 1;
+  required uint32 floor = 2;
+  required uint32 pop_icon = 3;
+  required uint32 pop_intimacy = 4;
+  required uint32 tid = 5;
+  required uint32 skin_id = 6;
+}
+
+message theme_md5 {
+  required string id = 1;
+  required string md5 = 2;
+}
+
+message visitor {
+  required string name = 1;
+  required uint32 ship_template = 2;
+  required uint32 ship_skin = 3;
+}
+

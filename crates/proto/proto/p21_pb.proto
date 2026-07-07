@@ -1,0 +1,2146 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p21;
+
+// cmd_id = 21000
+message cs_21000 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21002
+message cs_21002 {
+  repeated uint32 open_flag = 1;
+  repeated uint32 close_flag = 2;
+}
+
+// cmd_id = 21004
+message cs_21004 {
+  required string name = 1;
+  required uint32 type = 2;
+}
+
+// cmd_id = 21006
+message cs_21006 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21008
+message cs_21008 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21010
+message cs_21010 {
+  required uint32 level = 1;
+}
+
+// cmd_id = 21012
+message cs_21012 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21014
+message cs_21014 {
+  required uint32 type = 1;
+  repeated pb_island_item item_list = 2;
+}
+
+// cmd_id = 21016
+message cs_21016 {
+  required uint32 shop_id = 1;
+}
+
+// cmd_id = 21018
+message cs_21018 {
+  repeated .common.kvdata2 goods_list = 1;
+}
+
+// cmd_id = 21020
+message cs_21020 {
+  required uint32 shop_id = 1;
+}
+
+// cmd_id = 21022
+message cs_21022 {
+  required uint32 target_pt = 1;
+}
+
+// cmd_id = 21024
+message cs_21024 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21026
+message cs_21026 {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  repeated uint32 arg = 3;
+}
+
+// cmd_id = 21030
+message cs_21030 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21032
+message cs_21032 {
+  repeated uint32 task_id_list = 1;
+}
+
+// cmd_id = 21034
+message cs_21034 {
+  required uint32 task_id = 1;
+}
+
+// cmd_id = 21036
+message cs_21036 {
+  required uint32 task_id = 1;
+  required uint32 target_id = 2;
+  required uint32 target_count = 3;
+}
+
+// cmd_id = 21038
+message cs_21038 {
+  required uint32 task_id = 1;
+}
+
+// cmd_id = 21041
+message cs_21041 {
+  repeated uint32 task_ids = 1;
+}
+
+// cmd_id = 21050
+message cs_21050 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 21052
+message cs_21052 {
+  repeated pb_island_achievent event_list = 1;
+}
+
+// cmd_id = 21060
+message cs_21060 {
+  required uint32 island_id = 1;
+  required uint32 point_id = 2;
+}
+
+// cmd_id = 21062
+message cs_21062 {
+  required uint32 island_id = 1;
+  required uint32 point_id = 2;
+  required uint32 end_result = 3;
+}
+
+// cmd_id = 21064
+message cs_21064 {
+  required uint32 bait_id = 1;
+}
+
+// cmd_id = 21066
+message cs_21066 {
+  repeated pb_island_make makes = 1;
+}
+
+// cmd_id = 21200
+message cs_21200 {
+  required uint32 island_id = 1;
+}
+
+// cmd_id = 21202
+message cs_21202 {
+  required uint32 island_id = 1;
+  optional string code = 2;
+}
+
+// cmd_id = 21204
+message cs_21204 {
+  required uint32 island_id = 1;
+}
+
+// cmd_id = 21208
+message cs_21208 {
+  required uint32 island_id = 1;
+}
+
+// cmd_id = 21209
+message cs_21209 {
+  required uint32 island_id = 1;
+  required uint32 obj_id = 2;
+  required uint32 slot_id = 3;
+  required uint32 op = 4;
+  required uint32 status = 5;
+  required uint32 type = 6;
+}
+
+// cmd_id = 21211
+message cs_21211 {
+  required uint32 island_id = 1;
+  repeated pb_sync_object sync_ob_list = 2;
+}
+
+// cmd_id = 21213
+message cs_21213 {
+  required uint32 island_id = 1;
+  required uint32 map_id = 2;
+}
+
+// cmd_id = 21215
+message cs_21215 {
+  required uint32 island_id = 1;
+}
+
+// cmd_id = 21229
+message cs_21229 {
+  required uint32 island_id = 1;
+  required pb_player_pos_record player_position = 2;
+}
+
+// cmd_id = 21230
+message cs_21230 {
+  required uint32 island_id = 1;
+}
+
+// cmd_id = 21240
+message cs_21240 {
+  required uint32 island_id = 1;
+  required uint32 type = 2;
+  required uint32 num = 3;
+}
+
+// cmd_id = 21243
+message cs_21243 {
+  required uint32 island_id = 1;
+}
+
+// cmd_id = 21245
+message cs_21245 {
+  repeated uint32 friend_list = 1;
+  required uint32 map_id = 2;
+  required uint32 price = 3;
+}
+
+// cmd_id = 21300
+message cs_21300 {
+  required uint32 open_flag = 1;
+}
+
+// cmd_id = 21302
+message cs_21302 {
+  required uint32 cmd = 1;
+  repeated uint32 user_id_list = 2;
+}
+
+// cmd_id = 21305
+message cs_21305 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21307
+message cs_21307 {
+  required pb_placement_data update_data = 1;
+}
+
+// cmd_id = 21310
+message cs_21310 {
+  required uint32 island_id = 1;
+  required uint32 pos = 2;
+}
+
+// cmd_id = 21312
+message cs_21312 {
+  repeated uint32 friend_list = 1;
+}
+
+// cmd_id = 21315
+message cs_21315 {
+  repeated uint32 user_id_list = 1;
+}
+
+// cmd_id = 21317
+message cs_21317 {
+  required pb_placement_theme theme = 1;
+}
+
+// cmd_id = 21319
+message cs_21319 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 21321
+message cs_21321 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 21323
+message cs_21323 {
+  required uint32 island_id = 1;
+  required string content = 2;
+}
+
+// cmd_id = 21326
+message cs_21326 {
+  required uint32 user_id = 1;
+}
+
+// cmd_id = 21328
+message cs_21328 {
+  required uint32 type = 1;
+  required string picture = 2;
+}
+
+// cmd_id = 21330
+message cs_21330 {
+  required string visit_word = 1;
+}
+
+// cmd_id = 21332
+message cs_21332 {
+  repeated pb_set_flag flag_list = 1;
+}
+
+// cmd_id = 21334
+message cs_21334 {
+  required uint32 user_id = 1;
+}
+
+// cmd_id = 21336
+message cs_21336 {
+  required uint32 user_id = 1;
+  required uint32 label_id = 2;
+}
+
+// cmd_id = 21338
+message cs_21338 {
+  repeated uint32 group_list = 1;
+}
+
+// cmd_id = 21340
+message cs_21340 {
+  required uint32 type = 1;
+  required uint32 cond_id = 2;
+}
+
+// cmd_id = 21343
+message cs_21343 {
+  repeated uint32 book_ids = 1;
+}
+
+// cmd_id = 21345
+message cs_21345 {
+  repeated uint32 book_ids = 1;
+}
+
+// cmd_id = 21347
+message cs_21347 {
+  required uint32 lv = 1;
+}
+
+// cmd_id = 21401
+message cs_21401 {
+  required uint32 slot_id = 1;
+}
+
+// cmd_id = 21403
+message cs_21403 {
+  required uint32 slot_id = 1;
+}
+
+// cmd_id = 21405
+message cs_21405 {
+  required uint32 slot_id = 1;
+}
+
+// cmd_id = 21408
+message cs_21408 {
+  required uint32 type = 1;
+  required uint32 ship_slot_id = 2;
+}
+
+// cmd_id = 21410
+message cs_21410 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21412
+message cs_21412 {
+  required uint32 lv = 1;
+}
+
+// cmd_id = 21414
+message cs_21414 {
+  required uint32 order_id = 1;
+}
+
+// cmd_id = 21416
+message cs_21416 {
+  required uint32 ship_slot_id = 1;
+  repeated uint32 item_id = 2;
+}
+
+// cmd_id = 21418
+message cs_21418 {
+  required uint32 trade_id = 1;
+  repeated pb_trade_post post_list = 2;
+  repeated pb_trade_food food_list = 3;
+  required pb_trade_presell presell = 4;
+}
+
+// cmd_id = 21420
+message cs_21420 {
+  required uint32 trade_id = 1;
+}
+
+// cmd_id = 21423
+message cs_21423 {
+  required uint32 type = 1;
+  required uint32 target_id = 2;
+  repeated pb_speedup_ticket tickets = 3;
+}
+
+// cmd_id = 21425
+message cs_21425 {
+  repeated pb_speedup_key ticket_keys = 1;
+}
+
+// cmd_id = 21427
+message cs_21427 {
+  required uint32 area_id = 2;
+  repeated pb_speedup_ticket tickets = 3;
+}
+
+// cmd_id = 21429
+message cs_21429 {
+  required uint32 slot_id = 1;
+}
+
+// cmd_id = 21431
+message cs_21431 {
+  required uint32 slot_id = 1;
+  required uint32 appoint_id = 2;
+}
+
+// cmd_id = 21501
+message cs_21501 {
+  required uint32 build_id = 1;
+  required uint32 area_id = 2;
+  required uint32 ship_id = 3;
+  required uint32 formula_id = 4;
+  required uint32 num = 5;
+}
+
+// cmd_id = 21503
+message cs_21503 {
+  required uint32 build_id = 1;
+  required uint32 area_id = 2;
+}
+
+// cmd_id = 21505
+message cs_21505 {
+  required uint32 type = 1;
+  required uint32 build_id = 2;
+  required uint32 area_id = 3;
+}
+
+// cmd_id = 21507
+message cs_21507 {
+  required uint32 type = 1;
+  required uint32 build_id = 2;
+  required uint32 area_id = 3;
+}
+
+// cmd_id = 21509
+message cs_21509 {
+  required uint32 build_id = 1;
+  repeated uint32 slot_list = 2;
+  required uint32 formula_id = 3;
+}
+
+// cmd_id = 21511
+message cs_21511 {
+  required uint32 build_id = 1;
+  repeated uint32 area_ids = 2;
+}
+
+// cmd_id = 21516
+message cs_21516 {
+  required uint32 build_id = 1;
+  repeated uint32 slot_list = 2;
+}
+
+// cmd_id = 21520
+message cs_21520 {
+  required uint32 tech_id = 1;
+}
+
+// cmd_id = 21522
+message cs_21522 {
+  required uint32 tech_id = 1;
+}
+
+// cmd_id = 21524
+message cs_21524 {
+  required uint32 island_id = 1;
+  required uint32 gather_id = 2;
+}
+
+// cmd_id = 21526
+message cs_21526 {
+  required uint32 island_id = 1;
+  required uint32 gather_id = 2;
+}
+
+// cmd_id = 21529
+message cs_21529 {
+  required uint32 island_id = 1;
+  required uint32 fragment_id = 2;
+}
+
+// cmd_id = 21531
+message cs_21531 {
+  required uint32 island_id = 1;
+  required uint32 fragment_id = 2;
+}
+
+// cmd_id = 21533
+message cs_21533 {
+  required uint32 collect_id = 1;
+}
+
+// cmd_id = 21537
+message cs_21537 {
+  required uint32 build_id = 1;
+  required uint32 area_id = 2;
+  required uint32 add_num = 3;
+}
+
+// cmd_id = 21539
+message cs_21539 {
+  required uint32 type = 1;
+  repeated uint32 ship_list = 2;
+}
+
+// cmd_id = 21541
+message cs_21541 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 21601
+message cs_21601 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 21603
+message cs_21603 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 21605
+message cs_21605 {
+  required uint32 ship_id = 1;
+  required uint32 type = 2;
+  repeated pb_island_item item_list = 3;
+}
+
+// cmd_id = 21607
+message cs_21607 {
+  required uint32 ship_id = 1;
+  repeated pb_island_item item_list = 2;
+}
+
+// cmd_id = 21609
+message cs_21609 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 21611
+message cs_21611 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 21613
+message cs_21613 {
+  required uint32 ship_id = 1;
+  required uint32 gift_id = 2;
+}
+
+// cmd_id = 21617
+message cs_21617 {
+  required uint32 ship_id = 1;
+  repeated uint32 unload_dress = 2;
+  repeated pb_island_ship_wear dress_List = 3;
+  required uint32 skin_id = 4;
+  required uint32 color_id = 5;
+}
+
+// cmd_id = 21619
+message cs_21619 {
+  required uint32 ship_id = 1;
+  required uint32 color_id = 2;
+}
+
+// cmd_id = 21621
+message cs_21621 {
+  repeated uint32 dress_id = 1;
+}
+
+// cmd_id = 21624
+message cs_21624 {
+  repeated uint32 dress_id = 1;
+}
+
+// cmd_id = 21626
+message cs_21626 {
+  required uint32 island_id = 1;
+  repeated pb_island_cur_dress dress_list = 2;
+  repeated pb_dress_color color_list = 3;
+}
+
+// cmd_id = 21628
+message cs_21628 {
+  required uint32 id = 1;
+  required uint32 color_id = 2;
+}
+
+// cmd_id = 21630
+message cs_21630 {
+  required uint32 ship_id = 1;
+  required uint32 type = 2;
+}
+
+// cmd_id = 21700
+message cs_21700 {
+  required uint32 island_id = 1;
+  required uint32 target_id = 2;
+  required uint32 action_id = 3;
+}
+
+// cmd_id = 21702
+message cs_21702 {
+  required uint32 npc_id = 1;
+  required uint32 action_feedback_id = 2;
+}
+
+message pb_book_collect {
+  required uint32 id = 1;
+  required uint32 base = 2;
+  repeated pb_lv_collect lv_list = 3;
+  repeated pb_lv_collect star_list = 4;
+}
+
+message pb_book_cond {
+  required uint32 type = 1;
+  repeated uint32 unlock_ids = 2;
+}
+
+message pb_build_refresh {
+  required uint32 build_id = 1;
+  required uint32 refresh_time = 2;
+}
+
+message pb_cap_state {
+  required uint32 dress_id = 1;
+  required uint32 cap_id = 2;
+}
+
+message pb_card_image {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_dress_color {
+  required uint32 id = 1;
+  required uint32 color = 2;
+}
+
+message pb_event_effect {
+  required uint32 food_id = 1;
+  required uint32 add_per = 2;
+}
+
+message pb_finish_act_group {
+  required uint32 act_id = 1;
+  repeated uint32 groups = 2;
+}
+
+message pb_fish_sys {
+  required uint32 old_bait = 1;
+  required uint32 fish_rod = 2;
+  repeated pb_fish_weight fish_weight = 3;
+}
+
+message pb_fish_weight {
+  required uint32 fish_id = 1;
+  required uint32 min_weight = 2;
+  required uint32 max_weight = 3;
+  required uint32 gold_state = 4;
+}
+
+message pb_formula_drop_info {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_furniture {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  required uint32 time = 3;
+}
+
+message pb_furniture_data {
+  required uint32 id = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+  required uint32 dir = 4;
+}
+
+message pb_game_type_ship {
+  required uint32 game_type = 1;
+  required uint32 ship_id = 2;
+}
+
+message pb_gather_ship {
+  required uint32 ship_id = 1;
+  required uint32 cur_power = 2;
+  required uint32 recover_time = 3;
+  required uint32 add_exp = 4;
+}
+
+message pb_goods {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_island {
+  required pb_island_public public_data = 1;
+  optional pb_island_private private_data = 2;
+}
+
+message pb_island_achievement_sys {
+  repeated pb_island_achievent achieve_list = 1;
+  repeated uint32 finish_list = 2;
+}
+
+message pb_island_achievent {
+  required uint32 event_arg = 1;
+  required uint32 event_type = 2;
+  required uint32 value = 3;
+}
+
+message pb_island_appoint_area {
+  required uint32 id = 1;
+  repeated uint32 part_list = 2;
+  repeated pb_use_formula formula_list = 3;
+}
+
+message pb_island_appoint_area_award {
+  required uint32 id = 1;
+  required uint32 ship_id = 2;
+  required uint32 exp = 3;
+  required uint32 formula_id = 4;
+  repeated pb_formula_drop_info formula_drop_list = 5;
+  required uint32 main_num = 6;
+  required uint32 other_num = 7;
+}
+
+message pb_island_buff {
+  required uint32 id = 1;
+  required uint32 start_time = 2;
+}
+
+message pb_island_build {
+  required uint32 id = 1;
+  repeated pb_island_ship_appoint ship_appoint_list = 2;
+  repeated pb_island_appoint_area_award award_list = 3;
+  repeated pb_island_appoint_area appoint_list = 4;
+  optional pb_island_build_collect build_collect = 5;
+  repeated pb_island_hand_area hand_list = 6;
+}
+
+message pb_island_build_collect {
+  required uint32 get_num = 1;
+  required uint32 refresh_time = 2;
+  repeated uint32 collect_list = 3;
+}
+
+message pb_island_collect_fragment {
+  required uint32 id = 1;
+  required uint32 pos = 2;
+  required uint32 mark = 3;
+}
+
+message pb_island_collect_fragment_push {
+  required uint32 id = 1;
+  required uint32 pos = 2;
+  required uint32 mark = 3;
+  required uint32 push_type = 4;
+}
+
+message pb_island_collect_item {
+  required uint32 id = 1;
+  repeated uint32 had_fragment = 2;
+}
+
+message pb_island_collect_sys {
+  repeated pb_island_collect_item collect_item = 1;
+  repeated uint32 finish_list = 2;
+}
+
+message pb_island_cur_dress {
+  required uint32 type = 1;
+  required uint32 id = 2;
+}
+
+message pb_island_dress_num {
+  required uint32 id = 1;
+  required uint32 num = 2;
+  required uint32 read = 3;
+  required uint32 time = 4;
+}
+
+message pb_island_dress_user {
+  required uint32 id = 1;
+  required uint32 state = 2;
+  required uint32 color = 3;
+  repeated uint32 color_list = 4;
+}
+
+message pb_island_gather_push {
+  required uint32 id = 1;
+  required uint32 pos = 2;
+  required uint32 state = 3;
+  required uint32 mark = 4;
+  required uint32 refresh_time = 5;
+  required uint32 push_type = 6;
+}
+
+message pb_island_global_buff {
+  repeated uint32 forever_list = 1;
+  repeated pb_island_buff limit_list = 2;
+}
+
+message pb_island_hand_area {
+  required uint32 id = 1;
+  required uint32 state = 2;
+  required uint32 formula_id = 3;
+  required uint32 start_time = 4;
+  required uint32 end_time = 5;
+}
+
+message pb_island_item {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_island_label {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_island_make {
+  required uint32 make_id = 1;
+  required uint32 num = 2;
+}
+
+message pb_island_npc {
+  required uint32 id = 1;
+  required uint32 object_id = 2;
+}
+
+message pb_island_npc_push {
+  required uint32 type = 1;
+  required uint32 id = 2;
+  required uint32 object_id = 3;
+}
+
+message pb_island_order_ship_load {
+  required uint32 id = 1;
+  required uint32 num = 2;
+  required uint32 state = 3;
+}
+
+message pb_island_order_ship_slot {
+  required uint32 id = 1;
+  required uint32 state = 2;
+  required uint32 load_time = 3;
+  required uint32 get_time = 4;
+  repeated pb_island_order_ship_load cost = 5;
+  repeated pb_island_item reward = 6;
+  required uint32 finish_num = 7;
+  required uint32 auto_time = 8;
+}
+
+message pb_island_order_slot {
+  required uint32 id = 1;
+  required uint32 type = 2;
+  required uint32 cur_select = 3;
+  required uint32 start_time = 4;
+  required uint32 submit_time = 5;
+  required uint32 position = 6;
+  required uint32 dialog_id = 7;
+  repeated pb_island_item cost = 8;
+  required uint32 order_lv = 9;
+  required uint32 view_flag = 10;
+}
+
+message pb_island_order_system {
+  required uint32 favor = 1;
+  repeated uint32 get_favor = 2;
+  required uint32 daily_select = 3;
+  required uint32 daily_slot_num = 4;
+  required uint32 time_slot_num = 5;
+  repeated pb_island_order_slot slot_list = 6;
+  repeated pb_island_order_ship_slot ship_slot_list = 7;
+  repeated pb_speed_use speed_list = 8;
+  required uint32 ship_refresh = 9;
+  repeated pb_ship_order_appoint appoint_list = 10;
+  repeated pb_finish_act_group act_group = 11;
+}
+
+message pb_island_part_effect {
+  required uint32 num = 1;
+  required uint32 cost_extra = 2;
+  required uint32 main_extra = 3;
+  required uint32 other_extra = 4;
+}
+
+message pb_island_private {
+  required uint32 open_flag = 1;
+  repeated uint32 white_list = 2;
+  repeated uint32 black_list = 3;
+  repeated pb_visitor visitor_history = 4;
+  repeated pb_island_item item_list = 5;
+  repeated pb_island_item item_list_cache = 6;
+  repeated pb_furniture furniture_list = 7;
+  repeated pb_shop shop_list = 8;
+  required pb_island_order_system order_system = 9;
+  required string invite_code = 10;
+  required uint32 daily_timestamp = 11;
+  repeated .common.kvdata daily_list = 12;
+  repeated pb_island_season_review season_review_list = 13;
+  required pb_island_season season = 14;
+  required pb_island_collect_sys collect_sys = 15;
+  repeated pb_use_formula formula_num = 16;
+  required pb_island_user_dress_sys user_dress = 17;
+  required pb_island_achievement_sys achievement_sys = 18;
+  required pb_island_global_buff global_buff = 19;
+  repeated pb_speedup_ticket speed_tickets = 20;
+  repeated uint32 action_list = 21;
+  repeated uint32 action_feedback_npc_list = 22;
+  repeated pb_set_flag flag_list = 23;
+  required pb_view_book view_book = 24;
+  repeated uint32 follow_ships = 25;
+  repeated pb_card_image image_list = 26;
+  required pb_fish_sys fish_sys = 27;
+}
+
+message pb_island_public {
+  required uint32 id = 1;
+  required uint32 level = 2;
+  required uint32 exp = 3;
+  required uint32 storage_level = 4;
+  required string name = 5;
+  required pb_island_tech tech = 6;
+  required uint32 prosperity = 7;
+  repeated uint32 ability_list = 8;
+  repeated uint32 prosperity_rewarded = 9;
+  required pb_island_ship_sys ship_sys = 10;
+  required uint32 agora_level = 11;
+  required pb_placement_data placed_data = 12;
+  repeated uint32 flag_list = 13;
+  required uint32 tree_gift_timestamp = 14;
+  required uint32 tree_gift_count = 15;
+  repeated uint32 tree_gift_invited = 16;
+  repeated uint32 tree_gift_visitor = 17;
+  required pb_island_task task_info = 18;
+  required pb_island_trade_sys trade_sys = 19;
+  repeated pb_island_build build_list = 20;
+  required pb_island_treasure treasure = 21;
+}
+
+message pb_island_season {
+  required uint32 id = 1;
+  required uint32 pt = 2;
+  repeated uint32 fetch_list = 3;
+  repeated .common.kvdata count_list = 4;
+}
+
+message pb_island_season_review {
+  required uint32 id = 1;
+  repeated .common.kvdata count_list = 2;
+}
+
+message pb_island_ship {
+  required uint32 id = 1;
+  required uint32 lv = 2;
+  required uint32 exp = 3;
+  required uint32 break_lv = 4;
+  required uint32 skill_lv = 5;
+  required uint32 power = 6;
+  required uint32 recover_time = 7;
+  repeated pb_island_buff buff_list = 8;
+  repeated pb_ship_attr extra_attr_list = 9;
+  required uint32 up_limit_state = 10;
+  required uint32 cur_skin_id = 11;
+  required pb_ship_work_place work_place = 12;
+}
+
+message pb_island_ship_appoint {
+  required uint32 id = 1;
+  required uint32 ship_id = 2;
+  required uint32 max_times = 3;
+  required uint32 get_times = 4;
+  required uint32 formula_id = 5;
+  required uint32 start_time = 6;
+  repeated uint32 cost_time_list = 7;
+  required uint32 speed_time = 8;
+  repeated pb_island_part_effect times_extra = 9;
+}
+
+message pb_island_ship_power {
+  required uint32 ship_id = 1;
+  required uint32 power = 2;
+}
+
+message pb_island_ship_skin {
+  required uint32 ship_id = 1;
+  repeated pb_island_skin skin_list = 2;
+}
+
+message pb_island_ship_sys {
+  repeated uint32 invite_list = 1;
+  repeated pb_island_ship ship_list = 2;
+  repeated pb_island_dress_num had_dress = 3;
+  repeated pb_island_ship_wear wear_list = 4;
+  repeated pb_island_ship_skin skin_list = 5;
+  repeated pb_game_type_ship game_ship_list = 6;
+}
+
+message pb_island_ship_wear {
+  required uint32 ship_id = 1;
+  required uint32 dress_id = 2;
+}
+
+message pb_island_skin {
+  required uint32 id = 1;
+  required uint32 color_id = 2;
+  repeated uint32 color_list = 3;
+}
+
+message pb_island_task {
+  repeated uint32 task_id_list_finish = 1;
+  repeated pb_task task_list = 2;
+  required uint32 focus_id = 3;
+  repeated pb_task_random task_list_random = 4;
+  required uint32 week_daily_task_num = 5;
+}
+
+message pb_island_tech {
+  repeated uint32 finish_list = 1;
+  repeated pb_repeat_finish repeat_finish_list = 2;
+}
+
+message pb_island_trade {
+  required uint32 id = 1;
+  required uint32 lv = 2;
+  required uint32 total_sell = 3;
+  repeated pb_trade_sell_food sell_list = 4;
+  repeated pb_trade_food rest_list = 5;
+  repeated pb_trade_post post_list = 6;
+  required uint32 end_time = 7;
+  required uint32 speed_time = 8;
+}
+
+message pb_island_trade_sys {
+  required uint32 today_event = 1;
+  required uint32 today_trade = 2;
+  repeated pb_event_effect effect = 3;
+  repeated pb_trade_num today_num = 4;
+  repeated pb_island_trade trade_list = 5;
+  repeated pb_trade_presell presell_list = 6;
+}
+
+message pb_island_treasure {
+  required uint32 week_buy_num = 1;
+  repeated pb_tre_sell_list sell_list = 2;
+  repeated pb_tre_history_price price_list = 3;
+  repeated uint32 invite_list = 4;
+}
+
+message pb_island_user_dress_sys {
+  repeated pb_island_cur_dress cur_dress = 1;
+  repeated pb_island_dress_user had_dress = 2;
+  repeated pb_cap_state cap_list = 3;
+  repeated uint32 twin_cur_list = 4;
+}
+
+message pb_island_wild_gather {
+  required uint32 id = 1;
+  required uint32 pos = 2;
+  required uint32 state = 3;
+  required uint32 mark = 4;
+  required uint32 refresh_time = 5;
+}
+
+message pb_lv_collect {
+  required uint32 lv = 1;
+  required uint32 value = 2;
+}
+
+message pb_object {
+  required uint32 id = 1;
+  required uint32 type = 2;
+  repeated pb_slot slots = 3;
+  required uint32 status = 4;
+}
+
+message pb_placement_data {
+  repeated pb_furniture_data placed_list = 1;
+  repeated uint32 floor_data = 2;
+  repeated uint32 tile_data = 3;
+}
+
+message pb_placement_theme {
+  required uint32 id = 1;
+  required string name = 2;
+  required pb_placement_data placed_data = 3;
+}
+
+message pb_player {
+  required uint32 id = 1;
+  required uint32 state = 2;
+  required string name = 3;
+  required uint32 level = 4;
+  required .common.displayinfo display = 5;
+  required uint32 map_id = 6;
+  repeated pb_island_cur_dress cur_dress = 7;
+  repeated pb_dress_color dress_color = 8;
+}
+
+message pb_player_pos_record {
+  required uint32 map_id = 1;
+  required pb_vector3 position = 2;
+  required pb_vector3 rotation = 3;
+}
+
+message pb_quaternion {
+  required float x = 1;
+  required float y = 2;
+  required float z = 3;
+  required float w = 4;
+}
+
+message pb_repeat_finish {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_set_flag {
+  required uint32 type = 1;
+  required uint32 flag = 2;
+}
+
+message pb_ship_attr {
+  required uint32 id = 1;
+  required uint32 value = 2;
+}
+
+message pb_ship_order_appoint {
+  required uint32 id = 1;
+  required uint32 view_time = 2;
+  repeated pb_island_item cost = 3;
+  repeated pb_island_item reward = 4;
+}
+
+message pb_ship_work_place {
+  required uint32 type = 1;
+  required uint32 place = 2;
+}
+
+message pb_shop {
+  required uint32 id = 1;
+  required uint32 exist_time = 2;
+  required uint32 refresh_time = 3;
+  repeated pb_goods goods_list = 4;
+  required uint32 refresh_count = 5;
+}
+
+message pb_slot {
+  required uint32 slot_id = 1;
+  required uint32 owner_id = 2;
+}
+
+message pb_speed_use {
+  required uint32 slot_id = 1;
+  required uint32 speed_time = 2;
+}
+
+message pb_speedup_key {
+  required uint32 speed_id = 1;
+  required uint32 end_time = 2;
+}
+
+message pb_speedup_ticket {
+  required pb_speedup_key key = 1;
+  required uint32 num = 2;
+}
+
+message pb_sync_object {
+  required uint32 id = 1;
+  optional pb_vector_3_alt pos = 2;
+  optional pb_quaternion dir = 3;
+  repeated int32 status = 4;
+}
+
+message pb_task {
+  required uint32 id = 1;
+  required uint32 timestamp = 2;
+  repeated pb_task_process process_list = 3;
+}
+
+message pb_task_process {
+  required uint32 target_id = 1;
+  required uint32 target_count = 2;
+}
+
+message pb_task_random {
+  required uint32 task_id = 1;
+  required uint32 timestamp = 2;
+}
+
+message pb_trade_food {
+  required uint32 food_id = 1;
+  required uint32 num = 2;
+}
+
+message pb_trade_num {
+  required uint32 trade_id = 1;
+  required uint32 num = 2;
+}
+
+message pb_trade_post {
+  required uint32 post_id = 1;
+  required uint32 ship_id = 2;
+}
+
+message pb_trade_presell {
+  required uint32 trade_id = 1;
+  required uint32 sell_num_min = 2;
+  required uint32 sell_num_max = 3;
+  required uint32 sell_money_min = 4;
+  required uint32 sell_money_max = 5;
+}
+
+message pb_trade_sell_food {
+  required uint32 food_id = 1;
+  required uint32 num = 2;
+  required uint32 sell_money = 3;
+}
+
+message pb_tre_history_price {
+  required uint32 timestamp = 1;
+  required uint32 price = 2;
+}
+
+message pb_tre_sell_list {
+  required uint32 island_id = 1;
+  required uint32 num = 2;
+}
+
+message pb_use_formula {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_vector3 {
+  required float x = 1;
+  required float y = 2;
+  required float z = 3;
+}
+
+message pb_vector_3_alt {
+  required float x = 1;
+  required float y = 2;
+  required float z = 3;
+}
+
+message pb_view_book {
+  repeated pb_book_cond cond_list = 1;
+  repeated uint32 book_list = 2;
+  repeated uint32 book_awards = 3;
+  repeated pb_book_collect book_collects = 4;
+  repeated pb_island_item item_list = 5;
+}
+
+message pb_visitor {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 time = 3;
+  required uint32 cmd = 4;
+}
+
+// cmd_id = 21001
+message sc_21001 {
+  required uint32 ret = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21003
+message sc_21003 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21005
+message sc_21005 {
+  required uint32 ret = 1;
+}
+
+// cmd_id = 21007
+message sc_21007 {
+  required uint32 result = 1;
+  repeated pb_island_item item_list = 2;
+}
+
+// cmd_id = 21009
+message sc_21009 {
+  required uint32 result = 1;
+  required string invite_code = 2;
+}
+
+// cmd_id = 21011
+message sc_21011 {
+  required uint32 ret = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21013
+message sc_21013 {
+  required uint32 ret = 1;
+}
+
+// cmd_id = 21015
+message sc_21015 {
+  required uint32 result = 1;
+  repeated pb_island_item item_list = 2;
+}
+
+// cmd_id = 21017
+message sc_21017 {
+  required uint32 result = 1;
+  optional pb_shop shop_info = 2;
+}
+
+// cmd_id = 21019
+message sc_21019 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21021
+message sc_21021 {
+  required uint32 result = 1;
+  optional pb_shop shop_info = 2;
+}
+
+// cmd_id = 21023
+message sc_21023 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21025
+message sc_21025 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  optional pb_island_season_review season_review = 3;
+  optional pb_island_order_system order_sys = 4;
+}
+
+// cmd_id = 21027
+message sc_21027 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  repeated pb_island_ship ship_list = 3;
+}
+
+// cmd_id = 21031
+message sc_21031 {
+  repeated uint32 remove_task_list = 1;
+  repeated uint32 remove_task_finish = 2;
+  repeated pb_task task_list = 3;
+  repeated pb_task_random task_list_random = 4;
+}
+
+// cmd_id = 21033
+message sc_21033 {
+  repeated pb_task task_list = 1;
+}
+
+// cmd_id = 21035
+message sc_21035 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21037
+message sc_21037 {
+  required uint32 result = 1;
+  repeated pb_task task_list = 2;
+}
+
+// cmd_id = 21039
+message sc_21039 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21040
+message sc_21040 {
+  repeated pb_task task_list = 1;
+}
+
+// cmd_id = 21042
+message sc_21042 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21043
+message sc_21043 {
+  repeated pb_task task_list = 1;
+  repeated pb_task_random task_list_random = 2;
+}
+
+// cmd_id = 21051
+message sc_21051 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21053
+message sc_21053 {
+  repeated pb_island_achievent event_list = 1;
+}
+
+// cmd_id = 21061
+message sc_21061 {
+  required uint32 result = 1;
+  required uint32 fish_id = 2;
+  required uint32 weight = 3;
+  required uint32 gold_state = 4;
+}
+
+// cmd_id = 21063
+message sc_21063 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21065
+message sc_21065 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21067
+message sc_21067 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21201
+message sc_21201 {
+  required pb_island island = 1;
+  required pb_player_pos_record player_position = 2;
+}
+
+// cmd_id = 21203
+message sc_21203 {
+  required uint32 result = 1;
+  repeated pb_player player_list = 2;
+  required uint32 island_id = 3;
+  required uint32 pos = 4;
+  required uint32 cd = 5;
+}
+
+// cmd_id = 21205
+message sc_21205 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21206
+message sc_21206 {
+  required uint32 island_id = 1;
+  repeated pb_player player_list = 2;
+}
+
+// cmd_id = 21207
+message sc_21207 {
+  required uint32 island_id = 1;
+  repeated pb_object object_list = 2;
+}
+
+// cmd_id = 21210
+message sc_21210 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21212
+message sc_21212 {
+  repeated pb_sync_object sync_ob_list = 1;
+}
+
+// cmd_id = 21214
+message sc_21214 {
+  required uint32 result = 1;
+  repeated pb_object object_list = 2;
+  repeated pb_island_wild_gather gather_list = 3;
+  repeated pb_island_collect_fragment fragment_list = 4;
+  repeated pb_island_npc npc_list = 5;
+}
+
+// cmd_id = 21216
+message sc_21216 {
+  repeated pb_visitor visitor_list = 1;
+}
+
+// cmd_id = 21217
+message sc_21217 {
+  required uint32 island_id = 1;
+  required uint32 build_id = 2;
+}
+
+// cmd_id = 21218
+message sc_21218 {
+  required uint32 island_id = 1;
+  required uint32 slot_id = 2;
+}
+
+// cmd_id = 21219
+message sc_21219 {
+  required uint32 island_id = 1;
+  required uint32 animal_id = 2;
+}
+
+// cmd_id = 21220
+message sc_21220 {
+  required uint32 island_id = 1;
+  required pb_island_ship_appoint appoint_data = 2;
+}
+
+// cmd_id = 21221
+message sc_21221 {
+  required uint32 island_id = 1;
+  repeated pb_island_hand_area hand_list = 2;
+}
+
+// cmd_id = 21222
+message sc_21222 {
+  required uint32 island_id = 1;
+  repeated uint32 slot_list = 2;
+}
+
+// cmd_id = 21223
+message sc_21223 {
+  required uint32 island_id = 1;
+  required uint32 ship_id = 2;
+  required uint32 skin_id = 3;
+  required uint32 skin_color = 4;
+  repeated uint32 unload_dress = 5;
+  repeated pb_island_ship_wear dress_List = 6;
+}
+
+// cmd_id = 21224
+message sc_21224 {
+  required uint32 island_id = 1;
+  required uint32 user_id = 2;
+  repeated pb_island_cur_dress dress_list = 3;
+  repeated pb_dress_color dress_color = 4;
+}
+
+// cmd_id = 21225
+message sc_21225 {
+  required uint32 island_id = 1;
+  required pb_island_trade trade = 2;
+}
+
+// cmd_id = 21226
+message sc_21226 {
+  required uint32 island_id = 1;
+  required uint32 slot_id = 2;
+}
+
+// cmd_id = 21227
+message sc_21227 {
+  required uint32 island_id = 1;
+  required uint32 ability_id = 2;
+}
+
+// cmd_id = 21228
+message sc_21228 {
+  required uint32 island_id = 1;
+  repeated pb_island_npc_push refresh_list = 2;
+}
+
+// cmd_id = 21231
+message sc_21231 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21232
+message sc_21232 {
+  required uint32 island_id = 1;
+  required uint32 user_id = 2;
+  required uint32 point_id = 3;
+  required uint32 rod_id = 4;
+  required uint32 fish_id = 5;
+}
+
+// cmd_id = 21233
+message sc_21233 {
+  required uint32 island_id = 1;
+  required uint32 user_id = 2;
+  required uint32 point_id = 3;
+  required uint32 type = 4;
+}
+
+// cmd_id = 21241
+message sc_21241 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21242
+message sc_21242 {
+  required uint32 island_id = 1;
+  required pb_tre_history_price today_price = 2;
+}
+
+// cmd_id = 21244
+message sc_21244 {
+  required pb_tre_history_price today_price = 1;
+  required uint32 island_lv = 2;
+}
+
+// cmd_id = 21246
+message sc_21246 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21247
+message sc_21247 {
+  required uint32 island_id = 1;
+  required uint32 map_id = 2;
+  required uint32 price = 3;
+}
+
+// cmd_id = 21301
+message sc_21301 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21303
+message sc_21303 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21304
+message sc_21304 {
+  required uint32 timestamp = 1;
+}
+
+// cmd_id = 21306
+message sc_21306 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21308
+message sc_21308 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21309
+message sc_21309 {
+  required uint32 island_id = 1;
+  required pb_placement_data update_data = 2;
+}
+
+// cmd_id = 21311
+message sc_21311 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21313
+message sc_21313 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21314
+message sc_21314 {
+  required uint32 island_id = 1;
+  required uint32 gift_count = 2;
+  repeated uint32 gift_visitor = 3;
+  required uint32 gift_timestamp = 4;
+  required uint32 cmd = 5;
+}
+
+// cmd_id = 21316
+message sc_21316 {
+  repeated .common.kvdata2 gift_list = 1;
+}
+
+// cmd_id = 21318
+message sc_21318 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21320
+message sc_21320 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21322
+message sc_21322 {
+  repeated pb_placement_theme theme_list = 1;
+}
+
+// cmd_id = 21324
+message sc_21324 {
+  required uint32 result = 1;
+  required string tip = 2;
+}
+
+// cmd_id = 21325
+message sc_21325 {
+  required uint32 island_id = 1;
+  required uint32 user_id = 2;
+  required string content = 3;
+}
+
+// cmd_id = 21327
+message sc_21327 {
+  required string name = 1;
+  required string picture = 2;
+  required string visit_word = 3;
+  required uint32 lv = 4;
+  required uint32 social_flag = 5;
+  required uint32 label_view_flag = 6;
+  repeated pb_island_label label_list = 7;
+  repeated uint32 achieve_list = 8;
+  required uint32 achieve_num = 9;
+  required uint32 visit_num = 10;
+  required uint32 good_num = 11;
+  required uint32 ship_num = 12;
+  required uint32 book_num = 13;
+  required uint32 label_flag = 14;
+  required uint32 good_flag = 15;
+  required uint32 white_flag = 16;
+  required uint32 black_flag = 17;
+}
+
+// cmd_id = 21329
+message sc_21329 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21331
+message sc_21331 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21333
+message sc_21333 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21335
+message sc_21335 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21337
+message sc_21337 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21339
+message sc_21339 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21341
+message sc_21341 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21342
+message sc_21342 {
+  repeated pb_island_item item_list = 1;
+}
+
+// cmd_id = 21344
+message sc_21344 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21346
+message sc_21346 {
+  required uint32 result = 1;
+  repeated pb_book_collect collect_list = 2;
+}
+
+// cmd_id = 21348
+message sc_21348 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21402
+message sc_21402 {
+  required uint32 result = 1;
+  required pb_island_order_slot slot = 2;
+  repeated .common.dropinfo drop_list = 3;
+}
+
+// cmd_id = 21404
+message sc_21404 {
+  required uint32 result = 1;
+  required pb_island_order_slot slot = 2;
+}
+
+// cmd_id = 21406
+message sc_21406 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21407
+message sc_21407 {
+  required uint32 island_id = 1;
+  required pb_island_order_slot order_info = 2;
+}
+
+// cmd_id = 21409
+message sc_21409 {
+  required uint32 result = 1;
+  required pb_island_order_ship_slot slot = 2;
+  repeated .common.dropinfo drop_list = 3;
+  repeated pb_ship_order_appoint appoint_list = 4;
+}
+
+// cmd_id = 21411
+message sc_21411 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21413
+message sc_21413 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21415
+message sc_21415 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21417
+message sc_21417 {
+  required uint32 result = 1;
+  required uint32 get_time = 2;
+  repeated .common.dropinfo drop_list = 3;
+}
+
+// cmd_id = 21419
+message sc_21419 {
+  required uint32 result = 1;
+  required pb_island_trade trade_data = 2;
+  repeated pb_island_ship_power ship_power = 3;
+}
+
+// cmd_id = 21421
+message sc_21421 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  required uint32 event_add = 3;
+  required uint32 event_id = 4;
+}
+
+// cmd_id = 21422
+message sc_21422 {
+  required uint32 type = 1;
+  required uint32 today_event = 2;
+  required uint32 today_trade = 3;
+  repeated pb_event_effect effect = 4;
+}
+
+// cmd_id = 21424
+message sc_21424 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21426
+message sc_21426 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21428
+message sc_21428 {
+  required uint32 result = 1;
+  repeated uint32 time_list = 2;
+}
+
+// cmd_id = 21430
+message sc_21430 {
+  required uint32 result = 1;
+  required uint32 next_time = 2;
+  repeated pb_ship_order_appoint appoint_list = 3;
+}
+
+// cmd_id = 21432
+message sc_21432 {
+  required uint32 result = 1;
+  required pb_ship_order_appoint appoint = 2;
+}
+
+// cmd_id = 21502
+message sc_21502 {
+  required uint32 result = 1;
+  required uint32 ship_power = 2;
+  required pb_island_ship_appoint ship_appoint = 3;
+}
+
+// cmd_id = 21504
+message sc_21504 {
+  required uint32 result = 1;
+  required uint32 ship_id = 2;
+  required uint32 cur_energy = 3;
+  required uint32 add_exp = 4;
+  required uint32 recover_time = 5;
+  repeated pb_island_appoint_area_award award = 6;
+  required uint32 return_num = 7;
+}
+
+// cmd_id = 21506
+message sc_21506 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  required uint32 get_times = 3;
+  required uint32 pt_award = 4;
+  required uint32 formula_id = 5;
+  repeated uint32 rest_time_list = 6;
+  required uint32 start_time = 7;
+}
+
+// cmd_id = 21508
+message sc_21508 {
+  required uint32 result = 1;
+  required uint32 refresh_time = 2;
+  repeated .common.dropinfo drop_list = 3;
+}
+
+// cmd_id = 21510
+message sc_21510 {
+  required uint32 result = 1;
+  repeated pb_island_hand_area hand_list = 2;
+}
+
+// cmd_id = 21512
+message sc_21512 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21517
+message sc_21517 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21518
+message sc_21518 {
+  required uint32 area_id = 1;
+  required uint32 formula_id = 2;
+  required uint32 num = 3;
+  required uint32 comb_num = 4;
+}
+
+// cmd_id = 21519
+message sc_21519 {
+  required pb_island_build build = 1;
+}
+
+// cmd_id = 21521
+message sc_21521 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21523
+message sc_21523 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21525
+message sc_21525 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 21527
+message sc_21527 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21528
+message sc_21528 {
+  required uint32 island_id = 1;
+  repeated pb_island_gather_push gather_list = 2;
+}
+
+// cmd_id = 21530
+message sc_21530 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21532
+message sc_21532 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21534
+message sc_21534 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21535
+message sc_21535 {
+  required uint32 island_id = 1;
+  repeated pb_island_collect_fragment_push fragment_data = 2;
+}
+
+// cmd_id = 21536
+message sc_21536 {
+  required uint32 get_num = 1;
+  repeated uint32 get_times = 2;
+  required uint32 empty_num = 3;
+  required uint32 mange_flag = 4;
+}
+
+// cmd_id = 21538
+message sc_21538 {
+  required uint32 result = 1;
+  repeated uint32 cost_time_list = 2;
+  repeated pb_island_part_effect times_extra = 9;
+}
+
+// cmd_id = 21540
+message sc_21540 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  repeated pb_gather_ship ship_list = 3;
+  repeated uint32 gather_list = 4;
+  repeated pb_build_refresh build_refresh = 5;
+  required uint32 cost_gold = 6;
+}
+
+// cmd_id = 21542
+message sc_21542 {
+  required uint32 result = 1;
+  repeated pb_island_wild_gather gather_list = 2;
+}
+
+// cmd_id = 21602
+message sc_21602 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21604
+message sc_21604 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21606
+message sc_21606 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21608
+message sc_21608 {
+  required uint32 result = 1;
+  required uint32 add_exp = 2;
+}
+
+// cmd_id = 21610
+message sc_21610 {
+  required uint32 result = 1;
+  required pb_island_ship ship = 2;
+}
+
+// cmd_id = 21612
+message sc_21612 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21614
+message sc_21614 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21618
+message sc_21618 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21620
+message sc_21620 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21622
+message sc_21622 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21623
+message sc_21623 {
+  required uint32 ship_id = 1;
+  required uint32 cur_power = 2;
+  required uint32 recover_time = 3;
+}
+
+// cmd_id = 21625
+message sc_21625 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21627
+message sc_21627 {
+  required uint32 result = 1;
+  repeated pb_cap_state cap_list = 2;
+}
+
+// cmd_id = 21629
+message sc_21629 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21631
+message sc_21631 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 21701
+message sc_21701 {
+  required uint32 island_id = 1;
+  required uint32 player_id = 2;
+  required uint32 target_id = 3;
+  required uint32 action_id = 4;
+}
+
+// cmd_id = 21703
+message sc_21703 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}

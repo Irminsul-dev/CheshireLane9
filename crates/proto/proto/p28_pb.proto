@@ -1,0 +1,349 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p28;
+
+message act_info {
+  required uint32 ship_id = 1;
+  required uint32 type = 2;
+  required uint32 act_id = 3;
+  required uint32 time = 4;
+}
+
+message apa_event_info {
+  required uint32 event_type = 1;
+  required uint32 value = 2;
+  required uint32 ship_id = 3;
+}
+
+message apartment_furniture {
+  required uint32 furniture_id = 1;
+  required uint32 slot_id = 2;
+}
+
+message apartment_gift {
+  required uint32 gift_id = 1;
+  required uint32 number = 2;
+  required uint32 used_number = 3;
+}
+
+message apartment_gift_shop {
+  required uint32 gift_id = 1;
+  required uint32 count = 2;
+}
+
+message apartment_give_gift {
+  required uint32 gift_id = 1;
+  required uint32 number = 2;
+}
+
+message apartment_ins {
+  required uint32 ship_group = 1;
+  required uint32 care_flag = 2;
+  required uint32 cur_back = 3;
+  required uint32 cur_comm_id = 4;
+  repeated comm_info comm_list = 5;
+  repeated phone_info phone_list = 6;
+  repeated friend_circle_info friend_list = 7;
+}
+
+message apartment_room {
+  required uint32 id = 1;
+  repeated apartment_furniture furnitures = 2;
+  repeated uint32 collections = 3;
+  repeated uint32 ships = 4;
+}
+
+message apartment_ship {
+  required uint32 ship_group = 1;
+  required uint32 favor_lv = 2;
+  required uint32 favor_exp = 3;
+  repeated uint32 regular_trigger = 4;
+  required uint32 daily_favor = 5;
+  repeated uint32 dialogues = 6;
+  repeated uint32 skins = 7;
+  required uint32 cur_skin = 8;
+  required string name = 9;
+  required uint32 name_cd = 10;
+  required uint32 visit_time = 11;
+  repeated skin_hidden_info hidden_info = 12;
+}
+
+message comm_info {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  required uint32 read_flag = 3;
+  repeated keyvalue reply_list = 4;
+}
+
+// cmd_id = 28001
+message cs_28001 {
+  required uint32 room_id = 1;
+}
+
+// cmd_id = 28003
+message cs_28003 {
+  required uint32 ship_group = 1;
+  required uint32 trigger_id = 2;
+}
+
+// cmd_id = 28005
+message cs_28005 {
+  required uint32 ship_group = 1;
+}
+
+// cmd_id = 28007
+message cs_28007 {
+  required uint32 room_id = 1;
+  repeated apartment_furniture furnitures = 2;
+}
+
+// cmd_id = 28009
+message cs_28009 {
+  required uint32 ship_group = 1;
+  repeated apartment_give_gift gifts = 2;
+}
+
+// cmd_id = 28011
+message cs_28011 {
+  required uint32 room_id = 1;
+  required uint32 collection_id = 2;
+  required uint32 ship_group = 3;
+}
+
+// cmd_id = 28013
+message cs_28013 {
+  required uint32 ship_group = 1;
+  required uint32 skin = 2;
+}
+
+// cmd_id = 28015
+message cs_28015 {
+  required uint32 dialog_id = 1;
+}
+
+// cmd_id = 28017
+message cs_28017 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 28019
+message cs_28019 {
+  required uint32 room_id = 1;
+  required uint32 ship_group = 2;
+}
+
+// cmd_id = 28021
+message cs_28021 {
+  required uint32 ship_group = 1;
+  required string name = 2;
+}
+
+// cmd_id = 28023
+message cs_28023 {
+  repeated apa_event_info event_list = 1;
+}
+
+// cmd_id = 28026
+message cs_28026 {
+  required uint32 ship_id = 1;
+  required uint32 type = 2;
+  repeated uint32 id_list = 3;
+}
+
+// cmd_id = 28028
+message cs_28028 {
+  required uint32 ship_id = 1;
+  required uint32 type = 2;
+  required uint32 id = 3;
+  required uint32 chat_id = 4;
+  required uint32 value = 5;
+}
+
+// cmd_id = 28030
+message cs_28030 {
+  required uint32 ship_id = 1;
+  required uint32 back_id = 2;
+}
+
+// cmd_id = 28032
+message cs_28032 {
+  required uint32 ship_id = 1;
+  required uint32 value = 2;
+}
+
+// cmd_id = 28034
+message cs_28034 {
+  required uint32 ship_id = 1;
+  required uint32 comm_id = 2;
+}
+
+// cmd_id = 28036
+message cs_28036 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 28038
+message cs_28038 {
+  required uint32 ship_group = 1;
+  required uint32 skin_id = 2;
+  repeated uint32 hidden_parts = 3;
+}
+
+// cmd_id = 28090
+message cs_28090 {
+  required uint32 track_typ = 1;
+  repeated int32 int_args = 2;
+  repeated string str_args = 3;
+}
+
+message friend_circle_info {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  required uint32 read_flag = 3;
+  required uint32 good_flag = 4;
+  repeated reply_friend reply_list = 5;
+  required uint32 exit_time = 6;
+}
+
+message keyvalue {
+  required uint32 key = 1;
+  required uint32 value = 2;
+}
+
+message phone_info {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  required uint32 read_flag = 3;
+}
+
+message reply_friend {
+  required uint32 key = 1;
+  required uint32 value = 2;
+  required uint32 time = 3;
+}
+
+// cmd_id = 28000
+message sc_28000 {
+  repeated apartment_gift gifts = 1;
+  repeated apartment_ship ships = 2;
+  repeated apartment_gift_shop gift_daily = 3;
+  repeated apartment_gift_shop gift_permanent = 4;
+  repeated apartment_gift_shop furniture_daily = 5;
+  repeated apartment_gift_shop furniture_permanent = 6;
+  required uint32 daily_vigor_max = 7;
+  repeated apartment_room rooms = 8;
+  repeated apartment_ins ins = 9;
+}
+
+// cmd_id = 28002
+message sc_28002 {
+  required uint32 result = 1;
+  required apartment_room room = 2;
+  repeated apartment_ins ins = 3;
+}
+
+// cmd_id = 28004
+message sc_28004 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28006
+message sc_28006 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 28008
+message sc_28008 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28010
+message sc_28010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28012
+message sc_28012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28014
+message sc_28014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28016
+message sc_28016 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 28018
+message sc_28018 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28020
+message sc_28020 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28022
+message sc_28022 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28024
+message sc_28024 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28025
+message sc_28025 {
+  repeated act_info list = 1;
+}
+
+// cmd_id = 28027
+message sc_28027 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28029
+message sc_28029 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 28031
+message sc_28031 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28033
+message sc_28033 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28035
+message sc_28035 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28037
+message sc_28037 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 28039
+message sc_28039 {
+  required uint32 result = 1;
+}
+
+message skin_hidden_info {
+  required uint32 skin_id = 1;
+  repeated uint32 hidden_parts = 2;
+}
+

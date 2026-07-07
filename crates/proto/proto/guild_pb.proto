@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package guild;
+
+message capital_log {
+  required uint32 member_id = 1;
+  required string name = 2;
+  required uint32 event_type = 3;
+  repeated uint32 event_target = 4;
+  required uint32 time = 5;
+}
+
+message guild_technology {
+  required uint32 id = 1;
+  required uint32 state = 2;
+  required uint32 progress = 3;
+}
+
+message weekly_task {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+  required uint32 monday_0clock = 3;
+}
+

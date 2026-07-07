@@ -1,0 +1,119 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p24;
+
+message challengeinfo {
+  required uint32 season_max_score = 1;
+  required uint32 activity_max_score = 2;
+  required uint32 season_max_level = 3;
+  required uint32 activity_max_level = 4;
+  required uint32 season_id = 5;
+  repeated uint32 dungeon_id_list = 6;
+  repeated uint32 buff_list = 7;
+}
+
+message commanderinchallenge {
+  required uint32 pos = 1;
+  required .common.commanderinfo commanderinfo = 2;
+}
+
+// cmd_id = 24002
+message cs_24002 {
+  required uint32 activity_id = 1;
+  repeated groupinfo group_list = 2;
+  required uint32 mode = 3;
+}
+
+// cmd_id = 24004
+message cs_24004 {
+  required uint32 activity_id = 1;
+}
+
+// cmd_id = 24011
+message cs_24011 {
+  required uint32 activity_id = 1;
+  required uint32 mode = 2;
+}
+
+// cmd_id = 24020
+message cs_24020 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 24022
+message cs_24022 {
+  repeated uint32 challengeids = 1;
+}
+
+message groupinfo {
+  required uint32 id = 1;
+  repeated uint32 ship_list = 2;
+  repeated .common.commandersinfo commanders = 3;
+}
+
+message groupinfoinchallenge {
+  required uint32 id = 1;
+  repeated shipinchallenge ships = 2;
+  repeated commanderinchallenge commanders = 3;
+}
+
+// cmd_id = 24003
+message sc_24003 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 24005
+message sc_24005 {
+  required uint32 result = 1;
+  required challengeinfo current_challenge = 2;
+  repeated userchallengeinfo user_challenge = 3;
+}
+
+// cmd_id = 24010
+message sc_24010 {
+  required uint32 score = 1;
+}
+
+// cmd_id = 24012
+message sc_24012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 24021
+message sc_24021 {
+  required uint32 result = 1;
+  repeated .common.kvdata times = 2;
+  repeated .common.kvdata awards = 3;
+  repeated uint32 pass_ids = 4;
+}
+
+// cmd_id = 24023
+message sc_24023 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 24100
+message sc_24100 {
+  required uint32 score = 1;
+}
+
+message shipinchallenge {
+  required uint32 id = 1;
+  required uint32 hp_rant = 2;
+  required .common.shipinfo ship_info = 3;
+}
+
+message userchallengeinfo {
+  required uint32 current_score = 1;
+  required uint32 level = 2;
+  repeated groupinfoinchallenge groupinc_list = 3;
+  required uint32 mode = 4;
+  required uint32 issl = 5;
+  required uint32 season_id = 6;
+  repeated uint32 dungeon_id_list = 7;
+  repeated uint32 buff_list = 8;
+}
+

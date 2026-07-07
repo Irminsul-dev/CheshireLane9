@@ -1,0 +1,246 @@
+syntax = "proto2";
+
+package p10;
+
+// cmd_id = 10001
+message cs_10001 {
+  required string account = 1;
+  required string password = 2;
+  required string mail_box = 3;
+}
+
+// cmd_id = 10018
+message cs_10018 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 10020
+message cs_10020 {
+  required uint32 login_type = 1;
+  required string arg1 = 2;
+  optional string arg2 = 3;
+  optional string arg3 = 4;
+  optional string arg4 = 5;
+  required string check_key = 6;
+  optional uint32 device = 7;
+}
+
+// cmd_id = 10022
+message cs_10022 {
+  required uint32 account_id = 1;
+  required string server_ticket = 2;
+  required string platform = 3;
+  required uint32 serverid = 4;
+  required string check_key = 5;
+  required string device_id = 6;
+}
+
+// cmd_id = 10024
+message cs_10024 {
+  required string nick_name = 1;
+  required uint32 ship_id = 2;
+  required string device_id = 3;
+}
+
+// cmd_id = 10026
+message cs_10026 {
+  required uint32 account_id = 1;
+}
+
+// cmd_id = 10100
+message cs_10100 {
+  required uint32 need_request = 1;
+}
+
+// cmd_id = 10700
+message cs_10700 {
+  required string platform = 1;
+  required string sub_platform = 2;
+  required uint32 pack_index = 3;
+}
+
+// cmd_id = 10800
+message cs_10800 {
+  required uint32 state = 1;
+  required string platform = 2;
+}
+
+// cmd_id = 10802
+message cs_10802 {
+  required uint32 state = 1;
+  required uint32 platform = 2;
+}
+
+// cmd_id = 10991
+message cs_10991 {
+  repeated track_info infos = 1;
+}
+
+// cmd_id = 10992
+message cs_10992 {
+  required uint32 track_type = 1;
+  required uint32 event_id = 2;
+  required string para1 = 3;
+  required string para2 = 4;
+  required string para3 = 5;
+}
+
+// cmd_id = 10993
+message cs_10993 {
+  required uint32 action_system = 1;
+  required uint32 action_id = 2;
+  required string action_des = 3;
+  optional uint32 action_arg = 4;
+}
+
+// cmd_id = 10994
+message cs_10994 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 10996
+message cs_10996 {
+  required uint32 state = 1;
+  required string platform = 2;
+}
+
+message login_addr {
+  required string desc = 1;
+  required string ip = 2;
+  required uint32 port = 3;
+  optional string proxy_ip = 4;
+  optional uint32 proxy_port = 5;
+  required uint32 type = 6;
+}
+
+message noticeinfo {
+  required uint32 id = 1;
+  required string title = 2;
+  required string content = 3;
+}
+
+// cmd_id = 10002
+message sc_10002 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 10019
+message sc_10019 {
+  repeated serverinfo serverlist = 1;
+}
+
+// cmd_id = 10021
+message sc_10021 {
+  required uint32 result = 1;
+  repeated serverinfo serverlist = 2;
+  required uint32 account_id = 3;
+  required string server_ticket = 4;
+  repeated noticeinfo notice_list = 5;
+  optional uint32 device = 6;
+  repeated uint32 limit_server_ids = 7;
+}
+
+// cmd_id = 10023
+message sc_10023 {
+  required uint32 result = 1;
+  required uint32 user_id = 2;
+  required string server_ticket = 3;
+  optional uint32 server_load = 4;
+  optional uint32 db_load = 5;
+}
+
+// cmd_id = 10025
+message sc_10025 {
+  required uint32 result = 1;
+  required uint32 user_id = 2;
+}
+
+// cmd_id = 10027
+message sc_10027 {
+  required uint32 user_id = 1;
+  required uint32 level = 2;
+}
+
+// cmd_id = 10101
+message sc_10101 {
+  required uint32 state = 1;
+}
+
+// cmd_id = 10701
+message sc_10701 {
+  required string url = 1;
+  repeated string version = 2;
+  repeated login_addr addr_list = 3;
+  required uint32 timestamp = 4;
+  required uint32 monday_0oclock_timestamp = 5;
+  repeated string cdn_list = 6;
+}
+
+// cmd_id = 10801
+message sc_10801 {
+  required string gateway_ip = 1;
+  required uint32 gateway_port = 2;
+  required string url = 3;
+  repeated string version = 4;
+  optional string proxy_ip = 5;
+  optional uint32 proxy_port = 6;
+  required uint32 is_ts = 7;
+  required uint32 timestamp = 8;
+  required uint32 monday_0oclock_timestamp = 9;
+  repeated string cdn_list = 10;
+}
+
+// cmd_id = 10803
+message sc_10803 {
+  required string gateway_ip = 1;
+  required uint32 gateway_port = 2;
+  optional string proxy_ip = 3;
+  optional uint32 proxy_port = 4;
+}
+
+// cmd_id = 10995
+message sc_10995 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 10997
+message sc_10997 {
+  required uint32 version1 = 1;
+  required uint32 version2 = 2;
+  required uint32 version3 = 3;
+  required uint32 version4 = 4;
+  required string gateway_ip = 5;
+  required uint32 gateway_port = 6;
+  required string url = 7;
+}
+
+// cmd_id = 10998
+message sc_10998 {
+  required uint32 cmd = 1;
+  required uint32 result = 2;
+}
+
+// cmd_id = 10999
+message sc_10999 {
+  required uint32 reason = 1;
+}
+
+message serverinfo {
+  repeated uint32 ids = 1;
+  required string ip = 2;
+  required uint32 port = 3;
+  required uint32 state = 4;
+  required string name = 5;
+  optional uint32 tag_state = 6;
+  optional uint32 sort = 7;
+  optional string proxy_ip = 8;
+  optional uint32 proxy_port = 9;
+}
+
+message track_info {
+  required uint32 track_typ = 1;
+  required uint32 track_time = 2;
+  repeated int32 int_args = 3;
+  repeated string str_args = 4;
+}
+

@@ -1,0 +1,35 @@
+database_url = "sqlite://cheshire.sqlite"
+sdk_http_addr = "0.0.0.0:21080"
+sdk_https_addr = "0.0.0.0:21443"
+sdk_ip = "127.0.0.1"
+dispatch_addr = "0.0.0.0:21180"
+gate_addr = "0.0.0.0:21280"
+dispatch_ip = "127.0.0.1"
+dispatch_port = 21180
+salt = "dettimrepsignihtyrevednaeurtsignihton"
+tls_cert_path = "assets/tls/cert.pem"
+tls_key_path = "assets/tls/key.pem"
+
+dispatch_version = [
+  "$azhash$9$3$256$a2fb234a59d9334e",
+  "$cvhash$1226$2b97118c875c9dc1",
+  "$l2dhash$1342$3f9df9533aa7a4b5",
+  "$pichash$88$c3b73b182d063d1e",
+  "$bgmhash$81$0fc7c41e6a6ce609",
+  "$paintinghash$951$9c94dec2d2744cdc",
+  "$mangahash$789$6118789616ba7e71",
+  "$cipherhash$157$be7e81e6eccd62ad",
+  "$dormhash$612$bee6ebaaf3370f58",
+  "dTag-1",
+]
+
+[[dispatch_servers]]
+ids = [1]
+ip = "127.0.0.1"
+port = 21280
+state = 0
+name = "CheshireDev"
+tag_state = 2
+sort = 0
+proxy_ip = "127.0.0.1"
+proxy_port = 21280

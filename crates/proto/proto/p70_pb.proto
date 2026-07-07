@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+import "p63_pb.proto";
+
+package p70;
+
+// cmd_id = 70001
+message cs_70001 {
+  required uint32 id = 1;
+  repeated uint32 attr_list = 2;
+}
+
+// cmd_id = 70003
+message cs_70003 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 70005
+message cs_70005 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 70000
+message sc_70000 {
+  repeated .p63.metacharinfo meta_char_list = 1;
+}
+
+// cmd_id = 70002
+message sc_70002 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 70004
+message sc_70004 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 70006
+message sc_70006 {
+  required uint32 result = 1;
+  optional .common.shipinfo ship = 2;
+}
+

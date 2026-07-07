@@ -1,0 +1,475 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p12;
+
+message build_info {
+  required uint32 pos = 1;
+  required uint32 tid = 2;
+}
+
+// cmd_id = 12002
+message cs_12002 {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  required uint32 costtype = 3;
+}
+
+// cmd_id = 12004
+message cs_12004 {
+  repeated uint32 ship_id_list = 1;
+}
+
+// cmd_id = 12006
+message cs_12006 {
+  required uint32 ship_id = 1;
+  required uint32 equip_id = 2;
+  required uint32 pos = 3;
+  required uint32 type = 4;
+}
+
+// cmd_id = 12008
+message cs_12008 {
+  required uint32 type = 1;
+  repeated uint32 pos_list = 2;
+}
+
+// cmd_id = 12011
+message cs_12011 {
+  required uint32 ship_id = 1;
+  required uint32 remould_id = 2;
+  repeated uint32 material_id = 3;
+}
+
+// cmd_id = 12017
+message cs_12017 {
+  required uint32 ship_id = 1;
+  repeated uint32 material_id_list = 2;
+}
+
+// cmd_id = 12020
+message cs_12020 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 12022
+message cs_12022 {
+  repeated uint32 ship_id_list = 1;
+  required uint32 is_locked = 2;
+}
+
+// cmd_id = 12025
+message cs_12025 {
+  required uint32 type = 1;
+  repeated uint32 pos_list = 2;
+}
+
+// cmd_id = 12027
+message cs_12027 {
+  required uint32 ship_id = 1;
+  repeated uint32 material_id_list = 2;
+}
+
+// cmd_id = 12029
+message cs_12029 {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+// cmd_id = 12032
+message cs_12032 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 12034
+message cs_12034 {
+  required uint32 ship_id = 1;
+  required string name = 2;
+}
+
+// cmd_id = 12036
+message cs_12036 {
+  required uint32 ship_id = 1;
+  required uint32 equip_skin_id = 2;
+  required uint32 pos = 3;
+}
+
+// cmd_id = 12038
+message cs_12038 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 12040
+message cs_12040 {
+  required uint32 ship_id = 1;
+  required uint32 flag = 2;
+}
+
+// cmd_id = 12043
+message cs_12043 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 12045
+message cs_12045 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 12047
+message cs_12047 {
+  required uint32 ship_tid = 1;
+}
+
+// cmd_id = 12102
+message cs_12102 {
+  required uint32 id = 1;
+  repeated uint32 ship_list = 2;
+}
+
+// cmd_id = 12104
+message cs_12104 {
+  required uint32 id = 1;
+  required string name = 2;
+}
+
+// cmd_id = 12202
+message cs_12202 {
+  required uint32 ship_id = 1;
+  required uint32 skin_id = 2;
+  required uint32 skin_shadow = 3;
+}
+
+// cmd_id = 12204
+message cs_12204 {
+  required uint32 flag = 1;
+}
+
+// cmd_id = 12206
+message cs_12206 {
+  required uint32 flag = 1;
+}
+
+// cmd_id = 12208
+message cs_12208 {
+  repeated .common.kvdata2 ship_shadow_list = 1;
+}
+
+// cmd_id = 12210
+message cs_12210 {
+  required uint32 ship_id = 1;
+  required uint32 skin_shadow_id = 2;
+}
+
+// cmd_id = 12212
+message cs_12212 {
+  repeated uint32 ship_id_list = 1;
+}
+
+// cmd_id = 12299
+message cs_12299 {
+  required uint32 num = 1;
+}
+
+// cmd_id = 12301
+message cs_12301 {
+  required uint32 type = 1;
+  repeated uint32 id_list = 2;
+}
+
+// cmd_id = 12400
+message cs_12400 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 12402
+message cs_12402 {
+  repeated uint32 id_list = 1;
+}
+
+// cmd_id = 12404
+message cs_12404 {
+  repeated pt_old_lover_item item_list = 1;
+}
+
+// cmd_id = 12406
+message cs_12406 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 12408
+message cs_12408 {
+  required uint32 group_id = 1;
+}
+
+// cmd_id = 12410
+message cs_12410 {
+  required uint32 letter_id = 1;
+}
+
+message groupinfo {
+  required uint32 id = 1;
+  required string name = 2;
+  repeated uint32 ship_list = 3;
+  repeated .common.commandersinfo commanders = 4;
+}
+
+message pt_love_letter_medal {
+  required uint32 group_id = 1;
+  required uint32 exp = 2;
+  required uint32 level = 3;
+}
+
+message pt_old_lover_item {
+  required uint32 item_id = 1;
+  required uint32 group_id = 2;
+  required uint32 year = 3;
+}
+
+message pt_ship_love_letter {
+  required uint32 group_id = 1;
+  repeated uint32 letter_id_list = 2;
+}
+
+// cmd_id = 12001
+message sc_12001 {
+  repeated .common.shipinfo shiplist = 1;
+}
+
+// cmd_id = 12003
+message sc_12003 {
+  required uint32 result = 1;
+  repeated .common.buildinfo build_info = 2;
+}
+
+// cmd_id = 12005
+message sc_12005 {
+  required uint32 result = 1;
+  repeated uint32 ship_id_list = 2;
+}
+
+// cmd_id = 12007
+message sc_12007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12009
+message sc_12009 {
+  required uint32 result = 1;
+  repeated uint32 pos_list = 2;
+}
+
+// cmd_id = 12010
+message sc_12010 {
+  repeated .common.shipinfo ship_list = 1;
+}
+
+// cmd_id = 12012
+message sc_12012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12018
+message sc_12018 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12019
+message sc_12019 {
+  required uint32 intimacy = 1;
+}
+
+// cmd_id = 12021
+message sc_12021 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12023
+message sc_12023 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12024
+message sc_12024 {
+  required uint32 worklist_count = 1;
+  repeated .common.buildinfo worklist_list = 2;
+  required uint32 draw_count_1 = 3;
+  required uint32 draw_count_10 = 4;
+  required uint32 exchange_count = 5;
+}
+
+// cmd_id = 12026
+message sc_12026 {
+  required uint32 result = 1;
+  repeated .common.shipinfo ship_list = 2;
+}
+
+// cmd_id = 12028
+message sc_12028 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12030
+message sc_12030 {
+  required uint32 result = 1;
+  repeated .common.shipinfo ship_list = 2;
+}
+
+// cmd_id = 12031
+message sc_12031 {
+  required uint32 energy_auto_increase_time = 1;
+}
+
+// cmd_id = 12033
+message sc_12033 {
+  required uint32 result = 1;
+  required uint32 time = 2;
+}
+
+// cmd_id = 12035
+message sc_12035 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12037
+message sc_12037 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12039
+message sc_12039 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12041
+message sc_12041 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12042
+message sc_12042 {
+  repeated .common.shipinfo ship_list = 1;
+}
+
+// cmd_id = 12044
+message sc_12044 {
+  repeated build_info infoList = 1;
+}
+
+// cmd_id = 12046
+message sc_12046 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12048
+message sc_12048 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 12101
+message sc_12101 {
+  repeated groupinfo group_list = 1;
+}
+
+// cmd_id = 12103
+message sc_12103 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12105
+message sc_12105 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12106
+message sc_12106 {
+  required groupinfo group = 1;
+}
+
+// cmd_id = 12201
+message sc_12201 {
+  repeated .common.idtimeinfo skin_list = 1;
+  repeated uint32 forbidden_skin_list = 2;
+  repeated uint32 forbidden_skin_type = 3;
+  repeated skin_forbidden forbidden_list = 4;
+}
+
+// cmd_id = 12203
+message sc_12203 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12205
+message sc_12205 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12207
+message sc_12207 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12209
+message sc_12209 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12211
+message sc_12211 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12213
+message sc_12213 {
+  repeated .common.kvdata ship_count_list = 1;
+}
+
+// cmd_id = 12302
+message sc_12302 {
+  repeated .common.shipinfo ship_list = 1;
+}
+
+// cmd_id = 12401
+message sc_12401 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12403
+message sc_12403 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 12405
+message sc_12405 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 12407
+message sc_12407 {
+  repeated pt_old_lover_item converted_list = 1;
+  repeated uint32 rewarded_list = 2;
+  repeated pt_love_letter_medal medal_list = 3;
+  repeated pt_ship_love_letter letter_list = 4;
+  repeated pt_ship_love_letter converted_letter_list = 5;
+}
+
+// cmd_id = 12409
+message sc_12409 {
+  required uint32 ret = 1;
+}
+
+// cmd_id = 12411
+message sc_12411 {
+  required string content = 1;
+}
+
+message skin_forbidden {
+  required uint32 id = 1;
+  required uint32 sort_order = 2;
+  required uint32 type = 3;
+  required uint32 start_time = 4;
+  required uint32 stop_time = 5;
+}
+

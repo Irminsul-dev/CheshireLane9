@@ -1,0 +1,152 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p18;
+
+message arenarank {
+  required uint32 id = 1;
+  required uint32 level = 2;
+  required string name = 3;
+  required uint32 score = 4;
+  optional .common.displayinfo display = 5;
+}
+
+message arenashop {
+  required uint32 shop_id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 18001
+message cs_18001 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 18003
+message cs_18003 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 18006
+message cs_18006 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 18008
+message cs_18008 {
+  repeated uint32 vanguard_ship_id_list = 1;
+  repeated uint32 main_ship_id_list = 2;
+}
+
+// cmd_id = 18100
+message cs_18100 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 18102
+message cs_18102 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 18104
+message cs_18104 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 18201
+message cs_18201 {
+  required uint32 page = 1;
+  required uint32 type = 2;
+  optional uint32 act_id = 3;
+}
+
+// cmd_id = 18203
+message cs_18203 {
+  required uint32 type = 1;
+  optional uint32 act_id = 2;
+}
+
+message rank_info {
+  required uint32 user_id = 1;
+  required uint32 point = 2;
+  required string name = 3;
+  required uint32 lv = 4;
+  required uint32 arena_rank = 5;
+  optional .common.displayinfo display = 6;
+}
+
+// cmd_id = 18002
+message sc_18002 {
+  required uint32 score = 1;
+  required uint32 rank = 2;
+  required uint32 fight_count = 3;
+  required uint32 fight_count_reset_time = 4;
+  required uint32 flash_target_count = 5;
+  repeated uint32 vanguard_ship_id_list = 6;
+  repeated uint32 main_ship_id_list = 7;
+  repeated targetinfo target_list = 8;
+}
+
+// cmd_id = 18004
+message sc_18004 {
+  required uint32 result = 1;
+  repeated targetinfo target_list = 2;
+}
+
+// cmd_id = 18005
+message sc_18005 {
+  required uint32 score = 1;
+  required uint32 rank = 2;
+  repeated targetinfo target_list = 3;
+}
+
+// cmd_id = 18007
+message sc_18007 {
+  repeated arenarank arena_rank_lsit = 1;
+}
+
+// cmd_id = 18009
+message sc_18009 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 18101
+message sc_18101 {
+  required uint32 flash_count = 1;
+  repeated arenashop arena_shop_list = 2;
+  required uint32 next_flash_time = 3;
+}
+
+// cmd_id = 18103
+message sc_18103 {
+  required uint32 result = 1;
+  repeated arenashop arena_shop_list = 2;
+}
+
+// cmd_id = 18105
+message sc_18105 {
+  required targetinfo info = 1;
+}
+
+// cmd_id = 18202
+message sc_18202 {
+  repeated rank_info list = 1;
+}
+
+// cmd_id = 18204
+message sc_18204 {
+  required uint32 point = 1;
+  required uint32 rank = 2;
+}
+
+message targetinfo {
+  required uint32 id = 1;
+  required uint32 level = 2;
+  required string name = 3;
+  required uint32 score = 4;
+  required uint32 rank = 5;
+  repeated .common.shipinfo vanguard_ship_list = 6;
+  repeated .common.shipinfo main_ship_list = 7;
+  optional .common.displayinfo display = 8;
+}
+

@@ -1,0 +1,601 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p26;
+
+message act_goods_buy {
+  required uint32 itemid = 1;
+  required uint32 count = 2;
+}
+
+message act_goods_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  repeated uint32 bought_record = 3;
+}
+
+message awardinfo {
+  required uint32 id = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+message boss4th {
+  required uint32 id = 1;
+  required uint32 boss_hp = 2;
+  required uint32 death = 3;
+  required uint32 hour_traffic = 4;
+  required uint32 hour_off = 5;
+}
+
+message buff_slot {
+  required uint32 pos = 1;
+  required uint32 itemid = 2;
+  required uint32 itemnum = 3;
+}
+
+message cellsinfo {
+  required uint32 row = 1;
+  required uint32 column = 2;
+  required uint32 color = 3;
+}
+
+message colorinfo {
+  required uint32 id = 1;
+  required uint32 number = 2;
+}
+
+// cmd_id = 26002
+message cs_26002 {
+  required uint32 id = 1;
+  required uint32 act_id = 2;
+}
+
+// cmd_id = 26004
+message cs_26004 {
+  required uint32 id = 1;
+  required uint32 act_id = 2;
+  repeated cellsinfo cell_list = 3;
+}
+
+// cmd_id = 26006
+message cs_26006 {
+  required uint32 id = 1;
+  required uint32 act_id = 2;
+}
+
+// cmd_id = 26008
+message cs_26008 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26021
+message cs_26021 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26031
+message cs_26031 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26041
+message cs_26041 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26043
+message cs_26043 {
+  required uint32 act_id = 1;
+  required uint32 goodsid = 2;
+  repeated act_goods_buy selected = 3;
+}
+
+// cmd_id = 26051
+message cs_26051 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26053
+message cs_26053 {
+  required uint32 act_id = 1;
+  required uint32 recipe_id = 2;
+  repeated .common.kvdata items = 3;
+  required uint32 times = 4;
+}
+
+// cmd_id = 26055
+message cs_26055 {
+  required uint32 act_id = 1;
+  repeated buff_slot slots = 2;
+}
+
+// cmd_id = 26060
+message cs_26060 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26062
+message cs_26062 {
+  required uint32 act_id = 1;
+  repeated uint32 roles = 2;
+}
+
+// cmd_id = 26064
+message cs_26064 {
+  required uint32 act_id = 1;
+  required uint32 building_id = 2;
+}
+
+// cmd_id = 26066
+message cs_26066 {
+  required uint32 act_id = 1;
+  required uint32 group = 2;
+  required uint32 count = 3;
+}
+
+// cmd_id = 26068
+message cs_26068 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26070
+message cs_26070 {
+  required uint32 act_id = 1;
+  required uint32 level = 2;
+}
+
+// cmd_id = 26072
+message cs_26072 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26081
+message cs_26081 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26101
+message cs_26101 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 26103
+message cs_26103 {
+  required uint32 hubid = 1;
+  required uint32 cmd = 2;
+  repeated uint32 args1 = 3;
+}
+
+// cmd_id = 26105
+message cs_26105 {
+  repeated cs_26103 combine = 1;
+}
+
+// cmd_id = 26106
+message cs_26106 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26108
+message cs_26108 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26110
+message cs_26110 {
+  required uint32 gameid = 1;
+  required uint32 time = 2;
+}
+
+// cmd_id = 26111
+message cs_26111 {
+  required uint32 gameid = 1;
+}
+
+// cmd_id = 26122
+message cs_26122 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 26124
+message cs_26124 {
+  required uint32 times = 1;
+}
+
+// cmd_id = 26126
+message cs_26126 {
+  required uint32 roomid = 1;
+  required uint32 times = 2;
+  required uint32 score = 3;
+}
+
+// cmd_id = 26128
+message cs_26128 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 26150
+message cs_26150 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 26152
+message cs_26152 {
+  required uint32 goodsid = 1;
+  repeated select_info selected = 2;
+}
+
+// cmd_id = 26154
+message cs_26154 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 26156
+message cs_26156 {
+  required uint32 act_id = 1;
+}
+
+// cmd_id = 26158
+message cs_26158 {
+  required uint32 act_id = 1;
+  repeated uint32 ship_group_id = 2;
+}
+
+// cmd_id = 26160
+message cs_26160 {
+  required uint32 act_id = 1;
+  optional uint32 int_value = 2;
+  optional string str_value = 3;
+}
+
+message friendscore {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 score = 3;
+  required .common.displayinfo display = 4;
+  required uint32 time_data = 5;
+}
+
+message gameroom {
+  required uint32 roomid = 1;
+  required uint32 max_score = 2;
+}
+
+message goods_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message keyvalue {
+  required uint32 key = 1;
+  required uint32 value = 2;
+  optional uint32 value2 = 3;
+}
+
+message keyvaluelist {
+  required uint32 key = 1;
+  repeated keyvalue value_list = 2;
+}
+
+message minigamedata {
+  required uint32 id = 1;
+  repeated uint32 datas = 2;
+  repeated keyvaluelist date1_key_value_list = 3;
+}
+
+message minigamehub {
+  required uint32 id = 1;
+  optional uint32 available_cnt = 2;
+  optional uint32 used_cnt = 3;
+  optional uint32 ultimate = 4;
+  repeated .common.kvdata2 maxscores = 5;
+}
+
+message ninja_adjust {
+  required uint32 time = 1;
+  required ninja_pt left_hp = 2;
+  required uint32 max_level = 3;
+}
+
+message ninja_info {
+  required ninja_pt pt = 1;
+  repeated uint32 builds = 2;
+  repeated uint32 roles = 3;
+  repeated ninja_role_recruit recruits = 4;
+  repeated uint32 buffs = 5;
+  required uint32 max_level = 6;
+  required uint32 cur_level = 7;
+  required uint32 max_display = 8;
+  required ninja_adjust adjust = 9;
+  required ninja_pt summary_pt = 10;
+}
+
+message ninja_pt {
+  required uint32 b = 1;
+  required uint32 m = 2;
+  required uint32 k = 3;
+}
+
+message ninja_role_recruit {
+  required uint32 id = 1;
+  required uint32 start_time = 2;
+}
+
+message ninja_summary {
+  required ninja_pt summary_pt = 1;
+  repeated .common.dropinfo award_list = 2;
+  required ninja_adjust adjust = 3;
+}
+
+message p_party_role {
+  required uint32 tid = 1;
+  required uint32 bubble = 2;
+  required uint32 speech_bubble = 3;
+}
+
+message p_special_role {
+  required uint32 tid = 1;
+  required uint32 state = 2;
+  required uint32 gift = 3;
+}
+
+message pb_activity_item {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message pb_island_node {
+  required uint32 id = 1;
+  required uint32 event_id = 2;
+  required uint32 is_new = 3;
+}
+
+// cmd_id = 26001
+message sc_26001 {
+  required uint32 id = 1;
+  repeated cellsinfo cell_list = 2;
+  repeated colorinfo color_list = 3;
+  repeated awardinfo award_list = 4;
+  required uint32 start_time = 5;
+}
+
+// cmd_id = 26003
+message sc_26003 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 26005
+message sc_26005 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 26007
+message sc_26007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 26022
+message sc_26022 {
+  required uint32 result = 1;
+  required uint32 register_date = 2;
+  required string guild_name = 3;
+  required uint32 chapter_id = 4;
+  required uint32 marry_number = 5;
+  required uint32 medal_number = 6;
+  required uint32 furniture_number = 7;
+  required uint32 furniture_worth = 8;
+  required uint32 character_id = 9;
+  required uint32 first_lady_id = 10;
+  required string first_lady_name = 11;
+  required uint32 first_lady_time = 12;
+  required uint32 first_online = 13;
+  required uint32 world_max_task = 14;
+  required uint32 collect_num = 15;
+  required uint32 combat = 16;
+  required uint32 ship_num_total = 17;
+  required uint32 ship_num_120 = 18;
+  required uint32 ship_num_125 = 19;
+  required uint32 love200_num = 20;
+  required uint32 skin_num = 21;
+  required uint32 skin_ship_num = 22;
+}
+
+// cmd_id = 26032
+message sc_26032 {
+  required uint32 result = 1;
+  required uint32 boss_hp = 2;
+  repeated uint32 milestones = 3;
+  required uint32 death = 4;
+}
+
+// cmd_id = 26033
+message sc_26033 {
+  required uint32 point = 1;
+}
+
+// cmd_id = 26042
+message sc_26042 {
+  required uint32 result = 1;
+  required uint32 start_time = 2;
+  required uint32 stop_time = 3;
+  repeated act_goods_info goods = 4;
+}
+
+// cmd_id = 26044
+message sc_26044 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 26052
+message sc_26052 {
+  required uint32 result = 1;
+  repeated .common.kvdata items = 2;
+  repeated .common.kvdata recipes = 3;
+  repeated buff_slot slots = 4;
+}
+
+// cmd_id = 26054
+message sc_26054 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+}
+
+// cmd_id = 26056
+message sc_26056 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 26061
+message sc_26061 {
+  required uint32 result = 1;
+  optional ninja_info info = 2;
+}
+
+// cmd_id = 26063
+message sc_26063 {
+  required uint32 result = 1;
+  required ninja_adjust adjust = 2;
+}
+
+// cmd_id = 26065
+message sc_26065 {
+  required uint32 result = 1;
+  required ninja_adjust adjust = 2;
+}
+
+// cmd_id = 26067
+message sc_26067 {
+  required uint32 result = 1;
+  required ninja_adjust adjust = 2;
+}
+
+// cmd_id = 26069
+message sc_26069 {
+  required uint32 result = 1;
+  required ninja_summary summary = 2;
+}
+
+// cmd_id = 26071
+message sc_26071 {
+  required uint32 result = 1;
+  required ninja_adjust adjust = 2;
+}
+
+// cmd_id = 26073
+message sc_26073 {
+  required uint32 result = 1;
+  optional ninja_adjust adjust = 2;
+}
+
+// cmd_id = 26082
+message sc_26082 {
+  required uint32 result = 1;
+  repeated boss4th boss_list = 2;
+}
+
+// cmd_id = 26102
+message sc_26102 {
+  repeated minigamehub hubs = 1;
+}
+
+// cmd_id = 26104
+message sc_26104 {
+  required uint32 result = 1;
+  repeated .common.dropinfo award_list = 2;
+  optional minigamehub hub = 3;
+  optional minigamedata data = 4;
+}
+
+// cmd_id = 26107
+message sc_26107 {
+  required uint32 ret = 1;
+  repeated pb_activity_item item_list = 2;
+}
+
+// cmd_id = 26109
+message sc_26109 {
+  required uint32 ret = 1;
+  repeated pb_island_node node_list = 2;
+}
+
+// cmd_id = 26112
+message sc_26112 {
+  repeated friendscore ranks = 1;
+}
+
+// cmd_id = 26120
+message sc_26120 {
+  required uint32 weekly_free = 1;
+  required uint32 monthly_ticket = 2;
+  repeated gameroom rooms = 3;
+  required uint32 pay_coin_count = 4;
+  required uint32 first_enter = 5;
+}
+
+// cmd_id = 26123
+message sc_26123 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 26125
+message sc_26125 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 26127
+message sc_26127 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 26129
+message sc_26129 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 26151
+message sc_26151 {
+  repeated goods_info goods = 1;
+  required uint32 next_flash_time = 2;
+}
+
+// cmd_id = 26153
+message sc_26153 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 26155
+message sc_26155 {
+  required uint32 result = 1;
+  repeated uint32 next_flash_time = 2;
+}
+
+// cmd_id = 26157
+message sc_26157 {
+  required uint32 ret = 1;
+  repeated p_party_role party_roles = 2;
+  repeated p_special_role special_roles = 3;
+  optional uint32 refresh_time = 4;
+}
+
+// cmd_id = 26159
+message sc_26159 {
+  required uint32 ret = 1;
+  optional uint32 refresh_time = 2;
+  repeated p_party_role party_roles = 3;
+}
+
+// cmd_id = 26161
+message sc_26161 {
+  required uint32 result = 1;
+}
+
+message select_info {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+

@@ -1,0 +1,249 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p50;
+
+message ad_arg {
+  required uint32 type = 1;
+  optional string string = 2;
+  optional uint32 int = 3;
+}
+
+// cmd_id = 50001
+message cs_50001 {
+  required uint32 type = 1;
+  required string keyword = 2;
+}
+
+// cmd_id = 50003
+message cs_50003 {
+  required uint32 id = 1;
+  required string content = 2;
+}
+
+// cmd_id = 50006
+message cs_50006 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 50009
+message cs_50009 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 50011
+message cs_50011 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 50014
+message cs_50014 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 50016
+message cs_50016 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 50018
+message cs_50018 {
+  repeated uint32 user_id_list = 1;
+}
+
+// cmd_id = 50102
+message cs_50102 {
+  required uint32 type = 1;
+  required string content = 2;
+}
+
+// cmd_id = 50105
+message cs_50105 {
+  required uint32 id = 1;
+  required string content = 2;
+}
+
+// cmd_id = 50107
+message cs_50107 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 50109
+message cs_50109 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 50111
+message cs_50111 {
+  required uint32 id = 1;
+  required string info = 2;
+  required string content = 3;
+}
+
+// cmd_id = 50113
+message cs_50113 {
+  required uint32 user_id = 1;
+}
+
+message detail_info {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 title = 3;
+  required uint32 lv = 4;
+  required uint32 ship_count = 5;
+  required uint32 collection_count = 6;
+  required uint32 pvp_attack_count = 7;
+  required uint32 pvp_win_count = 8;
+  required uint32 collect_attack_count = 9;
+  required uint32 attack_count = 10;
+  required uint32 win_count = 11;
+  required string adv = 12;
+  required uint32 online = 13;
+  required uint32 pre_online_time = 14;
+  required uint32 score = 15;
+  repeated uint32 medal_id = 16;
+  optional .common.displayinfo display = 17;
+}
+
+message friend_info {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 lv = 3;
+  required string adv = 4;
+  required uint32 online = 5;
+  required uint32 pre_online_time = 6;
+  optional .common.displayinfo display = 7;
+}
+
+message msg_info {
+  required uint32 timestamp = 1;
+  required player_info player = 2;
+  required string content = 3;
+}
+
+message player_info {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 lv = 3;
+  optional .common.displayinfo display = 4;
+}
+
+// cmd_id = 50000
+message sc_50000 {
+  repeated friend_info friend_list = 1;
+  repeated msg_info request_list = 2;
+}
+
+// cmd_id = 50002
+message sc_50002 {
+  required uint32 result = 1;
+  optional detail_info player = 2;
+}
+
+// cmd_id = 50004
+message sc_50004 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50005
+message sc_50005 {
+  required msg_info msg = 1;
+}
+
+// cmd_id = 50007
+message sc_50007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50008
+message sc_50008 {
+  required friend_info player = 1;
+}
+
+// cmd_id = 50010
+message sc_50010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50012
+message sc_50012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50013
+message sc_50013 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 50015
+message sc_50015 {
+  repeated player_info player_list = 1;
+}
+
+// cmd_id = 50017
+message sc_50017 {
+  repeated player_info black_list = 1;
+}
+
+// cmd_id = 50019
+message sc_50019 {
+  repeated friend_info user_list = 1;
+}
+
+// cmd_id = 50101
+message sc_50101 {
+  required player_info player = 1;
+  required uint32 type = 2;
+  required string content = 3;
+}
+
+// cmd_id = 50103
+message sc_50103 {
+  required uint32 ad_id = 1;
+  repeated ad_arg arg_list = 2;
+}
+
+// cmd_id = 50104
+message sc_50104 {
+  required msg_info msg = 1;
+}
+
+// cmd_id = 50106
+message sc_50106 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50108
+message sc_50108 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50110
+message sc_50110 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50112
+message sc_50112 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 50114
+message sc_50114 {
+  required uint32 result = 1;
+  required player_info player = 2;
+}
+
+// cmd_id = 50115
+message sc_50115 {
+  required uint32 timestamp = 1;
+}
+
+// cmd_id = 50116
+message sc_50116 {
+  required player_info player = 1;
+  required uint32 type = 2;
+  required string content = 3;
+}
+

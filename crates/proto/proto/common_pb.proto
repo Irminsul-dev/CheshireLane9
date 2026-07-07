@@ -1,0 +1,212 @@
+syntax = "proto2";
+
+package common;
+
+message appreciationinfo {
+  repeated uint32 gallerys = 1;
+  repeated uint32 musics = 2;
+  repeated uint32 favor_gallerys = 3;
+  repeated uint32 favor_musics = 4;
+  required uint32 music_no = 5;
+  required uint32 music_mode = 6;
+}
+
+message attrinfo {
+  required uint32 level = 1;
+  required uint32 exp = 2;
+}
+
+message buildinfo {
+  required uint32 time = 1;
+  required uint32 finish_time = 2;
+  required uint32 build_id = 3;
+}
+
+message collectioninfo {
+  required uint32 id = 1;
+  required uint32 finish_time = 2;
+  required uint32 over_time = 3;
+  repeated uint32 ship_id_list = 4;
+}
+
+message commanderinfo {
+  required uint32 id = 1;
+  required uint32 template_id = 2;
+  required uint32 level = 3;
+  required uint32 exp = 4;
+  required uint32 is_locked = 5;
+  repeated uint32 ability = 6;
+  repeated uint32 ability_origin = 7;
+  required uint32 ability_time = 8;
+  repeated skillinfo skill = 9;
+  required uint32 used_pt = 10;
+  required string name = 11;
+  required uint32 rename_time = 12;
+  optional uint32 home_clean_time = 13;
+  optional uint32 home_play_time = 14;
+  optional uint32 home_feed_time = 15;
+}
+
+message commandersinfo {
+  required uint32 pos = 1;
+  required uint32 id = 2;
+}
+
+message displayinfo {
+  required uint32 icon = 1;
+  required uint32 skin = 2;
+  required uint32 icon_frame = 3;
+  required uint32 chat_frame = 4;
+  required uint32 icon_theme = 5;
+  required uint32 marry_flag = 6;
+  required uint32 transform_flag = 7;
+}
+
+message dropinfo {
+  required uint32 type = 1;
+  required uint32 id = 2;
+  required uint32 number = 3;
+}
+
+message equipskin_info {
+  required uint32 id = 1;
+  required uint32 skinId = 2;
+}
+
+message fleet_info {
+  required uint32 id = 1;
+  repeated team_info main_team = 2;
+  repeated team_info submarine_team = 3;
+  repeated team_info support_team = 4;
+}
+
+message fleetinfo {
+  required uint32 id = 1;
+  repeated uint32 ship_list = 2;
+  repeated commandersinfo commanders = 3;
+}
+
+message idtimeinfo {
+  required uint32 id = 1;
+  required uint32 time = 2;
+}
+
+message item_info {
+  required uint32 id = 1;
+  required uint32 num = 2;
+}
+
+message kvdata {
+  required uint32 key = 1;
+  required uint32 value = 2;
+}
+
+message kvdata2 {
+  required uint32 key = 1;
+  required uint32 value1 = 2;
+  required uint32 value2 = 3;
+}
+
+message refund_shopinfo {
+  required uint32 shop_id = 1;
+  required uint32 buy_time = 2;
+  required uint32 refund_time = 3;
+}
+
+message shipcoreinfo {
+  required uint32 id = 1;
+  required uint32 exp = 2;
+  repeated shipmodelinfo model_list = 3;
+}
+
+message shipgrouppos {
+  required uint32 ship_id = 1;
+  required uint32 pos = 2;
+}
+
+message shipinfo {
+  required uint32 id = 1;
+  required uint32 template_id = 2;
+  required uint32 level = 3;
+  required uint32 exp = 4;
+  repeated equipskin_info equip_info_list = 5;
+  required uint32 energy = 6;
+  required uint32 state = 7;
+  required uint32 is_locked = 8;
+  repeated transform_info transform_list = 9;
+  repeated shipskill skill_id_list = 10;
+  required uint32 intimacy = 11;
+  required uint32 proficiency = 12;
+  repeated strength_info strength_list = 13;
+  required uint32 create_time = 14;
+  required uint32 skin_id = 15;
+  required uint32 propose = 16;
+  optional string name = 17;
+  optional uint32 change_name_timestamp = 18;
+  required uint32 max_level = 19;
+  optional uint32 common_flag = 20;
+  required uint32 activity_npc = 21;
+  repeated uint32 meta_repair_list = 22;
+  optional spweaponinfo spweapon = 23;
+  repeated kvdata skin_shadow_list = 24;
+  repeated uint32 char_random_flag = 25;
+}
+
+message shipmodelinfo {
+  required uint32 pos = 1;
+  required uint32 id = 2;
+}
+
+message shipskill {
+  required uint32 skill_id = 1;
+  required uint32 skill_lv = 2;
+  required uint32 skill_exp = 3;
+}
+
+message skillinfo {
+  required uint32 id = 1;
+  required uint32 exp = 2;
+}
+
+message spweaponinfo {
+  required uint32 id = 1;
+  required uint32 template_id = 2;
+  required uint32 attr_1 = 3;
+  required uint32 attr_2 = 4;
+  required uint32 attr_temp_1 = 5;
+  required uint32 attr_temp_2 = 6;
+  required uint32 effect = 7;
+  required uint32 pt = 8;
+}
+
+message strength_info {
+  required uint32 id = 1;
+  required uint32 exp = 2;
+}
+
+message taskinfo {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+  required uint32 accept_time = 3;
+  required uint32 submit_time = 4;
+}
+
+message team_info {
+  required uint32 id = 1;
+  repeated uint32 ship_list = 2;
+  optional uint32 commander_main = 3;
+  optional uint32 commander_sub = 4;
+}
+
+message transform_info {
+  required uint32 id = 1;
+  required uint32 level = 2;
+}
+
+message usersimpleinfo {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 lv = 3;
+  required displayinfo display = 4;
+}
+

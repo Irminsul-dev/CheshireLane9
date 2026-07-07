@@ -1,0 +1,134 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p40;
+
+message commander_exp {
+  required uint32 commander_id = 1;
+  required uint32 exp = 2;
+}
+
+// cmd_id = 40001
+message cs_40001 {
+  required uint32 system = 1;
+  repeated uint32 ship_id_list = 2;
+  required uint32 data = 3;
+  repeated uint32 data2 = 4;
+  repeated othershipid other_ship_id_list = 5;
+}
+
+// cmd_id = 40003
+message cs_40003 {
+  required uint32 system = 1;
+  required uint32 data = 2;
+  required uint32 key = 3;
+  optional uint32 score = 4;
+  repeated statisticsinfo statistics = 5;
+  repeated uint32 kill_id_list = 6;
+  required uint32 total_time = 7;
+  required uint32 bot_percentage = 8;
+  required uint32 extra_param = 9;
+  optional string file_check = 10;
+  optional uint32 boss_hp = 11;
+  repeated enemyinfo enemy_info = 12;
+  repeated uint32 data2 = 13;
+  repeated uint32 commander_id_list = 14;
+  repeated statisticsinfo otherstatistics = 15;
+  required uint32 auto_before = 16;
+  required uint32 auto_switch_time = 17;
+  required uint32 auto_after = 18;
+}
+
+// cmd_id = 40005
+message cs_40005 {
+  required uint32 system = 1;
+}
+
+// cmd_id = 40007
+message cs_40007 {
+  required uint32 system = 1;
+  required uint32 id = 2;
+  required uint32 cnt = 3;
+}
+
+message dropperformance {
+  required uint32 enemy_id = 1;
+  required uint32 resource_num = 2;
+  required uint32 other_num = 3;
+}
+
+message enemyinfo {
+  required uint32 enemy_id = 1;
+  required uint32 damage_taken = 2;
+  required uint32 total_hp = 3;
+}
+
+message hpdropinfo {
+  required uint32 hp = 1;
+  repeated .common.dropinfo drop_info = 2;
+}
+
+message othershipid {
+  required uint32 ship_id = 1;
+  required uint32 user_id = 2;
+}
+
+message quick_reward {
+  repeated .common.dropinfo drop_list = 1;
+  repeated .common.dropinfo extra_drop_list = 2;
+}
+
+// cmd_id = 40002
+message sc_40002 {
+  required uint32 result = 1;
+  optional uint32 key = 2;
+  repeated dropperformance drop_performance = 3;
+}
+
+// cmd_id = 40004
+message sc_40004 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_info = 2;
+  repeated .common.dropinfo extra_drop_info = 3;
+  required uint32 player_exp = 4;
+  repeated ship_exp ship_exp_list = 5;
+  required uint32 mvp = 6;
+  repeated commander_exp commander_exp = 7;
+  repeated hpdropinfo hp_drop_info = 8;
+}
+
+// cmd_id = 40006
+message sc_40006 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 40008
+message sc_40008 {
+  required uint32 result = 1;
+  repeated quick_reward reward_list = 2;
+}
+
+// cmd_id = 40009
+message sc_40009 {
+  repeated sc_40004 re40004 = 1;
+  required uint32 system = 2;
+  optional uint32 arg1 = 3;
+}
+
+message ship_exp {
+  required uint32 ship_id = 1;
+  required uint32 exp = 2;
+  required uint32 intimacy = 3;
+  required uint32 energy = 4;
+}
+
+message statisticsinfo {
+  required uint32 ship_id = 1;
+  required uint32 damage_cause = 2;
+  required uint32 damage_caused = 3;
+  required uint32 hp_rest = 4;
+  required uint32 max_damage_once = 5;
+  required uint32 ship_gear_score = 6;
+}
+

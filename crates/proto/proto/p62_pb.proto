@@ -1,0 +1,172 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+import "guild_pb.proto";
+
+package p62;
+
+// cmd_id = 62002
+message cs_62002 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 62007
+message cs_62007 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 62009
+message cs_62009 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 62011
+message cs_62011 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 62013
+message cs_62013 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 62015
+message cs_62015 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 62020
+message cs_62020 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 62022
+message cs_62022 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 62024
+message cs_62024 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 62029
+message cs_62029 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 62100
+message cs_62100 {
+  required uint32 type = 1;
+}
+
+message rank_info {
+  required uint32 period = 1;
+  repeated rank_user_info rankuserinfo = 2;
+}
+
+message rank_user_info {
+  required uint32 user_id = 1;
+  required uint32 count = 2;
+}
+
+// cmd_id = 62003
+message sc_62003 {
+  required uint32 result = 1;
+  repeated uint32 donate_tasks = 2;
+}
+
+// cmd_id = 62004
+message sc_62004 {
+  required .guild.weekly_task this_weekly_tasks = 1;
+}
+
+// cmd_id = 62005
+message sc_62005 {
+  required uint32 benefit_finish_time = 1;
+}
+
+// cmd_id = 62006
+message sc_62006 {
+  required uint32 progress = 1;
+}
+
+// cmd_id = 62008
+message sc_62008 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 62010
+message sc_62010 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 62012
+message sc_62012 {
+  required uint32 result = 1;
+  repeated .guild.capital_log inclog = 2;
+  repeated .guild.capital_log declog = 3;
+  repeated .guild.capital_log otherlog = 4;
+}
+
+// cmd_id = 62014
+message sc_62014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 62016
+message sc_62016 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 62017
+message sc_62017 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 62018
+message sc_62018 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 62019
+message sc_62019 {
+  required uint32 id = 1;
+  required uint32 user_id = 2;
+  required uint32 has_capital = 3;
+  required uint32 has_tech_point = 4;
+}
+
+// cmd_id = 62021
+message sc_62021 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 62023
+message sc_62023 {
+  required uint32 result = 1;
+  required uint32 progress = 2;
+}
+
+// cmd_id = 62025
+message sc_62025 {
+  required uint32 result = 1;
+  required uint32 capital = 2;
+}
+
+// cmd_id = 62030
+message sc_62030 {
+  repeated rank_info list = 1;
+}
+
+// cmd_id = 62031
+message sc_62031 {
+  repeated uint32 donate_tasks = 1;
+}
+
+// cmd_id = 62101
+message sc_62101 {
+  repeated .guild.guild_technology technologys = 1;
+}
+

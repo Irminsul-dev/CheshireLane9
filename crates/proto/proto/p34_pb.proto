@@ -1,0 +1,225 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p34;
+
+// cmd_id = 34001
+message cs_34001 {
+  repeated uint32 group_id = 1;
+}
+
+// cmd_id = 34003
+message cs_34003 {
+  required uint32 group_id = 1;
+  required uint32 target_pt = 2;
+}
+
+// cmd_id = 34501
+message cs_34501 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 34503
+message cs_34503 {
+  repeated uint32 user_id_list = 1;
+}
+
+// cmd_id = 34505
+message cs_34505 {
+  required uint32 boss_id = 1;
+}
+
+// cmd_id = 34509
+message cs_34509 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 34511
+message cs_34511 {
+  required uint32 boss_id = 1;
+}
+
+// cmd_id = 34513
+message cs_34513 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 34515
+message cs_34515 {
+  required uint32 boss_id = 1;
+  optional uint32 last_time = 2;
+}
+
+// cmd_id = 34517
+message cs_34517 {
+  repeated uint32 boss_id = 1;
+}
+
+// cmd_id = 34519
+message cs_34519 {
+  required uint32 boss_id = 1;
+  required uint32 userId = 2;
+}
+
+// cmd_id = 34521
+message cs_34521 {
+  required uint32 template_id = 1;
+}
+
+// cmd_id = 34523
+message cs_34523 {
+  required uint32 boss_id = 1;
+}
+
+// cmd_id = 34525
+message cs_34525 {
+  required uint32 boss_id = 1;
+}
+
+// cmd_id = 34527
+message cs_34527 {
+  required uint32 boss_id = 1;
+}
+
+message meta_ship_info {
+  required uint32 group_id = 1;
+  required uint32 pt = 2;
+  repeated uint32 fetch_list = 3;
+}
+
+// cmd_id = 34002
+message sc_34002 {
+  repeated meta_ship_info meta_ship_list = 1;
+}
+
+// cmd_id = 34004
+message sc_34004 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 34502
+message sc_34502 {
+  required uint32 fight_count = 1;
+  required uint32 fight_count_update_time = 2;
+  optional worldboss_info self_boss = 3;
+  repeated worldboss_info other_boss = 4;
+  required uint32 summon_pt = 5;
+  required uint32 summon_pt_old = 6;
+  required uint32 summon_pt_daily_acc = 7;
+  required uint32 summon_pt_old_daily_acc = 8;
+  required uint32 summon_free = 9;
+  required uint32 auto_fight_finish_time = 10;
+  required uint32 default_boss_id = 11;
+  required uint32 auto_fight_max_damage = 12;
+  required uint32 guild_support = 13;
+  required uint32 friend_support = 14;
+  required uint32 world_support = 15;
+  required uint32 self_boss_lv = 16;
+}
+
+// cmd_id = 34504
+message sc_34504 {
+  repeated worldboss_info boss_list = 1;
+}
+
+// cmd_id = 34506
+message sc_34506 {
+  repeated worldboss_rank rank_list = 1;
+}
+
+// cmd_id = 34507
+message sc_34507 {
+  required worldboss_info boss_info = 1;
+  required .common.usersimpleinfo user_info = 2;
+  required uint32 type = 3;
+}
+
+// cmd_id = 34508
+message sc_34508 {
+  required uint32 boss_id = 1;
+  required uint32 hp = 2;
+}
+
+// cmd_id = 34510
+message sc_34510 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 34512
+message sc_34512 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drops = 2;
+}
+
+// cmd_id = 34514
+message sc_34514 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 34516
+message sc_34516 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 34518
+message sc_34518 {
+  repeated worldboss_simple list = 1;
+}
+
+// cmd_id = 34520
+message sc_34520 {
+  required uint32 result = 1;
+  repeated .common.shipinfo ship_list = 2;
+}
+
+// cmd_id = 34522
+message sc_34522 {
+  required uint32 result = 1;
+  optional worldboss_info boss = 2;
+}
+
+// cmd_id = 34524
+message sc_34524 {
+  required uint32 result = 1;
+  required uint32 auto_fight_finish_time = 2;
+}
+
+// cmd_id = 34526
+message sc_34526 {
+  required uint32 result = 1;
+  required uint32 count = 2;
+  required uint32 damage = 3;
+  required uint32 oil = 4;
+}
+
+// cmd_id = 34528
+message sc_34528 {
+  required uint32 result = 1;
+}
+
+message worldboss_info {
+  required uint32 id = 1;
+  required uint32 template_id = 2;
+  required uint32 lv = 3;
+  required uint32 hp = 4;
+  required uint32 owner = 5;
+  required uint32 last_time = 6;
+  required uint32 kill_time = 7;
+  required uint32 fight_count = 8;
+  required uint32 rank_count = 9;
+}
+
+message worldboss_rank {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 damage = 3;
+}
+
+message worldboss_simple {
+  required uint32 id = 1;
+  required uint32 hp = 2;
+  required uint32 rank_count = 3;
+}
+

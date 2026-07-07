@@ -1,0 +1,510 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p33;
+
+message ai_act {
+  required chaptercellpos ai_pos = 1;
+  optional uint32 strategy_id = 2;
+  optional chaptercellpos target_pos = 3;
+  repeated chaptercellpos move_path = 4;
+  repeated shipinchapter ship_update = 6;
+  required uint32 type = 7;
+  repeated worldposinfo pos_list = 8;
+}
+
+message buff_info {
+  required uint32 id = 1;
+  required uint32 stack = 2;
+  required uint32 timestamp = 3;
+  required uint32 round = 4;
+  required uint32 step = 5;
+}
+
+message chapterawardinfo {
+  required uint32 id = 1;
+  required uint32 award = 2;
+  required uint32 flag = 3;
+}
+
+message chaptercellinfo {
+  required chaptercellpos pos = 1;
+  optional uint32 discovered = 2;
+}
+
+message chaptercellpos {
+  required uint32 row = 1;
+  required uint32 column = 2;
+}
+
+message cmdcollection {
+  required uint32 progress = 1;
+  repeated uint32 progress_list = 2;
+  required uint32 random_id = 3;
+}
+
+message countinfo {
+  required uint32 step_count = 1;
+  required uint32 treasure_count = 2;
+  required uint32 task_progress = 3;
+  required uint32 activate_count = 4;
+  repeated uint32 collection_list = 5;
+}
+
+// cmd_id = 33000
+message cs_33000 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 33101
+message cs_33101 {
+  required uint32 id = 1;
+  required uint32 enter_map_id = 2;
+  repeated elitefleetinfo elite_fleet_list = 3;
+  required uint32 camp = 4;
+}
+
+// cmd_id = 33103
+message cs_33103 {
+  required uint32 act = 1;
+  required uint32 group_id = 2;
+  optional uint32 act_arg_1 = 3;
+  optional uint32 act_arg_2 = 4;
+  repeated chaptercellpos pos_list = 5;
+}
+
+// cmd_id = 33106
+message cs_33106 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 33108
+message cs_33108 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 33110
+message cs_33110 {
+  required uint32 type = 1;
+  required uint32 data = 2;
+}
+
+// cmd_id = 33112
+message cs_33112 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 33205
+message cs_33205 {
+  required uint32 taskId = 1;
+}
+
+// cmd_id = 33207
+message cs_33207 {
+  required uint32 taskId = 1;
+}
+
+// cmd_id = 33301
+message cs_33301 {
+  required uint32 id = 1;
+  required uint32 count = 2;
+  repeated uint32 arg = 3;
+}
+
+// cmd_id = 33401
+message cs_33401 {
+  required uint32 map_id = 1;
+}
+
+// cmd_id = 33403
+message cs_33403 {
+  required uint32 shop_id = 1;
+  required uint32 shop_type = 2;
+  required uint32 count = 3;
+}
+
+// cmd_id = 33405
+message cs_33405 {
+  repeated fleet_change fleet_list = 1;
+}
+
+// cmd_id = 33407
+message cs_33407 {
+  repeated uint32 ship_list = 1;
+}
+
+// cmd_id = 33409
+message cs_33409 {
+  repeated elitefleetinfo elite_fleet_list = 1;
+}
+
+// cmd_id = 33413
+message cs_33413 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 33415
+message cs_33415 {
+  repeated uint32 task_list = 1;
+}
+
+// cmd_id = 33509
+message cs_33509 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 33602
+message cs_33602 {
+  repeated worldtarget_fetch list = 1;
+}
+
+message elitefleetinfo {
+  repeated uint32 ship_id_list = 1;
+  repeated .common.commandersinfo commanders = 2;
+}
+
+message fleet_change {
+  required uint32 group_id = 1;
+  repeated uint32 ship_id = 2;
+}
+
+message goods_info {
+  required uint32 goods_id = 1;
+  required uint32 count = 2;
+}
+
+message groupcmdcollection {
+  required uint32 group_id = 1;
+  required cmdcollection cmd_collection = 2;
+}
+
+message groupinchapter {
+  required uint32 id = 1;
+  repeated shipinchapter ship_list = 2;
+  required chaptercellpos pos = 3;
+  required uint32 loss_flag = 4;
+  repeated strategyinfo box_strategy_list = 5;
+  repeated strategyinfo ship_strategy_list = 6;
+  repeated uint32 strategy_ids = 7;
+  required uint32 bullet = 8;
+  required chaptercellpos start_pos = 9;
+  repeated uint32 attach_list = 10;
+  required uint32 damage_level = 11;
+  repeated buff_info buff_list = 12;
+  repeated .common.commandersinfo commander_list = 13;
+  required uint32 kill_count = 14;
+  optional cmdcollection cmd_collection = 15;
+  required uint32 bullet_max = 16;
+}
+
+message groupinfoupdate {
+  required uint32 id = 1;
+  repeated buff_info buff_list = 2;
+}
+
+message landinfo {
+  required chaptercellpos pos = 1;
+  required uint32 type = 2;
+  required chaptercellpos dir = 3;
+  required uint32 distance = 4;
+}
+
+message map_vision {
+  required uint32 map_id = 1;
+  repeated chaptercellpos vision_list = 2;
+}
+
+message mapinfo {
+  required worldmapid id = 1;
+  repeated chaptercellinfo cell_list = 2;
+  repeated uint32 state_flag = 3;
+  repeated landinfo land_list = 4;
+  repeated worldposinfo pos_list = 5;
+}
+
+message port_info {
+  required uint32 port_id = 1;
+  repeated uint32 task_list = 2;
+  repeated goods_info goods_list = 3;
+  required uint32 next_refresh_time = 4;
+}
+
+// cmd_id = 33001
+message sc_33001 {
+  optional worldinfo world = 1;
+  required uint32 is_world_open = 2;
+  repeated uint32 port_list = 3;
+  required uint32 camp = 4;
+  repeated worldtarget target_list = 5;
+  repeated worldtarget_fetch target_fetch_list = 6;
+  required countinfo count_info = 7;
+  repeated goods_info out_shop_buy_list = 8;
+  repeated uint32 clean_chapter = 9;
+  repeated chapterawardinfo chapter_award = 10;
+  repeated .common.fleetinfo fleet_list = 11;
+  repeated uint32 new_flag_port_list = 12;
+  repeated uint32 global_flag_list = 13;
+}
+
+// cmd_id = 33102
+message sc_33102 {
+  required uint32 result = 1;
+  optional worldinfo world = 2;
+  repeated chapterawardinfo chapter_award = 3;
+  required countinfo count_info = 4;
+  repeated uint32 port_list = 5;
+  repeated uint32 new_flag_port_list = 6;
+}
+
+// cmd_id = 33104
+message sc_33104 {
+  required uint32 result = 1;
+  repeated chaptercellpos move_path = 2;
+  repeated .common.dropinfo drop_list = 3;
+  optional uint32 enter_map_id = 4;
+  repeated shipinchapter ship_update = 5;
+  repeated ai_act ai_act_list = 6;
+  optional worldmapid id = 7;
+  repeated landinfo land_list = 8;
+  repeated groupinfoupdate group_update = 9;
+  required uint32 event_id = 10;
+  repeated worldposinfo pos_list = 11;
+  optional uint32 action_power = 12;
+  optional uint32 action_power_extra = 13;
+  repeated worldtarget target_list = 14;
+  repeated groupcmdcollection cmd_collection_list = 15;
+}
+
+// cmd_id = 33105
+message sc_33105 {
+  repeated worldposinfo pos_list = 1;
+}
+
+// cmd_id = 33107
+message sc_33107 {
+  required uint32 result = 1;
+  optional mapinfo map = 2;
+  optional uint32 is_reset = 3;
+}
+
+// cmd_id = 33109
+message sc_33109 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 33111
+message sc_33111 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 33113
+message sc_33113 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+  required uint32 time = 3;
+  repeated uint32 sairen_chapter = 4;
+}
+
+// cmd_id = 33114
+message sc_33114 {
+  required uint32 is_world_open = 1;
+  repeated uint32 ship_id_list = 2;
+  repeated uint32 cmd_id_list = 3;
+  required uint32 progress = 4;
+}
+
+// cmd_id = 33202
+message sc_33202 {
+  repeated uint32 append_list = 1;
+}
+
+// cmd_id = 33203
+message sc_33203 {
+  repeated task_info update_list = 1;
+}
+
+// cmd_id = 33204
+message sc_33204 {
+  repeated uint32 delete_list = 1;
+}
+
+// cmd_id = 33206
+message sc_33206 {
+  required uint32 result = 1;
+  optional task_info task = 2;
+}
+
+// cmd_id = 33208
+message sc_33208 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drops = 2;
+  required uint32 exp = 3;
+  required uint32 intimacy = 4;
+}
+
+// cmd_id = 33302
+message sc_33302 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 33402
+message sc_33402 {
+  optional port_info port = 1;
+}
+
+// cmd_id = 33404
+message sc_33404 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 33406
+message sc_33406 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 33408
+message sc_33408 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 33410
+message sc_33410 {
+  required uint32 result = 1;
+  repeated groupinchapter group_list = 3;
+}
+
+// cmd_id = 33414
+message sc_33414 {
+  required uint32 result = 1;
+  repeated uint32 task_list = 2;
+  required uint32 next_refresh_time = 3;
+}
+
+// cmd_id = 33416
+message sc_33416 {
+  required uint32 result = 1;
+  repeated task_info task_list = 2;
+}
+
+// cmd_id = 33508
+message sc_33508 {
+  required uint32 boss_id = 1;
+  required uint32 hp = 2;
+}
+
+// cmd_id = 33510
+message sc_33510 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 33601
+message sc_33601 {
+  repeated worldtarget target_list = 1;
+}
+
+// cmd_id = 33603
+message sc_33603 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drops = 2;
+}
+
+message shipinchapter {
+  required uint32 id = 1;
+  required uint32 hp_rant = 2;
+  repeated buff_info buff_list = 3;
+}
+
+message strategyinfo {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message task_info {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+  required uint32 accept_time = 3;
+  required uint32 submite_time = 4;
+  required uint32 event_map_id = 5;
+}
+
+message world_item_info {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message worldboss_info {
+  required uint32 id = 1;
+  required uint32 template_id = 2;
+  required uint32 lv = 3;
+  required uint32 hp = 4;
+  required uint32 owner = 5;
+  required uint32 last_time = 6;
+}
+
+message worldboss_rank {
+  required uint32 id = 1;
+  required string name = 2;
+  required uint32 damage = 3;
+}
+
+message worldinfo {
+  required uint32 map_id = 1;
+  optional uint32 time = 2;
+  repeated groupinchapter group_list = 3;
+  optional uint32 round = 4;
+  optional uint32 task_finish_count = 5;
+  repeated task_info task_list = 6;
+  required uint32 submarine_state = 7;
+  repeated world_item_info item_list = 8;
+  repeated goods_info goods_list = 9;
+  required uint32 action_power = 11;
+  required uint32 action_power_extra = 12;
+  required uint32 last_recover_timestamp = 13;
+  required uint32 action_power_fetch_count = 14;
+  required uint32 last_change_group_timestamp = 15;
+  required uint32 enter_map_id = 16;
+  repeated .common.idtimeinfo cd_list = 17;
+  repeated buff_info buff_list = 18;
+  repeated worldmapid chapter_list = 19;
+  repeated uint32 sairen_chapter = 20;
+  repeated .common.kvdata month_boss = 21;
+}
+
+message worlditeminfo {
+  required uint32 item_type = 1;
+  optional uint32 item_id = 2;
+  optional uint32 item_flag = 3;
+  optional uint32 item_data = 4;
+  repeated uint32 buff_list = 5;
+  optional uint32 boss_hp = 6;
+  repeated uint32 effect_list = 7;
+}
+
+message worldmapid {
+  required uint32 random_id = 1;
+  required uint32 template_id = 2;
+}
+
+message worldposinfo {
+  required chaptercellpos pos = 1;
+  repeated worlditeminfo item_list = 2;
+}
+
+message worldtarget {
+  required uint32 id = 1;
+  repeated worldtarget_process process_list = 2;
+}
+
+message worldtarget_fetch {
+  required uint32 id = 1;
+  repeated uint32 star_list = 2;
+}
+
+message worldtarget_process {
+  required uint32 trigger_id = 1;
+  required uint32 count = 2;
+}
+

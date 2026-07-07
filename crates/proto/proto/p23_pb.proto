@@ -1,0 +1,376 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p23;
+
+// cmd_id = 23001
+message cs_23001 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 23003
+message cs_23003 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 23005
+message cs_23005 {
+  required uint32 type = 1;
+  required uint32 game_type = 2;
+}
+
+// cmd_id = 23007
+message cs_23007 {
+  required uint32 room_id = 1;
+}
+
+// cmd_id = 23009
+message cs_23009 {
+  required uint32 team_id = 1;
+}
+
+// cmd_id = 23011
+message cs_23011 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 23013
+message cs_23013 {
+  required uint32 user_id = 1;
+}
+
+// cmd_id = 23015
+message cs_23015 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 23017
+message cs_23017 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 23019
+message cs_23019 {
+  required uint32 ready = 1;
+}
+
+// cmd_id = 23021
+message cs_23021 {
+  required uint32 user_id = 1;
+}
+
+// cmd_id = 23023
+message cs_23023 {
+  required uint32 type = 1;
+  required string content = 2;
+}
+
+// cmd_id = 23025
+message cs_23025 {
+  required uint32 game_type = 1;
+}
+
+// cmd_id = 23027
+message cs_23027 {
+  required uint32 progress = 1;
+}
+
+// cmd_id = 23029
+message cs_23029 {
+  required uint32 type = 1;
+  required uint32 game_type = 2;
+  required uint32 ship_id = 3;
+}
+
+// cmd_id = 23103
+message cs_23103 {
+  required uint32 type = 1;
+  repeated uint32 arg_list = 2;
+}
+
+// cmd_id = 23106
+message cs_23106 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 23113
+message cs_23113 {
+  required uint32 Type = 1;
+}
+
+message ptgc_cheat_bar_bomb {
+  required uint32 bomb_id = 1;
+  required uint32 state = 2;
+}
+
+message ptgc_cheat_bar_card {
+  required uint32 key = 1;
+  required uint32 id = 2;
+}
+
+message ptgc_cheat_bar_player {
+  required uint32 user_id = 1;
+  required uint32 seat = 2;
+  required uint32 card_num = 3;
+  repeated ptgc_cheat_bar_bomb bomb_list = 4;
+  required uint32 is_auto = 5;
+  required uint32 round_num = 6;
+  required ptgc_player player_info = 7;
+}
+
+message ptgc_game_user_view {
+  required uint32 game_type = 1;
+  required uint32 ship_id = 2;
+  required uint32 skin_id = 3;
+  required uint32 color = 4;
+  repeated uint32 dress_list = 5;
+}
+
+message ptgc_load {
+  required uint32 user_id = 1;
+  required uint32 load = 2;
+}
+
+message ptgc_player {
+  required uint32 id = 1;
+  required uint32 level = 2;
+  required string name = 3;
+  required string guild_name = 4;
+  optional .common.displayinfo display = 5;
+  repeated ptgc_game_user_view user_view = 6;
+}
+
+message ptgc_player_rank {
+  required ptgc_player player = 1;
+  required uint32 score = 2;
+}
+
+message ptgc_room {
+  required uint32 id = 1;
+  required uint32 type = 2;
+  required uint32 game_type = 3;
+  repeated ptgc_player player_list = 4;
+  repeated ptgc_team team_list = 5;
+  repeated uint32 ready_list = 6;
+  required uint32 play_flag = 7;
+}
+
+message ptgc_room_simple {
+  required uint32 id = 1;
+  required uint32 type = 2;
+  required uint32 game_type = 3;
+  required string name = 4;
+  required uint32 player_num = 5;
+  required uint32 play_flag = 6;
+}
+
+message ptgc_team {
+  repeated uint32 user_id_list = 1;
+}
+
+// cmd_id = 23002
+message sc_23002 {
+  repeated ptgc_room_simple room_list = 1;
+}
+
+// cmd_id = 23004
+message sc_23004 {
+  required uint32 result = 1;
+  optional ptgc_room room = 2;
+}
+
+// cmd_id = 23006
+message sc_23006 {
+  required uint32 result = 1;
+  optional ptgc_room room = 2;
+  optional uint32 cd = 3;
+}
+
+// cmd_id = 23008
+message sc_23008 {
+  required uint32 result = 1;
+  optional ptgc_room room = 2;
+  optional uint32 cd = 3;
+}
+
+// cmd_id = 23010
+message sc_23010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23012
+message sc_23012 {
+  required uint32 time = 1;
+}
+
+// cmd_id = 23014
+message sc_23014 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23016
+message sc_23016 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23018
+message sc_23018 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23020
+message sc_23020 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23022
+message sc_23022 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23024
+message sc_23024 {
+  required uint32 result = 1;
+  required string tip = 2;
+}
+
+// cmd_id = 23026
+message sc_23026 {
+  repeated ptgc_player_rank rank_list = 1;
+}
+
+// cmd_id = 23028
+message sc_23028 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23030
+message sc_23030 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23031
+message sc_23031 {
+  required uint32 user_id = 1;
+  required ptgc_game_user_view user_view = 2;
+}
+
+// cmd_id = 23094
+message sc_23094 {
+  required uint32 game_type = 1;
+  repeated ptgc_player player_list = 2;
+  repeated ptgc_team team_list = 3;
+  repeated ptgc_load load_list = 4;
+  required uint32 time = 5;
+}
+
+// cmd_id = 23095
+message sc_23095 {
+  required uint32 game_type = 1;
+  repeated ptgc_player player_list = 2;
+  repeated ptgc_team team_list = 3;
+  repeated uint32 ready_list = 4;
+  required uint32 time = 5;
+}
+
+// cmd_id = 23096
+message sc_23096 {
+  required uint32 reason = 1;
+}
+
+// cmd_id = 23097
+message sc_23097 {
+  required ptgc_player invitor = 1;
+  required ptgc_room_simple room = 2;
+}
+
+// cmd_id = 23098
+message sc_23098 {
+  required uint32 user_id = 1;
+  required uint32 type = 2;
+  required string content = 3;
+}
+
+// cmd_id = 23099
+message sc_23099 {
+  required ptgc_room room = 1;
+}
+
+// cmd_id = 23101
+message sc_23101 {
+  repeated ptgc_cheat_bar_player player_list = 1;
+  required uint32 real_card = 2;
+  repeated ptgc_cheat_bar_card card_list = 3;
+  required uint32 user_id = 4;
+  required uint32 auto_time = 5;
+  required uint32 start_time = 6;
+  required uint32 room_type = 7;
+}
+
+// cmd_id = 23102
+message sc_23102 {
+  required uint32 real_card = 1;
+  repeated ptgc_cheat_bar_card card_list = 2;
+  required uint32 user_id = 3;
+  required uint32 auto_time = 4;
+  required uint32 turn_num = 5;
+}
+
+// cmd_id = 23104
+message sc_23104 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23105
+message sc_23105 {
+  required uint32 type = 1;
+  required uint32 user_id = 2;
+  repeated uint32 return_list = 3;
+  required uint32 next_user_id = 4;
+  required uint32 next_type = 5;
+  required uint32 auto_time = 6;
+}
+
+// cmd_id = 23107
+message sc_23107 {
+  required uint32 result = 1;
+  repeated ptgc_cheat_bar_player player_list = 2;
+  required uint32 real_card = 3;
+  repeated ptgc_cheat_bar_card card_list = 4;
+  required uint32 card_num = 5;
+  required uint32 user_id = 6;
+  required uint32 opt_type = 7;
+  required uint32 auto_time = 8;
+  required uint32 turn_num = 9;
+  required uint32 room_type = 10;
+  repeated ptgc_cheat_bar_player out_player_list = 11;
+}
+
+// cmd_id = 23108
+message sc_23108 {
+  required uint32 rank = 1;
+  required uint32 cur_score = 2;
+}
+
+// cmd_id = 23114
+message sc_23114 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 23115
+message sc_23115 {
+  required uint32 user_id = 1;
+  required uint32 state = 2;
+}
+
+// cmd_id = 23116
+message sc_23116 {
+  required uint32 win_user = 1;
+}
+
+// cmd_id = 23117
+message sc_23117 {
+  required uint32 cur_score = 1;
+}
+

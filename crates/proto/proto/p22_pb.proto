@@ -1,0 +1,161 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p22;
+
+// cmd_id = 22009
+message cs_22009 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 22011
+message cs_22011 {
+  required uint32 ship_id = 1;
+  repeated .common.item_info books = 2;
+}
+
+// cmd_id = 22014
+message cs_22014 {
+  required uint32 roomid = 1;
+}
+
+// cmd_id = 22101
+message cs_22101 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 22201
+message cs_22201 {
+  required uint32 room_id = 1;
+  required uint32 ship_id = 2;
+  required uint32 skill_pos = 3;
+  required uint32 item_id = 4;
+}
+
+// cmd_id = 22203
+message cs_22203 {
+  required uint32 room_id = 1;
+  required uint32 type = 2;
+}
+
+// cmd_id = 22302
+message cs_22302 {
+  required uint32 id = 1;
+  required uint32 index = 2;
+}
+
+// cmd_id = 22304
+message cs_22304 {
+  required uint32 id = 1;
+}
+
+message navalacademy_class {
+  required uint32 proficiency = 1;
+}
+
+message navalacademy_student {
+  required uint32 ship_id = 1;
+  required uint32 energy = 2;
+}
+
+// cmd_id = 22001
+message sc_22001 {
+  required uint32 oil_well_level = 1;
+  required uint32 oil_well_lv_up_time = 2;
+  required uint32 gold_well_level = 3;
+  required uint32 gold_well_lv_up_time = 4;
+  required uint32 class_lv = 5;
+  required uint32 class_lv_up_time = 6;
+  required navalacademy_class class = 7;
+  repeated skill_class skill_class_list = 8;
+  required uint32 skill_class_num = 9;
+  required uint32 daily_finish_buff_cnt = 10;
+}
+
+// cmd_id = 22010
+message sc_22010 {
+  required uint32 result = 1;
+  required uint32 exp_in_well = 2;
+}
+
+// cmd_id = 22012
+message sc_22012 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 22013
+message sc_22013 {
+  required uint32 proficiency = 1;
+  required uint32 exp_in_well = 2;
+}
+
+// cmd_id = 22015
+message sc_22015 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 22102
+message sc_22102 {
+  required shoppingstreet street = 1;
+}
+
+// cmd_id = 22202
+message sc_22202 {
+  required uint32 result = 1;
+  optional skill_class class_info = 2;
+}
+
+// cmd_id = 22204
+message sc_22204 {
+  required uint32 result = 1;
+  optional uint32 exp = 2;
+}
+
+// cmd_id = 22300
+message sc_22300 {
+  repeated tuthandbook handbooks = 1;
+  repeated uint32 finished_task_ids = 2;
+}
+
+// cmd_id = 22303
+message sc_22303 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 22305
+message sc_22305 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+message shoppingstreet {
+  required uint32 lv = 1;
+  required uint32 next_flash_time = 2;
+  required uint32 lv_up_time = 3;
+  repeated streetgoods goods_list = 4;
+  required uint32 flash_count = 5;
+}
+
+message skill_class {
+  required uint32 room_id = 1;
+  required uint32 ship_id = 2;
+  required uint32 start_time = 3;
+  required uint32 finish_time = 4;
+  required uint32 skill_pos = 5;
+  required uint32 exp = 6;
+}
+
+message streetgoods {
+  required uint32 goods_id = 1;
+  required uint32 discount = 2;
+  required uint32 buy_count = 3;
+}
+
+message tuthandbook {
+  required uint32 id = 1;
+  required uint32 pt = 2;
+  required uint32 award = 3;
+  repeated uint32 finished_task_ids = 4;
+}
+

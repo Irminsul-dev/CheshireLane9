@@ -1,0 +1,392 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p13;
+
+message ai_act {
+  required chaptercellpos ai_pos = 1;
+  optional uint32 strategy_id = 2;
+  optional chaptercellpos target_pos = 3;
+  repeated chaptercellpos move_path = 4;
+  repeated chaptercellinfo map_update = 5;
+  repeated shipinchapter ship_update = 6;
+  optional uint32 commander_skill_effect_id = 7;
+  optional uint32 act_type = 8;
+  optional uint32 hp_del = 9;
+  repeated cellflag cell_flag_list = 10;
+}
+
+message cellflag {
+  required chaptercellpos pos = 1;
+  repeated uint32 flag_list = 2;
+}
+
+message chaptercellinfo {
+  required chaptercellpos pos = 1;
+  required uint32 item_type = 2;
+  optional uint32 item_id = 3;
+  optional uint32 item_flag = 4;
+  optional uint32 item_data = 5;
+  repeated uint32 extra_id = 6;
+}
+
+message chaptercellpos {
+  required uint32 row = 1;
+  required uint32 column = 2;
+}
+
+message chapterinfo {
+  required uint32 id = 1;
+  required uint32 progress = 2;
+  required uint32 kill_boss_count = 3;
+  required uint32 kill_enemy_count = 4;
+  required uint32 take_box_count = 5;
+  required uint32 defeat_count = 6;
+  required uint32 today_defeat_count = 7;
+  required uint32 pass_count = 8;
+}
+
+// cmd_id = 13003
+message cs_13003 {
+  required uint32 id = 1;
+  repeated uint32 ship_id_list = 2;
+}
+
+// cmd_id = 13005
+message cs_13005 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 13007
+message cs_13007 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 13009
+message cs_13009 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 13101
+message cs_13101 {
+  required uint32 id = 1;
+  required .common.fleet_info fleet = 2;
+  optional uint32 operation_item = 3;
+  optional uint32 loop_flag = 4;
+  repeated fleetDutykeyValuePair fleet_duties = 5;
+}
+
+// cmd_id = 13103
+message cs_13103 {
+  required uint32 act = 1;
+  required uint32 group_id = 2;
+  optional uint32 act_arg_1 = 3;
+  optional uint32 act_arg_2 = 4;
+  optional uint32 act_arg_3 = 5;
+  optional uint32 act_arg_4 = 6;
+  optional uint32 act_arg_5 = 7;
+}
+
+// cmd_id = 13106
+message cs_13106 {
+  required uint32 arg = 1;
+}
+
+// cmd_id = 13107
+message cs_13107 {
+  required uint32 id = 1;
+  required .common.fleet_info fleet = 2;
+}
+
+// cmd_id = 13109
+message cs_13109 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 13111
+message cs_13111 {
+  required uint32 ship_id = 1;
+}
+
+// cmd_id = 13301
+message cs_13301 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 13401
+message cs_13401 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 13403
+message cs_13403 {
+  required uint32 type = 2;
+}
+
+// cmd_id = 13501
+message cs_13501 {
+  required uint32 active_id = 1;
+}
+
+// cmd_id = 13503
+message cs_13503 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 13505
+message cs_13505 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 13507
+message cs_13507 {
+  required uint32 chapter_id = 1;
+  required uint32 pos = 2;
+}
+
+message currentchapterinfo {
+  required uint32 id = 1;
+  required uint32 time = 2;
+  repeated chaptercellinfo cell_list = 3;
+  repeated groupinchapter main_group_list = 4;
+  repeated chaptercellinfo ai_list = 5;
+  repeated chaptercellinfo escort_list = 6;
+  required uint32 round = 7;
+  optional uint32 is_submarine_auto_attack = 8;
+  repeated uint32 operation_buff = 9;
+  optional uint32 model_act_count = 10;
+  repeated uint32 buff_list = 11;
+  optional uint32 loop_flag = 12;
+  repeated uint32 extra_flag_list = 13;
+  repeated cellflag cell_flag_list = 14;
+  required uint32 chapter_hp = 15;
+  repeated strategyinfo chapter_strategy_list = 16;
+  required uint32 kill_count = 17;
+  required uint32 init_ship_count = 18;
+  required uint32 continuous_kill_count = 19;
+  repeated strategyinfo battle_statistics = 20;
+  repeated fleetDutykeyValuePair fleet_duties = 21;
+  required uint32 move_step_count = 22;
+  repeated groupinchapter submarine_group_list = 23;
+  repeated groupinchapter support_group_list = 24;
+}
+
+message escort_info {
+  required uint32 line_id = 1;
+  required uint32 award_timestamp = 2;
+  required uint32 flash_timestamp = 3;
+  repeated escort_pos map = 4;
+}
+
+message escort_pos {
+  required uint32 map_id = 1;
+  required uint32 chapter_id = 2;
+}
+
+message expedition_daily_count {
+  required uint32 id = 1;
+  required uint32 count = 2;
+}
+
+message fleetDutykeyValuePair {
+  required uint32 key = 1;
+  required uint32 value = 2;
+}
+
+message groupinchapter {
+  required uint32 id = 1;
+  repeated shipinchapter ship_list = 2;
+  required chaptercellpos pos = 3;
+  required uint32 step_count = 4;
+  repeated strategyinfo box_strategy_list = 5;
+  repeated strategyinfo ship_strategy_list = 6;
+  repeated uint32 strategy_ids = 7;
+  required uint32 bullet = 8;
+  required chaptercellpos start_pos = 9;
+  repeated .common.commandersinfo commander_list = 10;
+  required uint32 move_step_down = 11;
+  required uint32 kill_count = 12;
+  required uint32 fleet_id = 13;
+  required uint32 vision_lv = 14;
+}
+
+message pro_chapter_submarine {
+  required uint32 chapter_id = 1;
+  required uint32 active_time = 2;
+  required uint32 index = 3;
+}
+
+message reactchapter_info {
+  required uint32 count = 1;
+  required uint32 active_timestamp = 2;
+  required uint32 active_id = 3;
+  required uint32 daily_count = 4;
+}
+
+message remapcount {
+  required uint32 chapter_id = 1;
+  required uint32 pos = 2;
+  required uint32 count = 3;
+  required uint32 flag = 4;
+}
+
+// cmd_id = 13000
+message sc_13000 {
+  required uint32 daily_repair_count = 1;
+  optional currentchapterinfo current_chapter = 2;
+}
+
+// cmd_id = 13001
+message sc_13001 {
+  repeated chapterinfo chapter_list = 1;
+  optional reactchapter_info react_chapter = 2;
+  repeated .common.fleet_info fleet_list = 3;
+}
+
+// cmd_id = 13002
+message sc_13002 {
+  repeated .common.collectioninfo collection_list = 1;
+  required uint32 max_team = 2;
+}
+
+// cmd_id = 13004
+message sc_13004 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 13006
+message sc_13006 {
+  required uint32 result = 1;
+  required uint32 exp = 2;
+  repeated .common.dropinfo drop_list = 3;
+  repeated .common.collectioninfo new_collection = 4;
+  required uint32 is_cri = 5;
+}
+
+// cmd_id = 13008
+message sc_13008 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 13010
+message sc_13010 {
+  required uint32 result = 1;
+  repeated .common.collectioninfo collection_list = 2;
+}
+
+// cmd_id = 13011
+message sc_13011 {
+  repeated .common.collectioninfo collection = 1;
+}
+
+// cmd_id = 13102
+message sc_13102 {
+  required uint32 result = 1;
+  optional currentchapterinfo current_chapter = 2;
+}
+
+// cmd_id = 13104
+message sc_13104 {
+  required uint32 result = 1;
+  repeated chaptercellpos move_path = 2;
+  repeated .common.dropinfo drop_list = 3;
+  repeated chaptercellinfo map_update = 4;
+  repeated shipinchapter ship_update = 5;
+  repeated chaptercellinfo ai_list = 6;
+  repeated ai_act ai_act_list = 7;
+  repeated ai_act submarine_act_list = 8;
+  repeated ai_act escort_act_list = 9;
+  repeated ai_act fleet_act_list = 10;
+  repeated uint32 buff_list = 11;
+  repeated uint32 add_flag_list = 12;
+  repeated uint32 del_flag_list = 13;
+  repeated cellflag cell_flag_list = 14;
+  repeated .common.dropinfo extra_drop_list = 15;
+}
+
+// cmd_id = 13105
+message sc_13105 {
+  repeated chaptercellinfo map_update = 1;
+  repeated chaptercellinfo ai_list = 2;
+  repeated uint32 add_flag_list = 3;
+  repeated uint32 del_flag_list = 4;
+  repeated uint32 buff_list = 5;
+  repeated cellflag cell_flag_list = 6;
+}
+
+// cmd_id = 13108
+message sc_13108 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 13110
+message sc_13110 {
+  repeated uint32 drop_ship_list = 1;
+}
+
+// cmd_id = 13112
+message sc_13112 {
+  repeated .common.fleet_info fleet_list = 1;
+}
+
+// cmd_id = 13201
+message sc_13201 {
+  repeated expedition_daily_count count_list = 1;
+  required uint32 elite_expedition_count = 2;
+  required uint32 escort_expedition_count = 3;
+  repeated expedition_daily_count chapter_count_list = 4;
+  repeated uint32 quick_expedition_list = 5;
+}
+
+// cmd_id = 13302
+message sc_13302 {
+  repeated escort_info escort_info = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+// cmd_id = 13402
+message sc_13402 {
+  required uint32 next_refresh_time = 1;
+  required uint32 refresh_count = 2;
+  repeated pro_chapter_submarine chapter_list = 3;
+  required uint32 progress = 4;
+}
+
+// cmd_id = 13404
+message sc_13404 {
+  required uint32 result = 1;
+  optional pro_chapter_submarine chapter_id = 2;
+}
+
+// cmd_id = 13502
+message sc_13502 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 13504
+message sc_13504 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 13506
+message sc_13506 {
+  repeated remapcount remap_count_list = 1;
+}
+
+// cmd_id = 13508
+message sc_13508 {
+  required uint32 result = 1;
+  repeated .common.dropinfo drop_list = 2;
+}
+
+message shipinchapter {
+  required uint32 id = 1;
+  required uint32 hp_rant = 2;
+}
+
+message strategyinfo {
+  required uint32 id = 1;
+  required uint32 count = 3;
+}
+

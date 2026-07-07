@@ -1,0 +1,256 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p25;
+
+message commanderboxinfo {
+  required uint32 id = 1;
+  required uint32 poolId = 2;
+  required uint32 finish_time = 3;
+  required uint32 begin_time = 4;
+}
+
+message commanderhomeslot {
+  required uint32 id = 1;
+  required uint32 op_flag = 2;
+  required uint32 exp_time = 3;
+  required uint32 commander_id = 4;
+  required uint32 style = 5;
+  optional uint32 commander_level = 6;
+  optional uint32 commander_exp = 7;
+  required uint32 cache_exp = 8;
+}
+
+// cmd_id = 25002
+message cs_25002 {
+  required uint32 boxid = 1;
+}
+
+// cmd_id = 25004
+message cs_25004 {
+  required uint32 boxid = 1;
+}
+
+// cmd_id = 25006
+message cs_25006 {
+  required uint32 groupid = 1;
+  required uint32 pos = 2;
+  required uint32 commanderid = 3;
+}
+
+// cmd_id = 25008
+message cs_25008 {
+  required uint32 targetid = 1;
+  repeated uint32 materialid = 2;
+}
+
+// cmd_id = 25010
+message cs_25010 {
+  required uint32 commanderid = 1;
+}
+
+// cmd_id = 25012
+message cs_25012 {
+  required uint32 commanderid = 1;
+  required uint32 targetid = 2;
+  required uint32 replaceid = 3;
+}
+
+// cmd_id = 25014
+message cs_25014 {
+  required uint32 commanderid = 1;
+}
+
+// cmd_id = 25016
+message cs_25016 {
+  required uint32 commanderid = 1;
+  required uint32 flag = 2;
+}
+
+// cmd_id = 25018
+message cs_25018 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 25020
+message cs_25020 {
+  required string name = 1;
+  required uint32 commanderid = 2;
+}
+
+// cmd_id = 25022
+message cs_25022 {
+  required uint32 id = 1;
+  repeated .common.commandersinfo commandersid = 2;
+}
+
+// cmd_id = 25024
+message cs_25024 {
+  required uint32 id = 1;
+  required string name = 2;
+}
+
+// cmd_id = 25026
+message cs_25026 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 25028
+message cs_25028 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 25030
+message cs_25030 {
+  required uint32 slotidx = 1;
+  required uint32 commander_id = 2;
+}
+
+// cmd_id = 25032
+message cs_25032 {
+  required uint32 slotidx = 1;
+  required uint32 styleidx = 2;
+}
+
+// cmd_id = 25034
+message cs_25034 {
+  required uint32 type = 1;
+}
+
+// cmd_id = 25036
+message cs_25036 {
+  required uint32 is_open = 1;
+}
+
+// cmd_id = 25037
+message cs_25037 {
+  required uint32 item_cnt = 1;
+  required uint32 finish_cnt = 2;
+  required uint32 affect_cnt = 3;
+}
+
+message presetfleet {
+  required uint32 id = 1;
+  repeated .common.commandersinfo commandersid = 2;
+  required string name = 3;
+}
+
+// cmd_id = 25001
+message sc_25001 {
+  repeated .common.commanderinfo commanders = 1;
+  repeated commanderboxinfo box = 2;
+  required uint32 usage_count = 3;
+  repeated presetfleet presets = 4;
+}
+
+// cmd_id = 25003
+message sc_25003 {
+  required uint32 result = 1;
+  required commanderboxinfo box = 2;
+}
+
+// cmd_id = 25005
+message sc_25005 {
+  required uint32 result = 1;
+  required .common.commanderinfo commander = 2;
+  required uint32 finish_time = 3;
+}
+
+// cmd_id = 25007
+message sc_25007 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25009
+message sc_25009 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25011
+message sc_25011 {
+  required uint32 result = 1;
+  repeated uint32 abilityid = 2;
+}
+
+// cmd_id = 25013
+message sc_25013 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25015
+message sc_25015 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25017
+message sc_25017 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25019
+message sc_25019 {
+  required uint32 result = 1;
+  repeated .common.dropinfo awards = 2;
+}
+
+// cmd_id = 25021
+message sc_25021 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25023
+message sc_25023 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25025
+message sc_25025 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25027
+message sc_25027 {
+  required uint32 level = 1;
+  required uint32 exp = 2;
+  repeated commanderhomeslot slots = 3;
+  required uint32 clean = 4;
+}
+
+// cmd_id = 25029
+message sc_25029 {
+  required uint32 result = 1;
+  required uint32 level = 2;
+  required uint32 exp = 3;
+  repeated .common.dropinfo awards = 4;
+  required uint32 op_time = 5;
+}
+
+// cmd_id = 25031
+message sc_25031 {
+  required uint32 result = 1;
+  required uint32 time = 2;
+  required uint32 commander_level = 3;
+  required uint32 commander_exp = 4;
+}
+
+// cmd_id = 25033
+message sc_25033 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25035
+message sc_25035 {
+  repeated commanderboxinfo box_list = 1;
+}
+
+// cmd_id = 25038
+message sc_25038 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 25039
+message sc_25039 {
+  repeated .common.commanderinfo commander_list = 1;
+}
+

@@ -1,0 +1,632 @@
+syntax = "proto2";
+
+import "common_pb.proto";
+
+package p29;
+
+// cmd_id = 29001
+message cs_29001 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29003
+message cs_29003 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29005
+message cs_29005 {
+  required uint32 id = 1;
+  required uint32 ending_id = 2;
+}
+
+// cmd_id = 29007
+message cs_29007 {
+  required uint32 id = 1;
+  required uint32 difficulty = 2;
+}
+
+// cmd_id = 29009
+message cs_29009 {
+  required uint32 id = 1;
+  required string name = 2;
+}
+
+// cmd_id = 29011
+message cs_29011 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29013
+message cs_29013 {
+  required uint32 id = 1;
+  required uint32 rank = 2;
+}
+
+// cmd_id = 29015
+message cs_29015 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29017
+message cs_29017 {
+  required uint32 id = 1;
+  required uint32 chat_id = 2;
+}
+
+// cmd_id = 29019
+message cs_29019 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29021
+message cs_29021 {
+  required uint32 id = 1;
+  required uint32 talent = 2;
+}
+
+// cmd_id = 29023
+message cs_29023 {
+  required uint32 id = 1;
+  required uint32 talent = 2;
+}
+
+// cmd_id = 29025
+message cs_29025 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29027
+message cs_29027 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29030
+message cs_29030 {
+  required uint32 id = 1;
+  optional uint32 branch = 2;
+}
+
+// cmd_id = 29032
+message cs_29032 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29040
+message cs_29040 {
+  required uint32 id = 1;
+  repeated .common.kvdata plans = 2;
+}
+
+// cmd_id = 29042
+message cs_29042 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29044
+message cs_29044 {
+  required uint32 id = 1;
+  repeated uint32 plan_ids = 2;
+}
+
+// cmd_id = 29046
+message cs_29046 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29048
+message cs_29048 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29050
+message cs_29050 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29060
+message cs_29060 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29062
+message cs_29062 {
+  required uint32 id = 1;
+  required uint32 work_id = 2;
+}
+
+// cmd_id = 29064
+message cs_29064 {
+  required uint32 id = 1;
+  required uint32 event = 2;
+}
+
+// cmd_id = 29066
+message cs_29066 {
+  required uint32 id = 1;
+  required uint32 shop = 2;
+  required uint32 num = 3;
+}
+
+// cmd_id = 29068
+message cs_29068 {
+  required uint32 id = 1;
+  required uint32 character = 2;
+}
+
+// cmd_id = 29070
+message cs_29070 {
+  required uint32 id = 1;
+  required uint32 work_id = 2;
+}
+
+// cmd_id = 29072
+message cs_29072 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29090
+message cs_29090 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29092
+message cs_29092 {
+  required uint32 id = 1;
+  required uint32 difficulty = 2;
+}
+
+// cmd_id = 29101
+message cs_29101 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29103
+message cs_29103 {
+  required uint32 id = 1;
+  required uint32 index = 2;
+}
+
+// cmd_id = 29105
+message cs_29105 {
+  required uint32 id = 1;
+  required uint32 index = 2;
+}
+
+// cmd_id = 29107
+message cs_29107 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29120
+message cs_29120 {
+  required uint32 id = 1;
+  required uint32 tarot_id = 2;
+}
+
+// cmd_id = 29122
+message cs_29122 {
+  required uint32 id = 1;
+  required uint32 affixid = 2;
+}
+
+// cmd_id = 29124
+message cs_29124 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29126
+message cs_29126 {
+  required uint32 id = 1;
+}
+
+// cmd_id = 29002
+message sc_29002 {
+  required uint32 result = 1;
+  required tbinfo tb = 2;
+  required tbpermanent permanent = 3;
+}
+
+// cmd_id = 29004
+message sc_29004 {
+  required uint32 result = 1;
+  repeated uint32 endings = 2;
+}
+
+// cmd_id = 29006
+message sc_29006 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 29008
+message sc_29008 {
+  required uint32 result = 1;
+  required tbinfo tb = 2;
+}
+
+// cmd_id = 29010
+message sc_29010 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 29012
+message sc_29012 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+}
+
+// cmd_id = 29014
+message sc_29014 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29016
+message sc_29016 {
+  required uint32 result = 1;
+  repeated uint32 chats = 2;
+}
+
+// cmd_id = 29018
+message sc_29018 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29020
+message sc_29020 {
+  required uint32 result = 1;
+  repeated uint32 talents = 2;
+}
+
+// cmd_id = 29022
+message sc_29022 {
+  required uint32 result = 1;
+  required uint32 talent = 2;
+}
+
+// cmd_id = 29024
+message sc_29024 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29026
+message sc_29026 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29028
+message sc_29028 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29031
+message sc_29031 {
+  required uint32 result = 1;
+  required uint32 next_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29033
+message sc_29033 {
+  required uint32 result = 1;
+  required tbfsm fsm = 2;
+}
+
+// cmd_id = 29041
+message sc_29041 {
+  required uint32 result = 1;
+  repeated .common.kvdata plans = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29043
+message sc_29043 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29045
+message sc_29045 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 29047
+message sc_29047 {
+  required uint32 result = 1;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29049
+message sc_29049 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+  required tbres res = 3;
+}
+
+// cmd_id = 29051
+message sc_29051 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29061
+message sc_29061 {
+  required uint32 result = 1;
+  optional tbfsmcacheSite fsm_site = 2;
+  repeated uint32 characters = 3;
+  required tbdrops drop = 4;
+}
+
+// cmd_id = 29063
+message sc_29063 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29065
+message sc_29065 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29067
+message sc_29067 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29069
+message sc_29069 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29071
+message sc_29071 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 29073
+message sc_29073 {
+  required uint32 result = 1;
+  repeated uint32 shops = 2;
+}
+
+// cmd_id = 29091
+message sc_29091 {
+  required uint32 result = 1;
+  required uint32 first_node = 2;
+  required tbdrops drop = 3;
+}
+
+// cmd_id = 29093
+message sc_29093 {
+  required uint32 result = 1;
+  required tbinfo tb = 2;
+}
+
+// cmd_id = 29102
+message sc_29102 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29104
+message sc_29104 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29106
+message sc_29106 {
+  required uint32 result = 1;
+  optional tbfsmcacheNin1 cache = 2;
+}
+
+// cmd_id = 29108
+message sc_29108 {
+  required uint32 result = 1;
+  optional tbfsmcacheNin1 cache = 2;
+}
+
+// cmd_id = 29121
+message sc_29121 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29123
+message sc_29123 {
+  required uint32 result = 1;
+  required tbdrops drop = 2;
+}
+
+// cmd_id = 29125
+message sc_29125 {
+  required uint32 result = 1;
+}
+
+// cmd_id = 29127
+message sc_29127 {
+  required uint32 result = 1;
+  optional tbfsm fsm = 2;
+}
+
+message tbbenefit {
+  repeated tbbf actives = 1;
+}
+
+message tbbenefitval {
+  required uint32 buffid = 1;
+  repeated .common.kvdata benefitval = 2;
+}
+
+message tbbf {
+  required uint32 id = 1;
+  required uint32 round = 2;
+  required uint32 is_pending = 3;
+}
+
+message tbbfchange {
+  required uint32 drop_type = 1;
+  required uint32 drop_id = 2;
+  required uint32 positive_counter = 3;
+  required uint32 negative_counter = 4;
+}
+
+message tbbfcounter {
+  required uint32 group = 1;
+  repeated tbbfchange change = 2;
+}
+
+message tbdisplay {
+  repeated tbdrop benefit_display = 1;
+  repeated tbbenefitval dollar_num_display = 2;
+  repeated tbbfcounter counter = 3;
+}
+
+message tbdrop {
+  required uint32 type = 1;
+  required uint32 id = 2;
+  required int32 number = 3;
+}
+
+message tbdrops {
+  repeated tbdrop base_drop = 1;
+  repeated tbdrop benefit_drop = 2;
+  required tbdisplay display = 3;
+}
+
+message tbfsm {
+  required uint32 system_no = 1;
+  required uint32 current_node = 2;
+  repeated tbfsmcache cache = 3;
+  repeated tbfsm priority_fsm = 4;
+  repeated uint32 tarot_selects = 5;
+}
+
+message tbfsmcache {
+  repeated tbfsmcachePlan cache_plan = 1;
+  repeated tbfsmcacheTalent cache_talent = 2;
+  repeated tbfsmcacheSite cache_site = 3;
+  repeated tbfsmcacheChat cache_chat = 4;
+  repeated tbfsmcacheEnd cache_end = 5;
+  repeated tbfsmcacheMind cache_mind = 6;
+  repeated tbfsmcacheNin1 cache_nin1 = 7;
+  repeated tbfsmcacheAffixUp cache_affix_up = 8;
+  repeated tbfsmcacheTarot cache_tarot = 9;
+  repeated tbfsmcacheEval cache_eval = 10;
+}
+
+message tbfsmcacheAffixUp {
+}
+
+message tbfsmcacheChat {
+  required uint32 finished = 1;
+  repeated uint32 chats = 2;
+}
+
+message tbfsmcacheEnd {
+  repeated uint32 ends = 1;
+  required uint32 select = 2;
+}
+
+message tbfsmcacheEval {
+  required uint32 is_finished = 1;
+}
+
+message tbfsmcacheMind {
+}
+
+message tbfsmcacheNin1 {
+  repeated tbdrop selects = 1;
+  repeated uint32 reroll_count = 2;
+  required uint32 is_from_shop = 3;
+}
+
+message tbfsmcachePlan {
+  required uint32 cur_index = 1;
+  repeated .common.kvdata plans = 2;
+}
+
+message tbfsmcacheSite {
+  repeated uint32 events = 1;
+  repeated uint32 shops = 2;
+  repeated .common.kvdata buys = 3;
+  required .common.kvdata state = 4;
+  repeated uint32 character_this_round = 5;
+  required uint32 refresh_count = 6;
+}
+
+message tbfsmcacheTalent {
+  required uint32 finished = 1;
+  repeated uint32 talents = 2;
+  repeated uint32 retalents = 3;
+}
+
+message tbfsmcacheTarot {
+}
+
+message tbinfo {
+  required uint32 id = 1;
+  required tbfsm fsm = 2;
+  required tbround round = 3;
+  required tbres res = 4;
+  required tbtalent talent = 5;
+  required tbplan plan = 6;
+  required tbsite site = 7;
+  repeated .common.kvdata evaluations = 8;
+  required string name = 9;
+  required uint32 favor_lv = 10;
+  required tbbenefit benefit = 11;
+  required uint32 difficulty = 12;
+  required uint32 eval_fail = 13;
+  required tbdisplay display = 14;
+}
+
+message tbpermanent {
+  required uint32 ng_plus_count = 1;
+  repeated uint32 polaroids = 2;
+  repeated uint32 endings = 3;
+  repeated uint32 active_endings = 4;
+  repeated uint32 tarot_archive = 5;
+  required uint32 max_round = 6;
+}
+
+message tbplan {
+  repeated uint32 plan_upgrade = 1;
+}
+
+message tbres {
+  repeated .common.kvdata attrs = 1;
+  repeated .common.kvdata resource = 2;
+}
+
+message tbround {
+  required uint32 round = 1;
+  required uint32 in_temp = 2;
+  required uint32 temp_round = 3;
+}
+
+message tbsite {
+  repeated uint32 characters = 1;
+  repeated .common.kvdata work_counter = 2;
+  repeated uint32 works = 3;
+  repeated .common.kvdata event_counter = 4;
+}
+
+message tbtalent {
+  repeated uint32 talents = 1;
+}
+
