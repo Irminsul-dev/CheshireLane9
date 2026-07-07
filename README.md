@@ -6,6 +6,10 @@ CheshireLane9 is a server emulator for an anime fleet game client Version 9.x.
 
 It is an upgrade of the old [CheshireLane](https://github.com/Irminsul-dev/CheshireLane.git) project. The name changed because the client did. The problems, naturally, found new and interesting ways to remain problems.
 
+## Screenshot
+
+![screen shot](assets/static/screen_shot.png)
+
 The repository lives at:
 
 ```bash
