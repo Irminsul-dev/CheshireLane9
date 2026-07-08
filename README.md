@@ -42,10 +42,9 @@ To build and run the server:
 
 For client redirection, depending on your device setup, you may also need:
 
-- Root access, commonly through [Magisk](https://github.com/topjohnwu/Magisk)
 - User CA trust support, for example [NVISOsecurity/AlwaysTrustUserCerts](https://github.com/NVISOsecurity/AlwaysTrustUserCerts)
 - `mitmproxy`, if you use the SDK redirect script
-- `iptables`, if you use the game redirect scripts
+- [cheshire-game-redirect-magisk](https://github.com/Irminsul-dev/cheshire-game-redirect-magisk), if you need game traffic redirection on Android
 
 ## Build And Run
 
@@ -57,7 +56,7 @@ The server reads `config.toml` from the working directory. If the file does not 
 
 ## Redirect Scripts
 
-Redirect helper scripts live in:
+The SDK redirect helper lives in:
 
 ```text
 scripts/redirect/
@@ -86,32 +85,7 @@ Install and trust the mitmproxy certificate on the client. On Android, user cert
 
 ### Game Redirect
 
-On the rooted client shell:
-
-```bash
-su
-sh scripts/redirect/redirect_game.sh
-```
-
-This redirects the known destination IPs for:
-
-- `blhxjploginapi.azurlane.jp`
-- `blhxusgate.yo-star.com`
-
-to:
-
-```text
-127.0.0.1:21180
-```
-
-To remove the rules:
-
-```bash
-su
-sh scripts/redirect/unredirect_game.sh
-```
-
-These scripts use `setenforce` and `iptables`. If your Android build has opinions about either, it will share them loudly.
+Use [cheshire-game-redirect-magisk](https://github.com/Irminsul-dev/cheshire-game-redirect-magisk) and follow its instructions.
 
 ## Status
 
