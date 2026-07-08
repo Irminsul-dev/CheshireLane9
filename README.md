@@ -32,6 +32,32 @@ Default ports:
 - Dispatch: `21180`
 - Gate: `21280`
 
+## Supported Features
+
+### The Game's **Real** Core Gameplay
+
+- View ships in the dock.
+- View and change ship skins.
+
+### Chat Commands
+
+Commands are sent as plain text in the in-game chat. They do not use `/`.
+
+| Command | Effect |
+| --- | --- |
+| `help` | Shows the available commands. Unknown commands also return the help text. |
+| `ship` | Adds the currently supported ship set to the account and refreshes ship data. |
+| `skin` | Unlocks skins for the ships currently on the account and refreshes skin data. |
+
+Typical use:
+
+```text
+ship
+skin
+```
+
+Run `ship` before `skin` if you want skins for newly added ships.
+
 ## Requirements
 
 To build and run the server:
