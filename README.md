@@ -34,6 +34,10 @@ Default ports:
 
 ## Supported Features
 
+### SDK Account Login
+
+**Use any email-formatted string as the account, then use verification code `114514` to register or log in directly.**
+
 ### The Game's **Real** Core Gameplay
 
 - View ships in the dock.
