@@ -2,6 +2,8 @@
 
 # CheshireLane9
 
+![JP](https://img.shields.io/badge/JP-9.3.256-44cc11)
+
 CheshireLane9 is a server emulator for an anime fleet game client Version 9.x.
 
 It is an upgrade of the old [CheshireLane-Public](https://github.com/Irminsul-dev/CheshireLane-Public.git) project. The name changed because the client did. The problems, naturally, found new and interesting ways to remain problems.
