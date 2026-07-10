@@ -7,9 +7,9 @@ use anyhow::{anyhow, Result};
 use proto::common::{Collectioninfo, Displayinfo, Kvdata};
 use proto::p10::{Cs10022, Cs10024, Cs10100, Cs10991, Sc10023, Sc10025, Sc10101};
 use proto::p11::{
-    Cs11001, Cs11011, Cs11017, Cs11603, Cs11701, Cs11705, Cs11710, Cs11722, Cs11751, InsMessage,
-    Noticeinfo, Sc11000, Sc11002, Sc11012, Sc11018, Sc11200, Sc11210, Sc11300, Sc11604, Sc11702,
-    Sc11706, Sc11711, Sc11723, Sc11752,
+    Cs11001, Cs11011, Cs11017, Cs11401, Cs11603, Cs11701, Cs11705, Cs11710, Cs11722, Cs11751,
+    InsMessage, Noticeinfo, Sc11000, Sc11002, Sc11012, Sc11018, Sc11200, Sc11210, Sc11300, Sc11402,
+    Sc11604, Sc11702, Sc11706, Sc11711, Sc11723, Sc11752,
 };
 use proto::p12::{Cs12202, Cs12299, Cs12406, Sc12010, Sc12024, Sc12031, Sc12203, Sc12407};
 use proto::p13::{Cs13505, Sc13002, Sc13201, Sc13506};
@@ -156,6 +156,16 @@ fn handle_player_packet(
                 player.story_list.push(req.story_id);
                 *dirty = true;
                 push(&mut out, Sc11018::default(), packet.id);
+            }
+        }
+        Cs11401::CMD_ID => {
+            if let Some(req) = packet.decode::<Cs11401>() {
+                let room_id = if req.room_id == 0 { 1 } else { req.room_id };
+                if player.chat_room_id != room_id {
+                    player.chat_room_id = room_id;
+                    *dirty = true;
+                }
+                push(&mut out, Sc11402 { result: 0, room_id }, packet.id);
             }
         }
         Cs11603::CMD_ID => {
@@ -724,6 +734,7 @@ pub(crate) fn request_proto_name(cmd_id: u16) -> &'static str {
         Cs11001::CMD_ID => "p11.Cs11001",
         Cs11011::CMD_ID => "p11.Cs11011",
         Cs11017::CMD_ID => "p11.Cs11017",
+        Cs11401::CMD_ID => "p11.Cs11401",
         Cs11603::CMD_ID => "p11.Cs11603",
         Cs11701::CMD_ID => "p11.Cs11701",
         Cs11705::CMD_ID => "p11.Cs11705",
