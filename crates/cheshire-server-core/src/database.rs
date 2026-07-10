@@ -248,9 +248,11 @@ mod tests {
         let account = db.get_account(uid).await.unwrap().unwrap();
         assert_eq!(account.uid as u32, uid);
 
-        let mut info = PlayerInfo::default();
-        info.uid = uid;
-        info.nick_name = "tester".to_string();
+        let info = PlayerInfo {
+            uid,
+            nick_name: "tester".to_string(),
+            ..Default::default()
+        };
         db.save_player(uid, &info).await.unwrap();
 
         let loaded = db.load_or_create_player(uid).await.unwrap();

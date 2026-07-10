@@ -1,13 +1,15 @@
 use std::net::SocketAddr;
-use std::path::PathBuf;
-use std::sync::LazyLock;
+use std::path::{Path, PathBuf};
 
-use proto::p10::Serverinfo;
+use anyhow::{Context, Result};
+use cheshire_server_proto::p10::Serverinfo;
 use serde::Deserialize;
 
 #[derive(Clone, Deserialize)]
 pub struct Config {
     pub database_url: String,
+    #[serde(default = "default_assets_dir")]
+    pub assets_dir: PathBuf,
     pub sdk_http_addr: SocketAddr,
     pub sdk_https_addr: SocketAddr,
     #[serde(default = "default_sdk_ip")]
@@ -34,6 +36,10 @@ pub struct Config {
 
 fn default_sdk_ip() -> String {
     "127.0.0.1".to_string()
+}
+
+fn default_assets_dir() -> PathBuf {
+    "assets".into()
 }
 
 fn default_sdk_proxy_addr() -> SocketAddr {
@@ -67,20 +73,26 @@ impl Default for Config {
 }
 
 impl Config {
-    fn load_or_create(path: &str) -> Self {
-        std::fs::read_to_string(path).map_or_else(
-            |_| {
-                std::fs::write(path, DEFAULT_CONFIG).expect("failed to write default config");
-                Self::default()
-            },
-            |data| toml::from_str(&data).expect("failed to parse config.toml"),
-        )
+    pub fn load_or_create(path: impl AsRef<Path>) -> Result<Self> {
+        let path = path.as_ref();
+        match std::fs::read_to_string(path) {
+            Ok(data) => toml::from_str(&data)
+                .with_context(|| format!("parse configuration {}", path.display())),
+            Err(err) if err.kind() == std::io::ErrorKind::NotFound => {
+                std::fs::write(path, DEFAULT_CONFIG)
+                    .with_context(|| format!("write default configuration {}", path.display()))?;
+                Ok(Self::default())
+            }
+            Err(err) => Err(err).with_context(|| format!("read configuration {}", path.display())),
+        }
+    }
+
+    pub fn sdk_http_origin(&self) -> String {
+        format!("http://{}:{}", self.sdk_ip, self.sdk_http_addr.port())
     }
 }
 
-const DEFAULT_CONFIG: &str = include_str!("config.default.toml");
-
-pub static CONFIG: LazyLock<Config> = LazyLock::new(|| Config::load_or_create("config.toml"));
+pub const DEFAULT_CONFIG: &str = include_str!("config.default.toml");
 
 #[cfg(test)]
 mod tests {
@@ -95,12 +107,11 @@ mod tests {
             .unwrap()
             .as_nanos();
         let path = std::env::temp_dir().join(format!("cheshire-server-{id}.toml"));
-        let path = path.to_str().unwrap();
+        let config = Config::load_or_create(&path).unwrap();
+        let data = std::fs::read_to_string(&path).unwrap();
+        let _ = std::fs::remove_file(&path);
 
-        let config = Config::load_or_create(path);
-        let data = std::fs::read_to_string(path).unwrap();
-        let _ = std::fs::remove_file(path);
-
+        assert_eq!(config.assets_dir, PathBuf::from("assets"));
         assert_eq!(config.dispatch_addr.ip().to_string(), "0.0.0.0");
         assert_eq!(config.sdk_ip, "127.0.0.1");
         assert_eq!(config.sdk_proxy_addr, default_sdk_proxy_addr());
@@ -135,6 +146,7 @@ tls_key_path = "assets/tls/key.pem"
         )
         .unwrap();
 
+        assert_eq!(config.assets_dir, default_assets_dir());
         assert_eq!(config.sdk_ip, "127.0.0.1");
         assert_eq!(config.sdk_proxy_addr, default_sdk_proxy_addr());
         assert_eq!(

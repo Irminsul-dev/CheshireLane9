@@ -1,0 +1,19 @@
+[package]
+name = "cheshire-server-services"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+axum.workspace = true
+axum-server.workspace = true
+cheshire-server-core.workspace = true
+hudsucker.workspace = true
+cheshire-server-proto.workspace = true
+rand.workspace = true
+rustls.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tower-http.workspace = true
+tracing.workspace = true

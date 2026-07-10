@@ -1,17 +1,17 @@
-use proto::common::{
+use cheshire_server_proto::common::{
     Appreciationinfo, Commanderinfo, Displayinfo, EquipskinInfo, Idtimeinfo, Kvdata, Shipinfo,
     Shipskill,
 };
-use proto::p11::{Benefitbuff, Resource, Sc11003, Sc11015};
-use proto::p12::{Groupinfo, Sc12001, Sc12010, Sc12101, Sc12201};
-use proto::p13::{Chapterinfo, Currentchapterinfo, Sc13000, Sc13001};
-use proto::p14::{Sc14001, Sc14101};
-use proto::p15::{Iteminfo, Sc15001};
-use proto::p17::{Sc17001, ShipStatisticsInfo};
-use proto::p19::Sc19001;
-use proto::p22::Sc22001;
-use proto::p25::{Commanderboxinfo, Presetfleet, Sc25001};
-use proto::p33::Sc33114;
+use cheshire_server_proto::p11::{Benefitbuff, Resource, Sc11003, Sc11015};
+use cheshire_server_proto::p12::{Groupinfo, Sc12001, Sc12010, Sc12101, Sc12201};
+use cheshire_server_proto::p13::{Chapterinfo, Currentchapterinfo, Sc13000, Sc13001};
+use cheshire_server_proto::p14::{Sc14001, Sc14101};
+use cheshire_server_proto::p15::{Iteminfo, Sc15001};
+use cheshire_server_proto::p17::{Sc17001, ShipStatisticsInfo};
+use cheshire_server_proto::p19::Sc19001;
+use cheshire_server_proto::p22::Sc22001;
+use cheshire_server_proto::p25::{Commanderboxinfo, Presetfleet, Sc25001};
+use cheshire_server_proto::p33::Sc33114;
 use serde::{Deserialize, Serialize};
 use std::cmp::PartialEq;
 
@@ -266,14 +266,8 @@ impl PlayerInfo {
             };
             let skins = ship_skin_data
                 .0
-                .iter()
-                .filter_map(|(_, skin)| {
-                    if skin.ship_group == group_type {
-                        Some(skin)
-                    } else {
-                        None
-                    }
-                })
+                .values()
+                .filter(|skin| skin.ship_group == group_type)
                 .map(|skin| Idtimeinfo {
                     id: skin.id,
                     ..Default::default()
@@ -355,17 +349,16 @@ impl PlayerInfo {
                 ship_info_list: ships
                     .iter()
                     .filter_map(|info| {
-                        if let Some(template) = ship_data.0.get(&info.template_id.to_string()) {
-                            Some(ShipStatisticsInfo {
+                        ship_data
+                            .0
+                            .get(&info.template_id.to_string())
+                            .map(|template| ShipStatisticsInfo {
                                 id: template.group_type,
                                 star: template.star,
                                 lv_max: info.level,
                                 intimacy_max: info.intimacy,
                                 ..Default::default()
                             })
-                        } else {
-                            None
-                        }
                     })
                     .collect(),
                 ..Default::default()

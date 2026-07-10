@@ -2,9 +2,8 @@
 .DS_Store
 cheshire.sqlite
 config.toml
-/crates/proto/out
+/crates/cheshire-server-proto/out
 /.understand-anything/
 /assets/ca/*.cer
 /assets/ca/*.pem
 /assets/tls/*.pem
-

@@ -1,5 +1,5 @@
 [package]
-name = "proto"
+name = "cheshire-server-proto"
 version.workspace = true
 edition.workspace = true
 build = "build.rs"

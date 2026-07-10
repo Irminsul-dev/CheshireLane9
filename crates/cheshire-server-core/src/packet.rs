@@ -1,6 +1,6 @@
 use anyhow::Result;
 use byteorder::{BigEndian, ByteOrder};
-use proto::{CheshireMessage, ProtoMsg};
+use cheshire_server_proto::{CheshireMessage, ProtoMsg};
 use std::fmt::Write;
 
 #[derive(thiserror::Error, Debug)]
@@ -195,7 +195,7 @@ fn hex_prefix(bytes: &[u8], max: usize) -> String {
 #[cfg(test)]
 mod tests {
     use super::Packet;
-    use proto::p63::Sc63318;
+    use cheshire_server_proto::p63::Sc63318;
 
     #[test]
     fn empty_payload_uses_wire_length_without_padding() {

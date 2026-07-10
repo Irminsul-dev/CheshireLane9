@@ -23,7 +23,42 @@ cd CheshireLane9
 
 CheshireLane9 currently runs the SDK, dispatch, gate, and game handling in one Rust binary. There is no heroic service mesh here; one executable is already enough paperwork.
 
-The implementation uses local protobuf definitions under `crates/proto`, game data from `assets/game`, and a SQLite database by default. Configuration is generated from `src/config.default.toml` into `config.toml` on first run.
+The implementation uses local protobuf definitions under `crates/cheshire-server-proto`, game data from `assets/game`, and a SQLite database by default. Configuration is generated from `crates/cheshire-server-core/src/config.default.toml` into `config.toml` on first run.
+
+## Server Architecture
+
+The executable is intentionally only a thin command-line wrapper. The reusable server code is split into three libraries:
+
+- `cheshire-server-core` owns the configuration model, game data, database, packet handling, and player runtime.
+- `cheshire-server-services` owns the SDK, dispatch, gate, proxy, and certificate services.
+- `cheshire-server-runtime` assembles those services and manages startup, shutdown, and task cleanup.
+
+The `crates/cheshire-server` package contains the thin CLI binary. A future `cheshire-server-app` can live beside it and depend on the same runtime library.
+
+Configuration is passed explicitly through these layers; the libraries do not read a global configuration file. This allows another binary, including a desktop application, to start the same server from an in-memory `Config`:
+
+```rust
+use cheshire_server_runtime::{Config, Server};
+use tokio::sync::oneshot;
+
+async fn run_server(shutdown: oneshot::Receiver<()>) -> anyhow::Result<()> {
+    let config = Config {
+        database_url: "sqlite://application-data/cheshire.sqlite".into(),
+        assets_dir: "application-resources/assets".into(),
+        ..Default::default()
+    };
+
+    Server::new(config)
+        .run_until_shutdown(async move {
+            let _ = shutdown.await;
+        })
+        .await
+}
+```
+
+The desktop layer can keep the matching `oneshot::Sender` and trigger it from its quit action.
+
+`Server::run()` is also available when the caller does not need an external shutdown signal.
 
 We know you all want the damn proto files directly, so this time they are open-sourced too; spare yourselves the miserable little scripts people keep writing to extract them.
 
@@ -83,7 +118,7 @@ For client redirection, depending on your device setup, you may also need:
 cargo run -p cheshire-server
 ```
 
-The server reads `config.toml` from the working directory. If the file does not exist, it writes the default one. This is convenient, unless you expected configuration to be a spiritual journey.
+The `cheshire-server` command reads `config.toml` from the working directory. If the file does not exist, it writes the default one. This file-loading behavior belongs to the command-line wrapper; library consumers can construct `Config` directly. This is convenient, unless you expected configuration to be a spiritual journey.
 
 On first start it also generates a persistent local CA and an SDK TLS certificate when they do not exist:
 

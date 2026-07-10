@@ -1,5 +1,11 @@
 [workspace]
-members = ["crates/proto"]
+members = [
+  "crates/cheshire-server",
+  "crates/cheshire-server-core",
+  "crates/cheshire-server-runtime",
+  "crates/cheshire-server-services",
+  "crates/cheshire-server-proto",
+]
 resolver = "2"
 
 [workspace.package]
@@ -7,26 +13,22 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace.dependencies]
-prost = "0.13.3"
-prost-types = "0.13.3"
-prost-build = "0.13.3"
-serde = { version = "1.0.210", features = ["derive"] }
-
-[package]
-name = "cheshire-server"
-version.workspace = true
-edition.workspace = true
-
-[dependencies]
 anyhow = "1.0.89"
 axum = "0.8.1"
 axum-server = { version = "0.7.1", features = ["tls-rustls"] }
 byteorder = "1.5.0"
+cheshire-server-core = { path = "crates/cheshire-server-core" }
+cheshire-server-runtime = { path = "crates/cheshire-server-runtime" }
+cheshire-server-services = { path = "crates/cheshire-server-services" }
 hudsucker = { version = "0.24.1", default-features = false, features = ["http2", "rcgen-ca", "rustls-client"] }
 md5 = "0.7.0"
+prost = "0.13.3"
+prost-types = "0.13.3"
+prost-build = "0.13.3"
+cheshire-server-proto = { path = "crates/cheshire-server-proto" }
 rand = "0.8.5"
 rustls = { version = "0.23.20", default-features = false, features = ["ring"] }
-serde.workspace = true
+serde = { version = "1.0.210", features = ["derive"] }
 serde_json = "1.0.128"
 sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite"] }
 thiserror = "2.0.7"
@@ -35,5 +37,3 @@ toml = "0.8.19"
 tower-http = { version = "0.6.2", features = ["fs"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
-
-proto = { path = "crates/proto" }

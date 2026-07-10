@@ -302,23 +302,68 @@ name = "cheshire-server"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "axum",
- "axum-server",
+ "cheshire-server-runtime",
+ "tokio",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "cheshire-server-core"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
  "byteorder",
- "hudsucker",
+ "cheshire-server-proto",
  "md5",
- "proto",
- "rand 0.8.6",
- "rustls",
  "serde",
  "serde_json",
  "sqlx",
  "thiserror",
  "tokio",
  "toml",
+ "tracing",
+]
+
+[[package]]
+name = "cheshire-server-proto"
+version = "0.1.0"
+dependencies = [
+ "prost",
+ "prost-build",
+ "prost-types",
+ "proto_derive",
+ "serde",
+]
+
+[[package]]
+name = "cheshire-server-runtime"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cheshire-server-core",
+ "cheshire-server-services",
+ "rustls",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "cheshire-server-services"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "axum",
+ "axum-server",
+ "cheshire-server-core",
+ "cheshire-server-proto",
+ "hudsucker",
+ "rand 0.8.6",
+ "rustls",
+ "serde",
+ "serde_json",
+ "tokio",
  "tower-http",
  "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -1646,17 +1691,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "52c2c1bf36ddb1a1c396b3601a3cec27c2462e45f07c386894ec3ccf5332bd16"
 dependencies = [
  "prost",
-]
-
-[[package]]
-name = "proto"
-version = "0.1.0"
-dependencies = [
- "prost",
- "prost-build",
- "prost-types",
- "proto_derive",
- "serde",
 ]
 
 [[package]]

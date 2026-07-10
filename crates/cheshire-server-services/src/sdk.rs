@@ -8,15 +8,14 @@ use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::Router;
 use axum_server::tls_rustls::RustlsConfig;
+use cheshire_server_core::config::Config;
+use cheshire_server_core::database::{Database, SdkAccount};
+use cheshire_server_core::time;
 use rand::distributions::{Alphanumeric, DistString};
 use rand::RngCore;
 use serde::Deserialize;
 use serde_json::{json, Value};
 use tower_http::services::ServeDir;
-
-use crate::config::CONFIG;
-use crate::database::{Database, SdkAccount};
-use crate::time;
 
 #[derive(Clone)]
 pub struct SdkState {
@@ -29,7 +28,8 @@ struct AuthInfo {
     token: Option<String>,
 }
 
-pub async fn serve(db: Database) -> Result<()> {
+pub async fn serve(config: Config, db: Database) -> Result<()> {
+    let static_dir = config.assets_dir.join("static");
     let state = SdkState { db };
     let app = Router::new()
         .route("/", get(index))
@@ -45,31 +45,30 @@ pub async fn serve(db: Database) -> Result<()> {
         .route("/user/pgs-oauth-code", post(pgs_oauth_code))
         .route("/common/version", post(common_version))
         .route("/user/set", post(user_set))
-        .nest_service("/static", ServeDir::new("assets/static"))
+        .nest_service("/static", ServeDir::new(static_dir))
         .layer(middleware::from_fn(auth_middleware))
         .with_state(state);
 
-    let tls =
-        RustlsConfig::from_pem_file(CONFIG.tls_cert_path.clone(), CONFIG.tls_key_path.clone())
-            .await?;
+    let tls = RustlsConfig::from_pem_file(config.tls_cert_path, config.tls_key_path).await?;
+    let http_addr = config.sdk_http_addr;
+    let https_addr = config.sdk_https_addr;
 
     let http_app = app.clone();
-    let http = tokio::spawn(async move {
-        tracing::info!("SDK HTTP listening on {}", CONFIG.sdk_http_addr);
-        axum_server::bind(CONFIG.sdk_http_addr)
+    let http = async move {
+        tracing::info!("SDK HTTP listening on {http_addr}");
+        axum_server::bind(http_addr)
             .serve(http_app.into_make_service())
             .await
-    });
+    };
 
-    let https = tokio::spawn(async move {
-        tracing::info!("SDK HTTPS listening on {}", CONFIG.sdk_https_addr);
-        axum_server::bind_rustls(CONFIG.sdk_https_addr, tls)
+    let https = async move {
+        tracing::info!("SDK HTTPS listening on {https_addr}");
+        axum_server::bind_rustls(https_addr, tls)
             .serve(app.into_make_service())
             .await
-    });
+    };
 
-    http.await??;
-    https.await??;
+    tokio::try_join!(http, https)?;
     Ok(())
 }
 

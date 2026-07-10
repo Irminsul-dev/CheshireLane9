@@ -1,0 +1,17 @@
+[package]
+name = "cheshire-server-core"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+byteorder.workspace = true
+md5.workspace = true
+cheshire-server-proto.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sqlx.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+toml.workspace = true
+tracing.workspace = true

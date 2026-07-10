@@ -1,38 +1,55 @@
 use anyhow::Result;
-use proto::p10::{Cs10018, Cs10020, Cs10800, Sc10019, Sc10021, Sc10801, Serverinfo};
-use proto::CmdID;
+use cheshire_server_core::config::Config;
+use cheshire_server_core::crypto::md5_with_salt;
+use cheshire_server_core::packet::Packet;
+use cheshire_server_core::time;
+use cheshire_server_proto::p10::{
+    Cs10018, Cs10020, Cs10800, Sc10019, Sc10021, Sc10801, Serverinfo,
+};
+use cheshire_server_proto::CmdID;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
-
-use crate::config::CONFIG;
-use crate::crypto::md5_with_salt;
-use crate::packet::Packet;
-use crate::time;
+use tokio::task::JoinSet;
 
 #[derive(Clone)]
 struct DispatchData {
+    gateway_ip: String,
+    gateway_port: u16,
     version: Vec<String>,
     servers: Vec<Serverinfo>,
 }
 
-pub async fn serve() -> Result<()> {
+pub async fn serve(config: Config) -> Result<()> {
+    let listen_addr = config.dispatch_addr;
     let data = DispatchData {
-        version: CONFIG.dispatch_version.clone(),
-        servers: CONFIG.dispatch_servers.clone(),
+        gateway_ip: config.dispatch_ip,
+        gateway_port: config.dispatch_port,
+        version: config.dispatch_version,
+        servers: config.dispatch_servers,
     };
 
-    let listener = TcpListener::bind(CONFIG.dispatch_addr).await?;
-    tracing::info!("dispatch listening on {}", CONFIG.dispatch_addr);
+    let listener = TcpListener::bind(listen_addr).await?;
+    tracing::info!("dispatch listening on {listen_addr}");
+    let mut clients = JoinSet::new();
 
     loop {
-        let (stream, addr) = listener.accept().await?;
-        let data = data.clone();
-        tracing::debug!("dispatch connection from {addr}");
-        tokio::spawn(async move {
-            if let Err(err) = handle_client(stream, data).await {
-                tracing::error!("dispatch client failed: {err}");
+        tokio::select! {
+            connection = listener.accept() => {
+                let (stream, addr) = connection?;
+                let data = data.clone();
+                tracing::debug!("dispatch connection from {addr}");
+                clients.spawn(async move {
+                    if let Err(err) = handle_client(stream, data).await {
+                        tracing::error!("dispatch client failed: {err}");
+                    }
+                });
             }
-        });
+            Some(result) = clients.join_next(), if !clients.is_empty() => {
+                if let Err(err) = result {
+                    tracing::error!("dispatch client task failed: {err}");
+                }
+            }
+        }
     }
 }
 
@@ -68,12 +85,12 @@ fn handle_packet(packet: Packet, data: &DispatchData) -> Option<Packet> {
     match packet.cmd_id {
         Cs10800::CMD_ID => Some(Packet::encode(
             &Sc10801 {
-                gateway_ip: CONFIG.dispatch_ip.clone(),
-                gateway_port: CONFIG.dispatch_port as u32,
-                url: format!("http://{}", CONFIG.dispatch_ip),
+                gateway_ip: data.gateway_ip.clone(),
+                gateway_port: data.gateway_port as u32,
+                url: format!("http://{}", data.gateway_ip),
                 version: data.version.clone(),
-                proxy_ip: Some(CONFIG.dispatch_ip.clone()),
-                proxy_port: Some(CONFIG.dispatch_port as u32),
+                proxy_ip: Some(data.gateway_ip.clone()),
+                proxy_port: Some(data.gateway_port as u32),
                 is_ts: 0,
                 timestamp: time::now_timestamp_s() as u32,
                 monday_0oclock_timestamp: 1_606_114_800,

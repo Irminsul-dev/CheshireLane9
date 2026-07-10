@@ -1,17 +1,17 @@
+use std::net::SocketAddr;
 use std::sync::atomic::{AtomicU32, Ordering};
 
 use anyhow::Result;
-use proto::p10::{Cs10022, Sc10023};
-use proto::CmdID;
+use cheshire_server_core::crypto::md5_with_salt;
+use cheshire_server_core::database::Database;
+use cheshire_server_core::game::{request_proto_name, PlayerRuntime};
+use cheshire_server_core::packet::Packet;
+use cheshire_server_proto::p10::{Cs10022, Sc10023};
+use cheshire_server_proto::CmdID;
 use rand::RngCore;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
-
-use crate::config::CONFIG;
-use crate::crypto::md5_with_salt;
-use crate::database::Database;
-use crate::game::PlayerRuntime;
-use crate::packet::Packet;
+use tokio::task::JoinSet;
 
 static NEXT_CONV: AtomicU32 = AtomicU32::new(1);
 
@@ -21,20 +21,30 @@ pub struct GateState {
     runtime: PlayerRuntime,
 }
 
-pub async fn serve(db: Database, runtime: PlayerRuntime) -> Result<()> {
-    let listener = TcpListener::bind(CONFIG.gate_addr).await?;
+pub async fn serve(listen_addr: SocketAddr, db: Database, runtime: PlayerRuntime) -> Result<()> {
+    let listener = TcpListener::bind(listen_addr).await?;
     let state = GateState { db, runtime };
-    tracing::info!("gate listening on {}", CONFIG.gate_addr);
+    tracing::info!("gate listening on {listen_addr}");
+    let mut clients = JoinSet::new();
 
     loop {
-        let (stream, addr) = listener.accept().await?;
-        let state = state.clone();
-        tracing::debug!("gate connection from {addr}");
-        tokio::spawn(async move {
-            if let Err(err) = handle_client(stream, state).await {
-                tracing::error!("gate client failed: {err}");
+        tokio::select! {
+            connection = listener.accept() => {
+                let (stream, addr) = connection?;
+                let state = state.clone();
+                tracing::debug!("gate connection from {addr}");
+                clients.spawn(async move {
+                    if let Err(err) = handle_client(stream, state).await {
+                        tracing::error!("gate client failed: {err}");
+                    }
+                });
             }
-        });
+            Some(result) = clients.join_next(), if !clients.is_empty() => {
+                if let Err(err) = result {
+                    tracing::error!("gate client task failed: {err}");
+                }
+            }
+        }
     }
 }
 
@@ -91,7 +101,7 @@ async fn handle_packet(
     tracing::debug!(
         service = "gate",
         path,
-        proto = crate::game::request_proto_name(packet.cmd_id),
+        proto = request_proto_name(packet.cmd_id),
         cmd_id = packet.cmd_id,
         packet_id = packet.id,
         uid = ?current_uid,

@@ -1,4 +1,5 @@
 database_url = "sqlite://cheshire.sqlite"
+assets_dir = "assets"
 sdk_http_addr = "0.0.0.0:21080"
 sdk_https_addr = "0.0.0.0:21443"
 sdk_ip = "127.0.0.1"

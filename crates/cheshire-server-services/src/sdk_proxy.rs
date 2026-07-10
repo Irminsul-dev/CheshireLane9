@@ -4,12 +4,11 @@ use std::net::SocketAddr;
 use anyhow::{Context, Result};
 use axum::http::uri::{Authority, Scheme};
 use axum::http::{Method, Request, Uri};
+use cheshire_server_core::Config;
 use hudsucker::certificate_authority::RcgenAuthority;
 use hudsucker::rcgen::{Issuer, KeyPair};
 use hudsucker::rustls::crypto::ring;
 use hudsucker::{Body, HttpContext, HttpHandler, Proxy, RequestOrResponse};
-
-use crate::config::CONFIG;
 
 const SDK_HOSTS: [&str; 2] = ["jp-sdk-api.yostarplat.com", "en-sdk-api.yostarplat.com"];
 
@@ -68,13 +67,13 @@ impl HttpHandler for SdkRedirectHandler {
     }
 }
 
-pub async fn serve() -> Result<()> {
-    let ca_key_pem = fs::read_to_string(&CONFIG.mitm_ca_key_path)
-        .with_context(|| format!("read MITM CA key {}", CONFIG.mitm_ca_key_path.display()))?;
-    let ca_cert_pem = fs::read_to_string(&CONFIG.mitm_ca_cert_path).with_context(|| {
+pub async fn serve(config: Config) -> Result<()> {
+    let ca_key_pem = fs::read_to_string(&config.mitm_ca_key_path)
+        .with_context(|| format!("read MITM CA key {}", config.mitm_ca_key_path.display()))?;
+    let ca_cert_pem = fs::read_to_string(&config.mitm_ca_cert_path).with_context(|| {
         format!(
             "read MITM CA certificate {}",
-            CONFIG.mitm_ca_cert_path.display()
+            config.mitm_ca_cert_path.display()
         )
     })?;
     let ca_key = KeyPair::from_pem(&ca_key_pem).context("parse MITM CA key")?;
@@ -84,16 +83,16 @@ pub async fn serve() -> Result<()> {
     let ca = RcgenAuthority::new(issuer, 64, provider.clone());
 
     let proxy = Proxy::builder()
-        .with_addr(CONFIG.sdk_proxy_addr)
+        .with_addr(config.sdk_proxy_addr)
         .with_ca(ca)
         .with_rustls_connector(provider)
-        .with_http_handler(SdkRedirectHandler::new(CONFIG.sdk_proxy_upstream_addr))
+        .with_http_handler(SdkRedirectHandler::new(config.sdk_proxy_upstream_addr))
         .build()
         .context("build SDK proxy")?;
 
     tracing::info!(
-        listen = %CONFIG.sdk_proxy_addr,
-        upstream = %CONFIG.sdk_proxy_upstream_addr,
+        listen = %config.sdk_proxy_addr,
+        upstream = %config.sdk_proxy_upstream_addr,
         "SDK proxy listening"
     );
     proxy.start().await.context("serve SDK proxy")?;

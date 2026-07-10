@@ -4,44 +4,47 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 use anyhow::{anyhow, Result};
-use proto::common::{Collectioninfo, Displayinfo, Kvdata};
-use proto::p10::{Cs10022, Cs10024, Cs10100, Cs10991, Sc10023, Sc10025, Sc10101};
-use proto::p11::{
+use cheshire_server_proto::common::{Collectioninfo, Displayinfo, Kvdata};
+use cheshire_server_proto::p10::{Cs10022, Cs10024, Cs10100, Cs10991, Sc10023, Sc10025, Sc10101};
+use cheshire_server_proto::p11::{
     Cs11001, Cs11011, Cs11017, Cs11401, Cs11603, Cs11701, Cs11705, Cs11710, Cs11722, Cs11751,
     InsMessage, Noticeinfo, Sc11000, Sc11002, Sc11012, Sc11018, Sc11200, Sc11210, Sc11300, Sc11402,
     Sc11604, Sc11702, Sc11706, Sc11711, Sc11723, Sc11752,
 };
-use proto::p12::{Cs12202, Cs12299, Cs12406, Sc12010, Sc12024, Sc12031, Sc12203, Sc12407};
-use proto::p13::{Cs13505, Sc13002, Sc13201, Sc13506};
-use proto::p15::{Cs15008, Cs15300, Sc15009};
-use proto::p16::{Cs16104, Sc16105, Sc16200};
-use proto::p18::{Cs18001, Sc18002};
-use proto::p19::{Cs19009, Sc19010};
-use proto::p20::{Cs20007, Sc20001, Sc20008, Sc20101, Sc20201};
-use proto::p21::Sc21536;
-use proto::p22::Sc22300;
-use proto::p24::{Cs24020, Sc24021};
-use proto::p25::{Commanderhomeslot, Cs25026, Sc25027};
-use proto::p26::{Cs26101, Sc26102, Sc26120};
-use proto::p27::{
+use cheshire_server_proto::p12::{
+    Cs12202, Cs12299, Cs12406, Sc12010, Sc12024, Sc12031, Sc12203, Sc12407,
+};
+use cheshire_server_proto::p13::{Cs13505, Sc13002, Sc13201, Sc13506};
+use cheshire_server_proto::p15::{Cs15008, Cs15300, Sc15009};
+use cheshire_server_proto::p16::{Cs16104, Sc16105, Sc16200};
+use cheshire_server_proto::p18::{Cs18001, Sc18002};
+use cheshire_server_proto::p19::{Cs19009, Sc19010};
+use cheshire_server_proto::p20::{Cs20007, Sc20001, Sc20008, Sc20101, Sc20201};
+use cheshire_server_proto::p21::Sc21536;
+use cheshire_server_proto::p22::Sc22300;
+use cheshire_server_proto::p24::{Cs24020, Sc24021};
+use cheshire_server_proto::p25::{Commanderhomeslot, Cs25026, Sc25027};
+use cheshire_server_proto::p26::{Cs26101, Sc26102, Sc26120};
+use cheshire_server_proto::p27::{
     ChildAttr, ChildFavor, ChildInfo, ChildTask, ChildTime, Cs27000, Cs27010, Sc27001, Sc27011,
 };
-use proto::p28::Sc28000;
-use proto::p29::{
+use cheshire_server_proto::p28::Sc28000;
+use cheshire_server_proto::p29::{
     Cs29001, Sc29002, Tbbenefit, Tbbf, Tbdisplay, Tbfsm, Tbfsmcache, Tbinfo, Tbpermanent, Tbplan,
     Tbres, Tbround, Tbsite, Tbtalent,
 };
-use proto::p30::{Sc30001, Sc30101};
-use proto::p34::{Cs34001, Cs34501, MetaShipInfo, Sc34002, Sc34502};
-use proto::p50::{Cs50102, PlayerInfo as ChatPlayerInfo, Sc50000, Sc50101};
-use proto::p60::{Cs60037, Cs60102, GuildBaseInfo, GuildInfo, Sc60000, Sc60103, UserGuildInfo};
-use proto::p62::{Cs62100, Sc62101};
-use proto::p63::{Cs63317, Sc63000, Sc63100, Sc63318};
-use proto::p64::Sc64000;
-use proto::CmdID;
+use cheshire_server_proto::p30::{Sc30001, Sc30101};
+use cheshire_server_proto::p34::{Cs34001, Cs34501, MetaShipInfo, Sc34002, Sc34502};
+use cheshire_server_proto::p50::{Cs50102, PlayerInfo as ChatPlayerInfo, Sc50000, Sc50101};
+use cheshire_server_proto::p60::{
+    Cs60037, Cs60102, GuildBaseInfo, GuildInfo, Sc60000, Sc60103, UserGuildInfo,
+};
+use cheshire_server_proto::p62::{Cs62100, Sc62101};
+use cheshire_server_proto::p63::{Cs63317, Sc63000, Sc63100, Sc63318};
+use cheshire_server_proto::p64::Sc64000;
+use cheshire_server_proto::CmdID;
 use tokio::sync::Mutex;
 
-use crate::config::CONFIG;
 use crate::database::Database;
 use crate::packet::Packet;
 use crate::time;
@@ -53,6 +56,7 @@ const MONDAY_0_TIMESTAMP: u32 = 1_606_114_800;
 pub struct PlayerRuntime {
     db: Database,
     players: Arc<Mutex<HashMap<u32, PlayerSession>>>,
+    notice_image_url: Arc<str>,
 }
 
 struct PlayerSession {
@@ -61,10 +65,16 @@ struct PlayerSession {
 }
 
 impl PlayerRuntime {
-    pub fn new(db: Database) -> Self {
+    pub fn new(db: Database, sdk_http_origin: impl Into<String>) -> Self {
+        let sdk_http_origin = sdk_http_origin.into();
         Self {
             db,
             players: Arc::new(Mutex::new(HashMap::new())),
+            notice_image_url: format!(
+                "{}/static/cheshire-banner.png",
+                sdk_http_origin.trim_end_matches('/')
+            )
+            .into(),
         }
     }
 
@@ -90,7 +100,13 @@ impl PlayerRuntime {
             let session = players
                 .get_mut(&uid)
                 .ok_or_else(|| anyhow!("player {uid} is not loaded"))?;
-            let out = handle_player_packet(uid, &mut session.info, &mut session.dirty, packet);
+            let out = handle_player_packet(
+                uid,
+                &mut session.info,
+                &mut session.dirty,
+                packet,
+                &self.notice_image_url,
+            );
             let save = session.dirty.then(|| session.info.clone());
             session.dirty = false;
             (out, save)
@@ -109,6 +125,7 @@ fn handle_player_packet(
     player: &mut PlayerInfo,
     dirty: &mut bool,
     packet: Packet,
+    notice_image_url: &str,
 ) -> Vec<Packet> {
     let mut out = Vec::new();
 
@@ -142,7 +159,7 @@ fn handle_player_packet(
                 );
             }
         }
-        Cs11001::CMD_ID => load_player_data(player, packet.id, &mut out),
+        Cs11001::CMD_ID => load_player_data(player, packet.id, &mut out, notice_image_url),
         Cs10100::CMD_ID => {
             if packet.decode::<Cs10100>().is_some() {
                 push(&mut out, Sc10101 { state: 0 }, packet.id);
@@ -454,7 +471,12 @@ fn handle_player_packet(
     out
 }
 
-fn load_player_data(player: &mut PlayerInfo, id: u16, out: &mut Vec<Packet>) {
+fn load_player_data(
+    player: &mut PlayerInfo,
+    id: u16,
+    out: &mut Vec<Packet>,
+    notice_image_url: &str,
+) {
     push(
         out,
         Sc11000 {
@@ -525,7 +547,7 @@ fn load_player_data(player: &mut PlayerInfo, id: u16, out: &mut Vec<Packet>) {
     push(out, Sc50000::default(), id);
     push(out, Sc11200::default(), id);
     push(out, Sc11210::default(), id);
-    push(out, server_notice(), id);
+    push(out, server_notice(notice_image_url), id);
     push(
         out,
         Sc11002 {
@@ -684,7 +706,7 @@ fn new_educate_tb(id: u32) -> Tbinfo {
     }
 }
 
-fn server_notice() -> Sc11300 {
+fn server_notice(notice_image_url: &str) -> Sc11300 {
     Sc11300 {
         notice_list: vec![Noticeinfo {
             tag_type: 1,
@@ -697,11 +719,7 @@ fn server_notice() -> Sc11300 {
             priority: 80,
             need_level: 0,
             btn_title: "Welcome".to_string(),
-            title_image: format!(
-                "http://{}:{}/static/cheshire-banner.png",
-                CONFIG.sdk_ip,
-                CONFIG.sdk_http_addr.port()
-            ),
+            title_image: notice_image_url.to_string(),
             time_desc: "2/1/2025".to_string(),
         }],
     }
@@ -721,11 +739,11 @@ fn reflux_data() -> Sc11752 {
     }
 }
 
-fn push<T: proto::CheshireMessage>(out: &mut Vec<Packet>, message: T, id: u16) {
+fn push<T: cheshire_server_proto::CheshireMessage>(out: &mut Vec<Packet>, message: T, id: u16) {
     out.push(Packet::encode(&message, id));
 }
 
-pub(crate) fn request_proto_name(cmd_id: u16) -> &'static str {
+pub fn request_proto_name(cmd_id: u16) -> &'static str {
     match cmd_id {
         Cs10022::CMD_ID => "p10.Cs10022",
         Cs10024::CMD_ID => "p10.Cs10024",
