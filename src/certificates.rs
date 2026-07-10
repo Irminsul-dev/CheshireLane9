@@ -208,7 +208,6 @@ mod tests {
             dispatch_port: 0,
             dispatch_version: vec![],
             dispatch_servers: Vec::<Serverinfo>::new(),
-            salt: "test".to_string(),
             mitm_ca_cert_path: root.join("assets/ca/ca-cert.cer"),
             mitm_ca_key_path: root.join("assets/ca/ca-key.pem"),
             tls_cert_path: root.join("assets/tls/cert.pem"),

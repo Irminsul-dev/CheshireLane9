@@ -22,7 +22,6 @@ pub struct Config {
     pub dispatch_port: u16,
     pub dispatch_version: Vec<String>,
     pub dispatch_servers: Vec<Serverinfo>,
-    pub salt: String,
     #[serde(default = "default_mitm_ca_cert_path")]
     pub mitm_ca_cert_path: PathBuf,
     #[serde(default = "default_mitm_ca_key_path")]
@@ -130,7 +129,6 @@ dispatch_ip = "127.0.0.1"
 dispatch_port = 21180
 dispatch_version = []
 dispatch_servers = []
-salt = "x"
 tls_cert_path = "assets/tls/cert.pem"
 tls_key_path = "assets/tls/key.pem"
 "#,

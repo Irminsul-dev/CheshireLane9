@@ -8,7 +8,6 @@ dispatch_addr = "0.0.0.0:21180"
 gate_addr = "0.0.0.0:21280"
 dispatch_ip = "127.0.0.1"
 dispatch_port = 21180
-salt = "dettimrepsignihtyrevednaeurtsignihton"
 mitm_ca_cert_path = "assets/ca/ca-cert.cer"
 mitm_ca_key_path = "assets/ca/ca-key.pem"
 tls_cert_path = "assets/tls/cert.pem"

@@ -135,7 +135,7 @@ async fn handle_login(
 
     let mut result = 1;
     let mut user_id = 0;
-    let md5 = md5_with_salt(&req.server_ticket, &CONFIG.salt);
+    let md5 = md5_with_salt(&req.server_ticket);
 
     if md5 == req.check_key {
         if let Some(account) = state.db.get_account(req.account_id).await? {

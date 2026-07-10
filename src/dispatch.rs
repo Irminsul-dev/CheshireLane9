@@ -82,7 +82,7 @@ fn handle_packet(packet: Packet, data: &DispatchData) -> Option<Packet> {
             packet.id,
         )),
         Cs10020::CMD_ID => packet.decode::<Cs10020>().map(|req| {
-            let hash = md5_with_salt(&req.arg1, &CONFIG.salt);
+            let hash = md5_with_salt(&req.arg1);
             let result = u32::from(hash != req.check_key);
             Packet::encode(
                 &Sc10021 {
