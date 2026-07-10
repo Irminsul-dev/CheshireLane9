@@ -3,9 +3,9 @@ use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
 use cheshire_server_proto::p10::Serverinfo;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Deserialize)]
+#[derive(Clone, Deserialize, Serialize)]
 pub struct Config {
     pub database_url: String,
     #[serde(default = "default_assets_dir")]
@@ -87,6 +87,13 @@ impl Config {
         }
     }
 
+    pub fn save(&self, path: impl AsRef<Path>) -> Result<()> {
+        let path = path.as_ref();
+        let data = toml::to_string_pretty(self).context("serialize server configuration")?;
+        std::fs::write(path, data)
+            .with_context(|| format!("write configuration {}", path.display()))
+    }
+
     pub fn sdk_http_origin(&self) -> String {
         format!("http://{}:{}", self.sdk_ip, self.sdk_http_addr.port())
     }
@@ -155,5 +162,24 @@ tls_key_path = "assets/tls/key.pem"
         );
         assert_eq!(config.mitm_ca_cert_path, default_mitm_ca_cert_path());
         assert_eq!(config.mitm_ca_key_path, default_mitm_ca_key_path());
+    }
+
+    #[test]
+    fn saved_config_round_trips() {
+        let id = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let path = std::env::temp_dir().join(format!("cheshire-server-save-{id}.toml"));
+        let config = Config::default();
+
+        config.save(&path).unwrap();
+        let loaded = Config::load_or_create(&path).unwrap();
+        let _ = std::fs::remove_file(path);
+
+        assert_eq!(loaded.database_url, config.database_url);
+        assert_eq!(loaded.assets_dir, config.assets_dir);
+        assert_eq!(loaded.sdk_http_addr, config.sdk_http_addr);
+        assert_eq!(loaded.dispatch_servers.len(), config.dispatch_servers.len());
     }
 }

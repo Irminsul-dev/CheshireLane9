@@ -1,0 +1,544 @@
+import { Button, LineEdit, ScrollView, TextEdit } from "std-widgets.slint";
+
+component SectionHeader inherits Rectangle {
+    in property <string> title;
+    in property <string> description;
+
+    height: 54px;
+    background: #182235;
+    border-radius: 10px;
+
+    VerticalLayout {
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        spacing: 2px;
+
+        Text {
+            text: root.title;
+            color: #f5f7fb;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        Text {
+            text: root.description;
+            color: #91a0b8;
+            font-size: 11px;
+            overflow: elide;
+        }
+    }
+}
+
+component FieldTitle inherits Rectangle {
+    in property <string> title;
+    in property <string> hint;
+
+    height: 18px;
+    background: transparent;
+
+    HorizontalLayout {
+        spacing: 6px;
+
+        Text {
+            text: root.title;
+            color: #edf1f8;
+            font-size: 13px;
+            font-weight: 600;
+            vertical-alignment: center;
+            horizontal-stretch: 1;
+        }
+
+        Rectangle {
+            width: 18px;
+            height: 18px;
+            background: #263852;
+            border-color: #3d5375;
+            border-width: 1px;
+            border-radius: 9px;
+
+            Text {
+                text: "i";
+                color: #b9cae4;
+                font-size: 11px;
+                font-weight: 700;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+            }
+
+            Tooltip {
+                text: @markdown("\{root.hint}");
+            }
+        }
+    }
+}
+
+component SettingField inherits Rectangle {
+    in property <string> title;
+    in property <string> hint;
+    in property <string> placeholder;
+    in-out property <string> value;
+
+    height: 76px;
+    background: #111a2a;
+    border-color: #26344c;
+    border-width: 1px;
+    border-radius: 9px;
+
+    VerticalLayout {
+        padding: 10px;
+        spacing: 5px;
+
+        FieldTitle {
+            title: root.title;
+            hint: root.hint;
+        }
+
+        LineEdit {
+            text <=> root.value;
+            placeholder-text: root.placeholder;
+        }
+    }
+}
+
+export component AppWindow inherits Window {
+    title: "Cheshire Server";
+    width: 1180px;
+    height: 820px;
+    background: #0b1220;
+
+    in-out property <string> database-url;
+    in-out property <string> assets-dir;
+    in-out property <string> sdk-http-addr;
+    in-out property <string> sdk-https-addr;
+    in-out property <string> sdk-ip;
+    in-out property <string> sdk-proxy-addr;
+    in-out property <string> sdk-proxy-upstream-addr;
+    in-out property <string> dispatch-addr;
+    in-out property <string> gate-addr;
+    in-out property <string> dispatch-ip;
+    in-out property <string> dispatch-port;
+    in-out property <string> mitm-ca-cert-path;
+    in-out property <string> mitm-ca-key-path;
+    in-out property <string> tls-cert-path;
+    in-out property <string> tls-key-path;
+    in-out property <string> dispatch-version-azhash;
+    in-out property <string> dispatch-version-cvhash;
+    in-out property <string> dispatch-version-l2dhash;
+    in-out property <string> dispatch-version-pichash;
+    in-out property <string> dispatch-version-bgmhash;
+    in-out property <string> dispatch-version-paintinghash;
+    in-out property <string> dispatch-version-mangahash;
+    in-out property <string> dispatch-version-cipherhash;
+    in-out property <string> dispatch-version-dormhash;
+    in-out property <string> dispatch-server-ip;
+    in-out property <string> dispatch-server-port;
+    in-out property <string> dispatch-server-name;
+
+    in-out property <string> status-text: "Ready — configuration loaded, server stopped.";
+    in-out property <bool> server-running: false;
+    in-out property <bool> show-logs: false;
+    in-out property <string> log-text: "";
+
+    callback save-config();
+    callback start-server();
+    callback stop-server();
+
+    VerticalLayout {
+        padding: 16px;
+        spacing: 12px;
+
+        Rectangle {
+            height: 92px;
+            background: #142037;
+            border-color: #2d4264;
+            border-width: 1px;
+            border-radius: 12px;
+
+            HorizontalLayout {
+                padding: 14px;
+                spacing: 12px;
+
+                VerticalLayout {
+                    horizontal-stretch: 1;
+                    spacing: 3px;
+
+                    Text {
+                        text: "Cheshire Server Control Room";
+                        color: #f7f9fd;
+                        font-size: 23px;
+                        font-weight: 700;
+                    }
+
+                    Text {
+                        text: root.status-text;
+                        color: root.server-running ? #62d6a2 : #9eabc0;
+                        font-size: 12px;
+                        wrap: word-wrap;
+                    }
+
+                    Text {
+                        text: "config.toml · changes are validated before they are allowed near a socket";
+                        color: #697b98;
+                        font-size: 10px;
+                    }
+                }
+
+                Button {
+                    text: "Save Config";
+                    enabled: !root.server-running;
+                    clicked => { root.save-config(); }
+                }
+
+                Button {
+                    text: root.server-running ? "Running" : "Start";
+                    enabled: !root.server-running;
+                    clicked => { root.start-server(); }
+                }
+
+                Button {
+                    text: "Stop";
+                    enabled: root.server-running;
+                    clicked => { root.stop-server(); }
+                }
+
+                Button {
+                    text: root.show-logs ? "Hide Logs" : "Show Logs";
+                    clicked => { root.show-logs = !root.show-logs; }
+                }
+            }
+        }
+
+        settings-scroll := ScrollView {
+            enabled: !root.server-running;
+            vertical-stretch: 1;
+            viewport-width: self.width;
+
+            VerticalLayout {
+                padding-right: 8px;
+                spacing: 10px;
+
+                SectionHeader {
+                    title: "Storage and resources";
+                    description: "Files the server reads or writes. Relative paths are resolved from the application working directory.";
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Database URL";
+                        value <=> root.database-url;
+                        placeholder: "sqlite://cheshire.sqlite";
+                        hint: "SQLite connection URL. The desktop app may point this at its writable application data directory.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Assets directory";
+                        value <=> root.assets-dir;
+                        placeholder: "assets";
+                        hint: "Must contain game/ and static/. A packaged app should use its bundled resource directory.";
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "MITM CA certificate";
+                        value <=> root.mitm-ca-cert-path;
+                        placeholder: "assets/ca/ca-cert.cer";
+                        hint: "Public CA certificate installed on the client. It is generated when missing.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "MITM CA private key";
+                        value <=> root.mitm-ca-key-path;
+                        placeholder: "assets/ca/ca-key.pem";
+                        hint: "Private signing key. Keep it writable, local, and very much not on the client.";
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "SDK TLS certificate";
+                        value <=> root.tls-cert-path;
+                        placeholder: "assets/tls/cert.pem";
+                        hint: "HTTPS certificate served by the local SDK endpoint and regenerated when missing.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "SDK TLS private key";
+                        value <=> root.tls-key-path;
+                        placeholder: "assets/tls/key.pem";
+                        hint: "Private key paired with the SDK certificate. Put it in writable application data.";
+                    }
+                }
+
+                SectionHeader {
+                    title: "SDK and proxy network";
+                    description: "Bind addresses describe this machine. Advertised addresses describe what the client can actually reach.";
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "SDK HTTP bind address";
+                        value <=> root.sdk-http-addr;
+                        placeholder: "0.0.0.0:21080";
+                        hint: "Use 0.0.0.0 to accept LAN/public traffic, or 127.0.0.1 when only this Mac should connect. This is not the public IP.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "SDK HTTPS bind address";
+                        value <=> root.sdk-https-addr;
+                        placeholder: "0.0.0.0:21443";
+                        hint: "Same bind rule as HTTP: 0.0.0.0 listens on all interfaces; 127.0.0.1 is local-only.";
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "SDK advertised IPv4";
+                        value <=> root.sdk-ip;
+                        placeholder: "192.168.110.51";
+                        hint: "Use 127.0.0.1 only for a client on this machine. LAN clients need this machine's LAN IP; remote clients need an externally reachable IP.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "SDK proxy bind address";
+                        value <=> root.sdk-proxy-addr;
+                        placeholder: "0.0.0.0:28080";
+                        hint: "0.0.0.0 exposes the proxy to reachable networks. Prefer 127.0.0.1 unless another device must use it, and never invite the whole internet casually.";
+                    }
+                }
+
+                SettingField {
+                    title: "SDK proxy upstream";
+                    value <=> root.sdk-proxy-upstream-addr;
+                    placeholder: "127.0.0.1:21080";
+                    hint: "Usually the local SDK HTTP listener, so 127.0.0.1:21080 is correct even when clients connect from LAN or the internet.";
+                }
+
+                SectionHeader {
+                    title: "Dispatch and gate network";
+                    description: "Dispatch tells clients where gate lives. A bind wildcard is useful here; an advertised wildcard is just a small lie.";
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Dispatch bind address";
+                        value <=> root.dispatch-addr;
+                        placeholder: "0.0.0.0:21180";
+                        hint: "Use 0.0.0.0 for LAN/public clients, or 127.0.0.1 for local-only testing. The IP must belong to this host if it is not a wildcard.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Gate bind address";
+                        value <=> root.gate-addr;
+                        placeholder: "0.0.0.0:21280";
+                        hint: "The game connection listener. Use 0.0.0.0 when another device connects; 127.0.0.1 is enough for a local client.";
+                    }
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Dispatch advertised IPv4";
+                        value <=> root.dispatch-ip;
+                        placeholder: "192.168.110.51";
+                        hint: "Address returned to the client. Use this machine's LAN IP for LAN clients, a publicly reachable IP for remote clients, or 127.0.0.1 only locally.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Dispatch advertised port";
+                        value <=> root.dispatch-port;
+                        placeholder: "21180";
+                        hint: "Port advertised in dispatch responses. Keep it aligned with the redirect setup expected by the client.";
+                    }
+                }
+
+                SectionHeader {
+                    title: "Dispatch payload";
+                    description: "Nine version hashes are saved in this order; dTag-1 is appended automatically because typing constants is not a personality test.";
+                }
+
+                GridLayout {
+                    spacing: 10px;
+
+                    Row {
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "1 · azhash";
+                            value <=> root.dispatch-version-azhash;
+                            placeholder: "$azhash$…";
+                            hint: "First dispatch_version entry: the asset hash string beginning with $azhash$.";
+                        }
+
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "2 · cvhash";
+                            value <=> root.dispatch-version-cvhash;
+                            placeholder: "$cvhash$…";
+                            hint: "Second dispatch_version entry: the character voice hash string beginning with $cvhash$.";
+                        }
+
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "3 · l2dhash";
+                            value <=> root.dispatch-version-l2dhash;
+                            placeholder: "$l2dhash$…";
+                            hint: "Third dispatch_version entry: the Live2D hash string beginning with $l2dhash$.";
+                        }
+                    }
+
+                    Row {
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "4 · pichash";
+                            value <=> root.dispatch-version-pichash;
+                            placeholder: "$pichash$…";
+                            hint: "Fourth dispatch_version entry: the picture hash string beginning with $pichash$.";
+                        }
+
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "5 · bgmhash";
+                            value <=> root.dispatch-version-bgmhash;
+                            placeholder: "$bgmhash$…";
+                            hint: "Fifth dispatch_version entry: the background music hash string beginning with $bgmhash$.";
+                        }
+
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "6 · paintinghash";
+                            value <=> root.dispatch-version-paintinghash;
+                            placeholder: "$paintinghash$…";
+                            hint: "Sixth dispatch_version entry: the painting resource hash string beginning with $paintinghash$.";
+                        }
+                    }
+
+                    Row {
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "7 · mangahash";
+                            value <=> root.dispatch-version-mangahash;
+                            placeholder: "$mangahash$…";
+                            hint: "Seventh dispatch_version entry: the manga resource hash string beginning with $mangahash$.";
+                        }
+
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "8 · cipherhash";
+                            value <=> root.dispatch-version-cipherhash;
+                            placeholder: "$cipherhash$…";
+                            hint: "Eighth dispatch_version entry: the cipher resource hash string beginning with $cipherhash$.";
+                        }
+
+                        SettingField {
+                            horizontal-stretch: 1;
+                            title: "9 · dormhash";
+                            value <=> root.dispatch-version-dormhash;
+                            placeholder: "$dormhash$…";
+                            hint: "Ninth dispatch_version entry: the dorm resource hash string beginning with $dormhash$. dTag-1 is added after this field.";
+                        }
+                    }
+                }
+
+                SectionHeader {
+                    title: "Dispatch server entry";
+                    description: "One server is emitted. ids/state/tag_state/sort are fixed; proxy_ip and proxy_port reuse the visible IP and port.";
+                }
+
+                HorizontalLayout {
+                    spacing: 10px;
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Server IPv4";
+                        value <=> root.dispatch-server-ip;
+                        placeholder: "192.168.110.51";
+                        hint: "Written to both ip and proxy_ip. Use a client-reachable LAN/public IP, or 127.0.0.1 only when the client runs locally.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Server port";
+                        value <=> root.dispatch-server-port;
+                        placeholder: "21280";
+                        hint: "Written to both port and proxy_port. This normally matches the gate listener port.";
+                    }
+
+                    SettingField {
+                        horizontal-stretch: 1;
+                        title: "Server name";
+                        value <=> root.dispatch-server-name;
+                        placeholder: "CheshireDev";
+                        hint: "Display name shown in the client server list.";
+                    }
+                }
+            }
+        }
+
+        if root.show-logs: Rectangle {
+            height: 250px;
+            background: #080d17;
+            border-color: #2a3b57;
+            border-width: 1px;
+            border-radius: 10px;
+
+            VerticalLayout {
+                padding: 10px;
+                spacing: 6px;
+
+                HorizontalLayout {
+                    height: 24px;
+
+                    Text {
+                        text: "Runtime log";
+                        color: #dce5f4;
+                        font-size: 13px;
+                        font-weight: 600;
+                        horizontal-stretch: 1;
+                    }
+
+                    Text {
+                        text: "Collected even while this panel is hidden";
+                        color: #65758f;
+                        font-size: 10px;
+                    }
+                }
+
+                TextEdit {
+                    text: root.log-text;
+                    read-only: true;
+                    wrap: word-wrap;
+                    vertical-stretch: 1;
+                }
+            }
+        }
+    }
+}

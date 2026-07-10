@@ -1,0 +1,17 @@
+[package]
+name = "cheshire-server-app"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+cheshire-server-core.workspace = true
+cheshire-server-proto.workspace = true
+cheshire-server-runtime.workspace = true
+slint.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[build-dependencies]
+slint-build.workspace = true

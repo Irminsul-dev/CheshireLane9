@@ -34,7 +34,7 @@ The executable is intentionally only a thin command-line wrapper. The reusable s
 - `cheshire-server-services` owns the SDK, dispatch, gate, proxy, and certificate services.
 - `cheshire-server-runtime` assembles those services and manages startup, shutdown, and task cleanup.
 
-The `crates/cheshire-server` package contains the thin CLI binary. A future `cheshire-server-app` can live beside it and depend on the same runtime library.
+The `crates/cheshire-server` package contains the thin CLI binary. `crates/cheshire-server-app` contains the Slint desktop control room and depends on the same runtime library, so the server has two front doors without keeping two engines in the garage.
 
 Configuration is passed explicitly through these layers; no server starts by quietly hunting down a global configuration file. The core library still provides `Config::load_or_create` for callers who enjoy TOML paperwork. Another binary, including a desktop application, can skip that ceremony and start the same server from an in-memory `Config`:
 
@@ -127,6 +127,14 @@ cargo run -p cheshire-server
 ```
 
 The `cheshire-server` command chooses to call the core library's `Config::load_or_create` helper for `config.toml` in the working directory. If the file does not exist, the helper writes the default one. Library consumers can ignore the helper and construct `Config` directly, leaving TOML as optional paperwork rather than a constitutional requirement.
+
+### Desktop App
+
+```bash
+cargo run -p cheshire-server-app
+```
+
+The desktop app also reads or creates `config.toml`, but opening a window does not start the server. Review the field-specific network hints, save any changes, and press **Start** when the addresses have stopped looking suspicious. Starting validates and saves the form before launching the shared runtime in the background. **Stop** requests a clean shutdown, and **Show Logs** opens the log panel that has been collecting output while pretending not to exist.
 
 On first start it also generates a persistent local CA and an SDK TLS certificate when they do not exist:
 
