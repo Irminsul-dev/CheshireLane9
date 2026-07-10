@@ -15,10 +15,11 @@ use anyhow::Result;
 use config::CONFIG;
 use database::Database;
 use game::PlayerRuntime;
+use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    tracing_subscriber::fmt::init();
+    init_tracing();
     rustls::crypto::ring::default_provider()
         .install_default()
         .map_err(|_| anyhow::anyhow!("failed to install rustls crypto provider"))?;
@@ -43,4 +44,10 @@ async fn main() -> Result<()> {
     }
 
     Ok(())
+}
+
+fn init_tracing() {
+    let filter =
+        EnvFilter::try_from_default_env().unwrap_or_else(|_| EnvFilter::new("info,hudsucker=off"));
+    tracing_subscriber::fmt().with_env_filter(filter).init();
 }

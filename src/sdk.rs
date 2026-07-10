@@ -473,8 +473,8 @@ const COMMON_CONFIG: &str = r#"{
                         "http://blhxusgate.yo-star.com/?cmd=test?"
                     ]
                 },
-                "ENABLE": false,
-                "ENABLE_MANUAL": false,
+                "ENABLE": true,
+                "ENABLE_MANUAL": true,
                 "INTERNET": "https://www.google.com",
                 "INTERNET_ADDRESS": "https://www.google.com",
                 "NETWORK_ENDPORINT": "https://ap-southeast-1.log.aliyuncs.com",
@@ -685,11 +685,11 @@ mod tests {
     use super::*;
 
     #[test]
-    fn common_config_disables_external_network_detection() {
+    fn common_config_keeps_network_detection_enabled() {
         let config: Value = serde_json::from_str(COMMON_CONFIG).unwrap();
         let detection = &config["Data"]["AppConfig"]["DETECTION_ADDRESS"];
 
-        assert_eq!(detection["ENABLE"], false);
-        assert_eq!(detection["ENABLE_MANUAL"], false);
+        assert_eq!(detection["ENABLE"], true);
+        assert_eq!(detection["ENABLE_MANUAL"], true);
     }
 }

@@ -122,6 +122,8 @@ Android applications do not always trust user-installed CAs. Magisk plus AlwaysT
 
 The default proxy listener binds to all interfaces. Only expose it to a trusted LAN or restrict access with a firewall; otherwise it can be abused as an open forward proxy.
 
+Hudsucker's internal logs are hidden at the default `info` level because routine client disconnects are otherwise reported as warnings or errors. Set `RUST_LOG=info,hudsucker=debug` to enable them when diagnosing proxy behavior.
+
 ### Game Redirect
 
 Use [cheshire-game-redirect-magisk](https://github.com/Irminsul-dev/cheshire-game-redirect-magisk) and follow its instructions.
