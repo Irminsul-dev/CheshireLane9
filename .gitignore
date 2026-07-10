@@ -3,6 +3,8 @@
 cheshire.sqlite
 config.toml
 /crates/proto/out
-
-
+/.understand-anything/
+/assets/ca/*.cer
+/assets/ca/*.pem
+/assets/tls/*.pem
 

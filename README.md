@@ -75,7 +75,6 @@ To build and run the server:
 For client redirection, depending on your device setup, you may also need:
 
 - User CA trust support, for example [NVISOsecurity/AlwaysTrustUserCerts](https://github.com/NVISOsecurity/AlwaysTrustUserCerts)
-- `mitmproxy`, if you use the SDK redirect script
 - [cheshire-game-redirect-magisk](https://github.com/Irminsul-dev/cheshire-game-redirect-magisk), if you need game traffic redirection on Android
 
 ## Build And Run
@@ -86,34 +85,42 @@ cargo run -p cheshire-server
 
 The server reads `config.toml` from the working directory. If the file does not exist, it writes the default one. This is convenient, unless you expected configuration to be a spiritual journey.
 
-## Redirect Scripts
+On first start it also generates a persistent local CA and an SDK TLS certificate when they do not exist:
 
-The SDK redirect helper lives in:
+- `assets/ca/ca-cert.cer` — install this certificate on the client as a trusted CA
+- `assets/ca/ca-key.pem` — keep this private and never copy it to the client
+- `assets/tls/cert.pem` and `assets/tls/key.pem` — SDK HTTPS certificate signed by the local CA
 
-```text
-scripts/redirect/
+Existing certificate pairs are reused. If either CA file is missing, a new CA and SDK TLS pair are generated. If only one SDK TLS file is missing, the SDK TLS pair is regenerated.
+
+## SDK Proxy
+
+The Rust server includes an HTTP(S) MITM proxy, so Python and mitmproxy are not required. Its default configuration is:
+
+```toml
+sdk_proxy_addr = "0.0.0.0:28080"
+sdk_proxy_upstream_addr = "127.0.0.1:21080"
+mitm_ca_cert_path = "assets/ca/ca-cert.cer"
+mitm_ca_key_path = "assets/ca/ca-key.pem"
 ```
 
-### SDK Redirect
-
-Use the mitmproxy addon to send SDK API traffic to the local SDK HTTP server:
-
-```bash
-mitmproxy -s scripts/redirect/redirect_sdk.py
-```
-
-The script redirects:
+The proxy intercepts:
 
 - `jp-sdk-api.yostarplat.com`
 - `en-sdk-api.yostarplat.com`
 
-to:
+and forwards those requests to `sdk_proxy_upstream_addr`. Other HTTPS destinations remain ordinary CONNECT tunnels and are not decrypted.
 
-```text
-http://127.0.0.1:21080
-```
+To use it from Android:
 
-Install and trust the mitmproxy certificate on the client. On Android, user certificates may not be trusted by apps by default; Magisk plus AlwaysTrustUserCerts is the boring answer that usually works.
+1. Start `cheshire-server` once so the CA is generated.
+2. Copy `assets/ca/ca-cert.cer` to the phone and install it as a CA certificate.
+3. Set the phone's HTTP proxy to the Cheshire server IP and port `28080`.
+4. Use the Magisk game redirect module as before for dispatch/game traffic.
+
+Android applications do not always trust user-installed CAs. Magisk plus AlwaysTrustUserCerts, or installing the generated CA into the system trust store, may still be required.
+
+The default proxy listener binds to all interfaces. Only expose it to a trusted LAN or restrict access with a firewall; otherwise it can be abused as an open forward proxy.
 
 ### Game Redirect
 

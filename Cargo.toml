@@ -22,6 +22,7 @@ anyhow = "1.0.89"
 axum = "0.8.1"
 axum-server = { version = "0.7.1", features = ["tls-rustls"] }
 byteorder = "1.5.0"
+hudsucker = { version = "0.24.1", default-features = false, features = ["http2", "rcgen-ca", "rustls-client"] }
 md5 = "0.7.0"
 rand = "0.8.5"
 rustls = { version = "0.23.20", default-features = false, features = ["ring"] }

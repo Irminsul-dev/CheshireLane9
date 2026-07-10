@@ -12,6 +12,10 @@ pub struct Config {
     pub sdk_https_addr: SocketAddr,
     #[serde(default = "default_sdk_ip")]
     pub sdk_ip: String,
+    #[serde(default = "default_sdk_proxy_addr")]
+    pub sdk_proxy_addr: SocketAddr,
+    #[serde(default = "default_sdk_proxy_upstream_addr")]
+    pub sdk_proxy_upstream_addr: SocketAddr,
     pub dispatch_addr: SocketAddr,
     pub gate_addr: SocketAddr,
     pub dispatch_ip: String,
@@ -19,12 +23,42 @@ pub struct Config {
     pub dispatch_version: Vec<String>,
     pub dispatch_servers: Vec<Serverinfo>,
     pub salt: String,
+    #[serde(default = "default_mitm_ca_cert_path")]
+    pub mitm_ca_cert_path: PathBuf,
+    #[serde(default = "default_mitm_ca_key_path")]
+    pub mitm_ca_key_path: PathBuf,
+    #[serde(default = "default_tls_cert_path")]
     pub tls_cert_path: PathBuf,
+    #[serde(default = "default_tls_key_path")]
     pub tls_key_path: PathBuf,
 }
 
 fn default_sdk_ip() -> String {
     "127.0.0.1".to_string()
+}
+
+fn default_sdk_proxy_addr() -> SocketAddr {
+    "0.0.0.0:28080".parse().unwrap()
+}
+
+fn default_sdk_proxy_upstream_addr() -> SocketAddr {
+    "127.0.0.1:21080".parse().unwrap()
+}
+
+fn default_mitm_ca_cert_path() -> PathBuf {
+    "assets/ca/ca-cert.cer".into()
+}
+
+fn default_mitm_ca_key_path() -> PathBuf {
+    "assets/ca/ca-key.pem".into()
+}
+
+fn default_tls_cert_path() -> PathBuf {
+    "assets/tls/cert.pem".into()
+}
+
+fn default_tls_key_path() -> PathBuf {
+    "assets/tls/key.pem".into()
 }
 
 impl Default for Config {
@@ -70,11 +104,17 @@ mod tests {
 
         assert_eq!(config.dispatch_addr.ip().to_string(), "0.0.0.0");
         assert_eq!(config.sdk_ip, "127.0.0.1");
+        assert_eq!(config.sdk_proxy_addr, default_sdk_proxy_addr());
+        assert_eq!(
+            config.sdk_proxy_upstream_addr,
+            default_sdk_proxy_upstream_addr()
+        );
         assert_eq!(config.dispatch_ip, "127.0.0.1");
         assert!(config.dispatch_servers.iter().all(|server| {
             server.ip == "127.0.0.1" && server.proxy_ip.as_deref() == Some("127.0.0.1")
         }));
         assert!(data.contains("ip = \"127.0.0.1\""));
+        assert!(data.contains("sdk_proxy_addr = \"0.0.0.0:28080\""));
     }
 
     #[test]
@@ -98,5 +138,12 @@ tls_key_path = "assets/tls/key.pem"
         .unwrap();
 
         assert_eq!(config.sdk_ip, "127.0.0.1");
+        assert_eq!(config.sdk_proxy_addr, default_sdk_proxy_addr());
+        assert_eq!(
+            config.sdk_proxy_upstream_addr,
+            default_sdk_proxy_upstream_addr()
+        );
+        assert_eq!(config.mitm_ca_cert_path, default_mitm_ca_cert_path());
+        assert_eq!(config.mitm_ca_key_path, default_mitm_ca_key_path());
     }
 }

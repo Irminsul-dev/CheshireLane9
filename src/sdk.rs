@@ -473,8 +473,8 @@ const COMMON_CONFIG: &str = r#"{
                         "http://blhxusgate.yo-star.com/?cmd=test?"
                     ]
                 },
-                "ENABLE": true,
-                "ENABLE_MANUAL": true,
+                "ENABLE": false,
+                "ENABLE_MANUAL": false,
                 "INTERNET": "https://www.google.com",
                 "INTERNET_ADDRESS": "https://www.google.com",
                 "NETWORK_ENDPORINT": "https://ap-southeast-1.log.aliyuncs.com",
@@ -679,3 +679,17 @@ const COMMON_CONFIG: &str = r#"{
 }"#;
 
 const CLIENT_CODE: &str = include_str!("client-code.json");
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn common_config_disables_external_network_detection() {
+        let config: Value = serde_json::from_str(COMMON_CONFIG).unwrap();
+        let detection = &config["Data"]["AppConfig"]["DETECTION_ADDRESS"];
+
+        assert_eq!(detection["ENABLE"], false);
+        assert_eq!(detection["ENABLE_MANUAL"], false);
+    }
+}

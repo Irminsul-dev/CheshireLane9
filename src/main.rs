@@ -1,3 +1,4 @@
+mod certificates;
 mod config;
 mod crypto;
 mod data;
@@ -7,6 +8,7 @@ mod game;
 mod gate;
 mod packet;
 mod sdk;
+mod sdk_proxy;
 mod time;
 
 use anyhow::Result;
@@ -21,6 +23,7 @@ async fn main() -> Result<()> {
         .install_default()
         .map_err(|_| anyhow::anyhow!("failed to install rustls crypto provider"))?;
 
+    certificates::ensure(&CONFIG)?;
     data::load_all()?;
     let db = Database::connect(&CONFIG.database_url).await?;
     let runtime = PlayerRuntime::new(db.clone());
@@ -29,11 +32,13 @@ async fn main() -> Result<()> {
     let dispatch_task = tokio::spawn(dispatch::serve());
     let gate_task = tokio::spawn(gate::serve(db, runtime));
     let sdk_task = tokio::spawn(sdk::serve(sdk_db));
+    let sdk_proxy_task = tokio::spawn(sdk_proxy::serve());
 
     tokio::select! {
         result = dispatch_task => result??,
         result = gate_task => result??,
         result = sdk_task => result??,
+        result = sdk_proxy_task => result??,
         _ = tokio::signal::ctrl_c() => tracing::info!("shutdown requested"),
     }
 
