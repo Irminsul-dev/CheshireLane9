@@ -27,15 +27,16 @@ The implementation uses local protobuf definitions under `crates/cheshire-server
 
 ## Server Architecture
 
-The executable is intentionally only a thin command-line wrapper. The reusable server code is split into three libraries:
+The executable is intentionally only a thin command-line wrapper. The reusable server code is split across four libraries, because apparently one binary still needs a family tree:
 
 - `cheshire-server-core` owns the configuration model, game data, database, packet handling, and player runtime.
+- `cheshire-server-proto` owns the protobuf definitions and generated message types.
 - `cheshire-server-services` owns the SDK, dispatch, gate, proxy, and certificate services.
 - `cheshire-server-runtime` assembles those services and manages startup, shutdown, and task cleanup.
 
 The `crates/cheshire-server` package contains the thin CLI binary. A future `cheshire-server-app` can live beside it and depend on the same runtime library.
 
-Configuration is passed explicitly through these layers; the libraries do not read a global configuration file. This allows another binary, including a desktop application, to start the same server from an in-memory `Config`:
+Configuration is passed explicitly through these layers; no server starts by quietly hunting down a global configuration file. The core library still provides `Config::load_or_create` for callers who enjoy TOML paperwork. Another binary, including a desktop application, can skip that ceremony and start the same server from an in-memory `Config`:
 
 ```rust
 use cheshire_server_runtime::{Config, Server};
@@ -45,6 +46,10 @@ async fn run_server(shutdown: oneshot::Receiver<()>) -> anyhow::Result<()> {
     let config = Config {
         database_url: "sqlite://application-data/cheshire.sqlite".into(),
         assets_dir: "application-resources/assets".into(),
+        mitm_ca_cert_path: "application-data/ca/ca-cert.cer".into(),
+        mitm_ca_key_path: "application-data/ca/ca-key.pem".into(),
+        tls_cert_path: "application-data/tls/cert.pem".into(),
+        tls_key_path: "application-data/tls/key.pem".into(),
         ..Default::default()
     };
 
@@ -58,6 +63,8 @@ async fn run_server(shutdown: oneshot::Receiver<()>) -> anyhow::Result<()> {
 
 The desktop layer can keep the matching `oneshot::Sender` and trigger it from its quit action.
 
+Keep bundled assets in the application resources directory and generated keys in a writable application data directory. Signing a read-only app bundle is already enough paperwork without trying to write certificates back into it.
+
 `Server::run()` is also available when the caller does not need an external shutdown signal.
 
 We know you all want the damn proto files directly, so this time they are open-sourced too; spare yourselves the miserable little scripts people keep writing to extract them.
@@ -66,6 +73,7 @@ Default ports:
 
 - SDK HTTP: `21080`
 - SDK HTTPS: `21443`
+- SDK Proxy: `28080`
 - Dispatch: `21180`
 - Gate: `21280`
 
@@ -118,7 +126,7 @@ For client redirection, depending on your device setup, you may also need:
 cargo run -p cheshire-server
 ```
 
-The `cheshire-server` command reads `config.toml` from the working directory. If the file does not exist, it writes the default one. This file-loading behavior belongs to the command-line wrapper; library consumers can construct `Config` directly. This is convenient, unless you expected configuration to be a spiritual journey.
+The `cheshire-server` command chooses to call the core library's `Config::load_or_create` helper for `config.toml` in the working directory. If the file does not exist, the helper writes the default one. Library consumers can ignore the helper and construct `Config` directly, leaving TOML as optional paperwork rather than a constitutional requirement.
 
 On first start it also generates a persistent local CA and an SDK TLS certificate when they do not exist:
 
