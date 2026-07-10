@@ -5,7 +5,7 @@ use std::sync::Arc;
 
 use anyhow::{anyhow, Result};
 use proto::common::{Collectioninfo, Displayinfo, Kvdata};
-use proto::p10::{Cs10022, Cs10024, Cs10100, Sc10023, Sc10025, Sc10101};
+use proto::p10::{Cs10022, Cs10024, Cs10100, Cs10991, Sc10023, Sc10025, Sc10101};
 use proto::p11::{
     Cs11001, Cs11011, Cs11017, Cs11603, Cs11701, Cs11705, Cs11710, Cs11722, Cs11751, InsMessage,
     Noticeinfo, Sc11000, Sc11002, Sc11012, Sc11018, Sc11200, Sc11210, Sc11300, Sc11604, Sc11702,
@@ -147,6 +147,9 @@ fn handle_player_packet(
             if packet.decode::<Cs10100>().is_some() {
                 push(&mut out, Sc10101 { state: 0 }, packet.id);
             }
+        }
+        Cs10991::CMD_ID => {
+            let _ = packet.decode::<Cs10991>();
         }
         Cs11017::CMD_ID => {
             if let Some(req) = packet.decode::<Cs11017>() {
@@ -717,6 +720,7 @@ pub(crate) fn request_proto_name(cmd_id: u16) -> &'static str {
         Cs10022::CMD_ID => "p10.Cs10022",
         Cs10024::CMD_ID => "p10.Cs10024",
         Cs10100::CMD_ID => "p10.Cs10100",
+        Cs10991::CMD_ID => "p10.Cs10991",
         Cs11001::CMD_ID => "p11.Cs11001",
         Cs11011::CMD_ID => "p11.Cs11011",
         Cs11017::CMD_ID => "p11.Cs11017",
