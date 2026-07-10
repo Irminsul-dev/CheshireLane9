@@ -16,6 +16,7 @@ use proto::p13::{Cs13505, Sc13002, Sc13201, Sc13506};
 use proto::p15::{Cs15008, Cs15300, Sc15009};
 use proto::p16::{Cs16104, Sc16105, Sc16200};
 use proto::p18::{Cs18001, Sc18002};
+use proto::p19::{Cs19009, Sc19010};
 use proto::p20::{Cs20007, Sc20001, Sc20008, Sc20101, Sc20201};
 use proto::p21::Sc21536;
 use proto::p22::Sc22300;
@@ -259,6 +260,11 @@ fn handle_player_packet(
                     },
                     packet.id,
                 );
+            }
+        }
+        Cs19009::CMD_ID => {
+            if packet.decode::<Cs19009>().is_some() {
+                push(&mut out, Sc19010::default(), packet.id);
             }
         }
         Cs60037::CMD_ID => {
@@ -728,6 +734,7 @@ pub(crate) fn request_proto_name(cmd_id: u16) -> &'static str {
         Cs15300::CMD_ID => "p15.Cs15300",
         Cs16104::CMD_ID => "p16.Cs16104",
         Cs18001::CMD_ID => "p18.Cs18001",
+        Cs19009::CMD_ID => "p19.Cs19009",
         Cs20007::CMD_ID => "p20.Cs20007",
         Cs24020::CMD_ID => "p24.Cs24020",
         Cs25026::CMD_ID => "p25.Cs25026",
