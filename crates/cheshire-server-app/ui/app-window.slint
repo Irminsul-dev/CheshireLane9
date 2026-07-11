@@ -109,7 +109,6 @@ export component AppWindow inherits Window {
     background: #0b1220;
 
     in-out property <string> database-url;
-    in-out property <string> assets-dir;
     in-out property <string> sdk-http-addr;
     in-out property <string> sdk-https-addr;
     in-out property <string> sdk-ip;
@@ -224,24 +223,11 @@ export component AppWindow inherits Window {
                     description: "Files the server reads or writes. Relative paths are resolved from the application working directory.";
                 }
 
-                HorizontalLayout {
-                    spacing: 10px;
-
-                    SettingField {
-                        horizontal-stretch: 1;
-                        title: "Database URL";
-                        value <=> root.database-url;
-                        placeholder: "sqlite://cheshire.sqlite";
-                        hint: "SQLite connection URL. The desktop app may point this at its writable application data directory.";
-                    }
-
-                    SettingField {
-                        horizontal-stretch: 1;
-                        title: "Assets directory";
-                        value <=> root.assets-dir;
-                        placeholder: "assets";
-                        hint: "Must contain game/ and static/. A packaged app should use its bundled resource directory.";
-                    }
+                SettingField {
+                    title: "Database URL";
+                    value <=> root.database-url;
+                    placeholder: "sqlite://cheshire.sqlite";
+                    hint: "SQLite connection URL. The desktop app may point this at its writable application data directory.";
                 }
 
                 HorizontalLayout {

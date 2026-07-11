@@ -15,6 +15,7 @@ use rand::distributions::{Alphanumeric, DistString};
 use rand::RngCore;
 use serde::Deserialize;
 use serde_json::{json, Value};
+use std::path::PathBuf;
 use tower_http::services::ServeDir;
 
 #[derive(Clone)]
@@ -28,8 +29,8 @@ struct AuthInfo {
     token: Option<String>,
 }
 
-pub async fn serve(config: Config, db: Database) -> Result<()> {
-    let static_dir = config.assets_dir.join("static");
+pub async fn serve(config: Config, db: Database, assets_dir: PathBuf) -> Result<()> {
+    let static_dir = assets_dir.join("static");
     let state = SdkState { db };
     let app = Router::new()
         .route("/", get(index))

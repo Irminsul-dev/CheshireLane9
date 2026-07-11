@@ -196,7 +196,6 @@ mod tests {
     fn test_config(root: &Path) -> Config {
         Config {
             database_url: "sqlite::memory:".to_string(),
-            assets_dir: root.join("assets"),
             sdk_http_addr: "127.0.0.1:0".parse().unwrap(),
             sdk_https_addr: "127.0.0.1:0".parse().unwrap(),
             sdk_ip: "127.0.0.1".to_string(),

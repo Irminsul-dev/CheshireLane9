@@ -8,8 +8,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Deserialize, Serialize)]
 pub struct Config {
     pub database_url: String,
-    #[serde(default = "default_assets_dir")]
-    pub assets_dir: PathBuf,
     pub sdk_http_addr: SocketAddr,
     pub sdk_https_addr: SocketAddr,
     #[serde(default = "default_sdk_ip")]
@@ -36,10 +34,6 @@ pub struct Config {
 
 fn default_sdk_ip() -> String {
     "127.0.0.1".to_string()
-}
-
-fn default_assets_dir() -> PathBuf {
-    "assets".into()
 }
 
 fn default_sdk_proxy_addr() -> SocketAddr {
@@ -118,7 +112,6 @@ mod tests {
         let data = std::fs::read_to_string(&path).unwrap();
         let _ = std::fs::remove_file(&path);
 
-        assert_eq!(config.assets_dir, PathBuf::from("assets"));
         assert_eq!(config.dispatch_addr.ip().to_string(), "0.0.0.0");
         assert_eq!(config.sdk_ip, "127.0.0.1");
         assert_eq!(config.sdk_proxy_addr, default_sdk_proxy_addr());
@@ -153,7 +146,6 @@ tls_key_path = "assets/tls/key.pem"
         )
         .unwrap();
 
-        assert_eq!(config.assets_dir, default_assets_dir());
         assert_eq!(config.sdk_ip, "127.0.0.1");
         assert_eq!(config.sdk_proxy_addr, default_sdk_proxy_addr());
         assert_eq!(
@@ -162,6 +154,20 @@ tls_key_path = "assets/tls/key.pem"
         );
         assert_eq!(config.mitm_ca_cert_path, default_mitm_ca_cert_path());
         assert_eq!(config.mitm_ca_key_path, default_mitm_ca_key_path());
+    }
+
+    #[test]
+    fn legacy_assets_directory_is_ignored_and_not_saved() {
+        let legacy = DEFAULT_CONFIG.replacen(
+            "database_url = \"sqlite://cheshire.sqlite\"",
+            "database_url = \"sqlite://cheshire.sqlite\"\nassets_dir = \"custom-assets\"",
+            1,
+        );
+
+        let config: Config = toml::from_str(&legacy).unwrap();
+        let saved = toml::to_string(&config).unwrap();
+
+        assert!(!saved.contains("assets_dir"));
     }
 
     #[test]
@@ -178,7 +184,6 @@ tls_key_path = "assets/tls/key.pem"
         let _ = std::fs::remove_file(path);
 
         assert_eq!(loaded.database_url, config.database_url);
-        assert_eq!(loaded.assets_dir, config.assets_dir);
         assert_eq!(loaded.sdk_http_addr, config.sdk_http_addr);
         assert_eq!(loaded.dispatch_servers.len(), config.dispatch_servers.len());
     }

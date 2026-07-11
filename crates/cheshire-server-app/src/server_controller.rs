@@ -1,3 +1,4 @@
+use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
 
 use anyhow::{bail, Context, Result};
@@ -8,9 +9,10 @@ use tokio::sync::oneshot;
 
 use crate::AppWindow;
 
-#[derive(Clone, Default)]
+#[derive(Clone)]
 pub struct ServerController {
     state: Arc<Mutex<State>>,
+    assets_dir: Arc<PathBuf>,
 }
 
 #[derive(Default)]
@@ -20,6 +22,13 @@ struct State {
 }
 
 impl ServerController {
+    pub fn new(assets_dir: PathBuf) -> Self {
+        Self {
+            state: Arc::default(),
+            assets_dir: Arc::new(assets_dir),
+        }
+    }
+
     pub fn start(&self, config: Config, ui: slint::Weak<AppWindow>) -> Result<()> {
         let (shutdown, shutdown_requested) = oneshot::channel();
         {
@@ -32,6 +41,7 @@ impl ServerController {
         }
 
         let controller = self.clone();
+        let assets_dir = self.assets_dir.clone();
         let thread = std::thread::Builder::new()
             .name("cheshire-server-runtime".to_string())
             .spawn(move || {
@@ -42,9 +52,13 @@ impl ServerController {
                     .build()
                     .context("create Tokio runtime")
                     .and_then(|runtime| {
-                        runtime.block_on(Server::new(config).run_until_shutdown(async move {
-                            let _ = shutdown_requested.await;
-                        }))
+                        runtime.block_on(
+                            Server::new(config)
+                                .with_assets_dir(assets_dir.as_ref().clone())
+                                .run_until_shutdown(async move {
+                                    let _ = shutdown_requested.await;
+                                }),
+                        )
                     });
 
                 {

@@ -45,7 +45,6 @@ use tokio::sync::oneshot;
 async fn run_server(shutdown: oneshot::Receiver<()>) -> anyhow::Result<()> {
     let config = Config {
         database_url: "sqlite://application-data/cheshire.sqlite".into(),
-        assets_dir: "application-resources/assets".into(),
         mitm_ca_cert_path: "application-data/ca/ca-cert.cer".into(),
         mitm_ca_key_path: "application-data/ca/ca-key.pem".into(),
         tls_cert_path: "application-data/tls/cert.pem".into(),
@@ -54,6 +53,7 @@ async fn run_server(shutdown: oneshot::Receiver<()>) -> anyhow::Result<()> {
     };
 
     Server::new(config)
+        .with_assets_dir("application-resources/assets")
         .run_until_shutdown(async move {
             let _ = shutdown.await;
         })
@@ -63,7 +63,7 @@ async fn run_server(shutdown: oneshot::Receiver<()>) -> anyhow::Result<()> {
 
 The desktop layer can keep the matching `oneshot::Sender` and trigger it from its quit action.
 
-Keep bundled assets in the application resources directory and generated keys in a writable application data directory. Signing a read-only app bundle is already enough paperwork without trying to write certificates back into it.
+Game assets are a runtime resource rather than a user configuration field. `Server::new` uses `assets` for command-line development; embedded callers can select their bundled resource directory with `Server::with_assets_dir`. Keep generated keys in a writable application data directory. Signing a read-only app bundle is already enough paperwork without trying to write certificates back into it.
 
 `Server::run()` is also available when the caller does not need an external shutdown signal.
 
@@ -128,6 +128,8 @@ cargo run -p cheshire-server
 
 The `cheshire-server` command chooses to call the core library's `Config::load_or_create` helper for `config.toml` in the working directory. If the file does not exist, the helper writes the default one. Library consumers can ignore the helper and construct `Config` directly, leaving TOML as optional paperwork rather than a constitutional requirement.
 
+The CLI loads immutable game and static resources from `assets`. The directory is fixed for the lifetime of the process and is intentionally not stored in `config.toml`.
+
 ### Desktop App
 
 ```bash
@@ -135,6 +137,8 @@ cargo run -p cheshire-server-app
 ```
 
 The desktop app also reads or creates `config.toml`, but opening a window does not start the server. Review the field-specific network hints, save any changes, and press **Start** when the addresses have stopped looking suspicious. Starting validates and saves the form before launching the shared runtime in the background. **Stop** requests a clean shutdown, and **Show Logs** opens the log panel that has been collecting output while pretending not to exist.
+
+The desktop app resolves resources automatically. A packaged macOS application uses `Contents/Resources/assets`; other packaged layouts may place `assets` beside the executable; `cargo run` falls back to the workspace's `assets` directory. The resource location is not exposed in the settings UI and cannot change until the application restarts.
 
 On first start it also generates a persistent local CA and an SDK TLS certificate when they do not exist:
 

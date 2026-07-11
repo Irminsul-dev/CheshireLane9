@@ -2,7 +2,7 @@ mod config_editor;
 mod log_sink;
 mod server_controller;
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use anyhow::{Context, Result};
 use cheshire_server_core::Config;
@@ -20,7 +20,9 @@ fn main() -> Result<()> {
 
     load_initial_config(&ui);
 
-    let controller = ServerController::default();
+    let assets_dir = resolve_assets_dir();
+    tracing::info!(assets = %assets_dir.display(), "resolved application assets");
+    let controller = ServerController::new(assets_dir);
     register_save_callback(&ui);
     register_start_callback(&ui, controller.clone());
     register_stop_callback(&ui, controller.clone());
@@ -131,4 +133,30 @@ fn report_error(ui: &AppWindow, summary: &str, error: &anyhow::Error) {
     ui.set_status_text(message.clone().into());
     ui.set_show_logs(true);
     tracing::error!(error = %error, "{summary}");
+}
+
+fn resolve_assets_dir() -> PathBuf {
+    let executable = std::env::current_exe().ok();
+
+    #[cfg(target_os = "macos")]
+    if let Some(bundle_assets) = executable
+        .as_deref()
+        .and_then(Path::parent)
+        .and_then(Path::parent)
+        .map(|contents| contents.join("Resources/assets"))
+        .filter(|path| path.is_dir())
+    {
+        return bundle_assets;
+    }
+
+    if let Some(adjacent_assets) = executable
+        .as_deref()
+        .and_then(Path::parent)
+        .map(|directory| directory.join("assets"))
+        .filter(|path| path.is_dir())
+    {
+        return adjacent_assets;
+    }
+
+    PathBuf::from("assets")
 }

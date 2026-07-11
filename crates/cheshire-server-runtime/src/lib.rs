@@ -1,4 +1,5 @@
 use std::future::{pending, Future};
+use std::path::{Path, PathBuf};
 
 use anyhow::{anyhow, Context, Result};
 use cheshire_server_core::{data, Database, PlayerRuntime};
@@ -9,15 +10,28 @@ pub use cheshire_server_core::Config;
 
 pub struct Server {
     config: Config,
+    assets_dir: PathBuf,
 }
 
 impl Server {
     pub fn new(config: Config) -> Self {
-        Self { config }
+        Self {
+            config,
+            assets_dir: "assets".into(),
+        }
     }
 
     pub fn config(&self) -> &Config {
         &self.config
+    }
+
+    pub fn assets_dir(&self) -> &Path {
+        &self.assets_dir
+    }
+
+    pub fn with_assets_dir(mut self, assets_dir: impl Into<PathBuf>) -> Self {
+        self.assets_dir = assets_dir.into();
+        self
     }
 
     pub async fn run(self) -> Result<()> {
@@ -30,7 +44,7 @@ impl Server {
     {
         install_crypto_provider()?;
         certificates::ensure(&self.config).context("prepare server certificates")?;
-        data::load_all(&self.config.assets_dir).context("load game data")?;
+        data::load_all(&self.assets_dir).context("load game data")?;
 
         let db = Database::connect(&self.config.database_url)
             .await
@@ -38,6 +52,7 @@ impl Server {
         let player_runtime = PlayerRuntime::new(db.clone(), self.config.sdk_http_origin());
 
         let mut services = JoinSet::new();
+        let assets_dir = self.assets_dir;
         let config = self.config;
 
         let dispatch_config = config.clone();
@@ -56,7 +71,11 @@ impl Server {
         });
 
         let sdk_config = config.clone();
-        services.spawn(async move { sdk::serve(sdk_config, db).await.context("SDK service") });
+        services.spawn(async move {
+            sdk::serve(sdk_config, db, assets_dir)
+                .await
+                .context("SDK service")
+        });
 
         services.spawn(async move { sdk_proxy::serve(config).await.context("SDK proxy service") });
 
@@ -109,6 +128,13 @@ mod tests {
         let server = Server::new(config);
 
         assert_eq!(server.config().database_url, "sqlite::memory:");
+        assert_eq!(server.assets_dir(), Path::new("assets"));
+
+        let server = server.with_assets_dir("application-resources/assets");
+        assert_eq!(
+            server.assets_dir(),
+            Path::new("application-resources/assets")
+        );
     }
 
     #[tokio::test]
@@ -120,7 +146,6 @@ mod tests {
         let root = std::env::temp_dir().join(format!("cheshire-runtime-{id}"));
         let config = Config {
             database_url: "sqlite::memory:".to_string(),
-            assets_dir: std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../assets"),
             sdk_http_addr: "127.0.0.1:0".parse().unwrap(),
             sdk_https_addr: "127.0.0.1:0".parse().unwrap(),
             sdk_proxy_addr: "127.0.0.1:0".parse().unwrap(),
@@ -133,10 +158,14 @@ mod tests {
             ..Default::default()
         };
 
-        Server::new(config)
-            .run_until_shutdown(async {})
-            .await
-            .unwrap();
+        let assets_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../assets");
+        for _ in 0..2 {
+            Server::new(config.clone())
+                .with_assets_dir(assets_dir.clone())
+                .run_until_shutdown(async {})
+                .await
+                .unwrap();
+        }
 
         let _ = std::fs::remove_dir_all(root);
     }

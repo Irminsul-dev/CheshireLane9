@@ -10,7 +10,6 @@ use crate::AppWindow;
 #[derive(Clone, Debug)]
 struct FormValues {
     database_url: String,
-    assets_dir: String,
     sdk_http_addr: String,
     sdk_https_addr: String,
     sdk_ip: String,
@@ -57,7 +56,6 @@ impl FormValues {
 
         Ok(Self {
             database_url: config.database_url.clone(),
-            assets_dir: config.assets_dir.display().to_string(),
             sdk_http_addr: config.sdk_http_addr.to_string(),
             sdk_https_addr: config.sdk_https_addr.to_string(),
             sdk_ip: config.sdk_ip.clone(),
@@ -89,7 +87,6 @@ impl FormValues {
     fn from_ui(ui: &AppWindow) -> Self {
         Self {
             database_url: ui.get_database_url().to_string(),
-            assets_dir: ui.get_assets_dir().to_string(),
             sdk_http_addr: ui.get_sdk_http_addr().to_string(),
             sdk_https_addr: ui.get_sdk_https_addr().to_string(),
             sdk_ip: ui.get_sdk_ip().to_string(),
@@ -120,7 +117,6 @@ impl FormValues {
 
     fn apply_to_ui(self, ui: &AppWindow) {
         ui.set_database_url(self.database_url.into());
-        ui.set_assets_dir(self.assets_dir.into());
         ui.set_sdk_http_addr(self.sdk_http_addr.into());
         ui.set_sdk_https_addr(self.sdk_https_addr.into());
         ui.set_sdk_ip(self.sdk_ip.into());
@@ -186,7 +182,6 @@ impl FormValues {
 
         Ok(Config {
             database_url,
-            assets_dir: required_path(self.assets_dir, "Assets directory")?,
             sdk_http_addr: parse_socket(&self.sdk_http_addr, "SDK HTTP bind address")?,
             sdk_https_addr: parse_socket(&self.sdk_https_addr, "SDK HTTPS bind address")?,
             sdk_ip,
