@@ -14,6 +14,7 @@ use cheshire_server_proto::p25::{Commanderboxinfo, Presetfleet, Sc25001};
 use cheshire_server_proto::p33::Sc33114;
 use serde::{Deserialize, Serialize};
 use std::cmp::PartialEq;
+use std::collections::HashSet;
 
 #[derive(Serialize, Deserialize, Default, Clone, Eq, PartialEq)]
 pub enum ResourceType {
@@ -255,6 +256,10 @@ impl PlayerInfo {
     }
 
     pub fn add_ship_skin(&mut self, ship_id: u32) {
+        let mut owned_skin_ids = HashSet::new();
+        self.ship_skins
+            .retain(|skin| owned_skin_ids.insert(skin.id));
+
         if let (Some(ship_data), Some(ship_skin_data)) = (
             crate::data::ship_data_template_data::DATA.get(),
             crate::data::ship_skin_template_data::DATA.get(),
@@ -264,17 +269,18 @@ impl PlayerInfo {
             } else {
                 return;
             };
-            let skins = ship_skin_data
+            for skin in ship_skin_data
                 .0
                 .values()
                 .filter(|skin| skin.ship_group == group_type)
-                .map(|skin| Idtimeinfo {
-                    id: skin.id,
-                    ..Default::default()
-                })
-                .collect::<Vec<Idtimeinfo>>();
-
-            self.ship_skins.extend(&skins);
+            {
+                if owned_skin_ids.insert(skin.id) {
+                    self.ship_skins.push(Idtimeinfo {
+                        id: skin.id,
+                        ..Default::default()
+                    });
+                }
+            }
         }
     }
 

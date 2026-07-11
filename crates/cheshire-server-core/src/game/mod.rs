@@ -1,6 +1,6 @@
 pub mod player_info;
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 
 use anyhow::{anyhow, Result};
@@ -619,9 +619,15 @@ fn handle_chat(player: &mut PlayerInfo, dirty: &mut bool, content: String, out: 
 }
 
 fn give_all_ships(player: &mut PlayerInfo) {
+    let mut owned_templates = player
+        .ships
+        .iter()
+        .map(|ship| ship.template_id)
+        .collect::<HashSet<_>>();
+
     if let Some(data) = crate::data::ship_data_template_data::DATA.get() {
         for (key, ship) in &data.0 {
-            if ship.star == ship.star_max && ship.star >= 5 {
+            if ship.star == ship.star_max && ship.star >= 5 && owned_templates.insert(ship.id) {
                 if let Ok(id) = key.parse() {
                     player.add_ship(id);
                 }
@@ -799,3 +805,60 @@ const NOTICE: &str = r#"
         ※作者不对任何滥用、违法使用或由此产生的后果负责。
         ※本项目为开源免费项目，如您因使用本软件而支付费用，请立即申请退款。
 "#;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn load_test_data() {
+        let assets_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../assets");
+        crate::data::load_all(assets_dir).unwrap();
+    }
+
+    #[test]
+    fn give_all_ships_is_idempotent_by_template() {
+        load_test_data();
+        let mut player = PlayerInfo::default();
+
+        give_all_ships(&mut player);
+        let first_count = player.ships.len();
+        assert!(first_count > 0);
+
+        give_all_ships(&mut player);
+        let templates = player
+            .ships
+            .iter()
+            .map(|ship| ship.template_id)
+            .collect::<HashSet<_>>();
+
+        assert_eq!(player.ships.len(), first_count);
+        assert_eq!(templates.len(), first_count);
+    }
+
+    #[test]
+    fn give_all_skins_removes_existing_duplicates() {
+        load_test_data();
+        let mut player = PlayerInfo::default();
+        player.add_ship(106011);
+        player.add_ship(106011);
+
+        give_all_skins(&mut player);
+        assert!(!player.ship_skins.is_empty());
+        let expected_ids = player
+            .ship_skins
+            .iter()
+            .map(|skin| skin.id)
+            .collect::<HashSet<_>>();
+        player.ship_skins.push(player.ship_skins[0]);
+
+        give_all_skins(&mut player);
+        let actual_ids = player
+            .ship_skins
+            .iter()
+            .map(|skin| skin.id)
+            .collect::<HashSet<_>>();
+
+        assert_eq!(actual_ids, expected_ids);
+        assert_eq!(player.ship_skins.len(), actual_ids.len());
+    }
+}
