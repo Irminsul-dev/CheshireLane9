@@ -31,9 +31,12 @@ fn main() -> Result<()> {
         config = CONFIG_PATH,
         "desktop application ready; server is stopped"
     );
-    let result = ui.run().context("run application event loop");
-    controller.stop();
-    result
+    let event_loop_result = ui.run().context("run application event loop");
+    let shutdown_result = controller
+        .shutdown_and_wait()
+        .context("shut down desktop server runtime");
+    event_loop_result?;
+    shutdown_result
 }
 
 fn load_initial_config(ui: &AppWindow) {

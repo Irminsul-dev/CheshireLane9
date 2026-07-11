@@ -1,7 +1,8 @@
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex, MutexGuard};
+use std::thread::JoinHandle;
 
-use anyhow::{bail, Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use cheshire_server_core::Config;
 use cheshire_server_runtime::Server;
 use tokio::runtime::Builder;
@@ -19,6 +20,7 @@ pub struct ServerController {
 struct State {
     running: bool,
     shutdown: Option<oneshot::Sender<()>>,
+    thread: Option<JoinHandle<()>>,
 }
 
 impl ServerController {
@@ -30,6 +32,17 @@ impl ServerController {
     }
 
     pub fn start(&self, config: Config, ui: slint::Weak<AppWindow>) -> Result<()> {
+        let previous_thread = {
+            let mut state = self.lock();
+            if state.running {
+                bail!("the server is already running");
+            }
+            state.thread.take()
+        };
+        if let Some(thread) = previous_thread {
+            join_runtime_thread(thread).context("reap previous server runtime thread")?;
+        }
+
         let (shutdown, shutdown_requested) = oneshot::channel();
         {
             let mut state = self.lock();
@@ -90,14 +103,18 @@ impl ServerController {
                 });
             });
 
-        if let Err(error) = thread {
-            let mut state = self.lock();
-            state.running = false;
-            state.shutdown.take();
-            return Err(error).context("start server runtime thread");
+        match thread {
+            Ok(thread) => {
+                self.lock().thread = Some(thread);
+                Ok(())
+            }
+            Err(error) => {
+                let mut state = self.lock();
+                state.running = false;
+                state.shutdown.take();
+                Err(error).context("start server runtime thread")
+            }
         }
-
-        Ok(())
     }
 
     pub fn stop(&self) -> bool {
@@ -112,9 +129,60 @@ impl ServerController {
         shutdown.is_some_and(|shutdown| shutdown.send(()).is_ok())
     }
 
+    pub fn shutdown_and_wait(&self) -> Result<()> {
+        self.stop();
+        let thread = self.lock().thread.take();
+        let result = thread.map_or(Ok(()), join_runtime_thread);
+
+        let mut state = self.lock();
+        state.running = false;
+        state.shutdown.take();
+        result.context("join server runtime thread")
+    }
+
     fn lock(&self) -> MutexGuard<'_, State> {
         self.state
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner())
+    }
+}
+
+fn join_runtime_thread(thread: JoinHandle<()>) -> Result<()> {
+    thread
+        .join()
+        .map_err(|_| anyhow!("server runtime thread panicked"))
+}
+
+#[cfg(test)]
+mod tests {
+    use std::sync::atomic::{AtomicBool, Ordering};
+
+    use super::*;
+
+    #[test]
+    fn shutdown_waits_for_tracked_runtime_thread() {
+        let controller = ServerController::new("assets".into());
+        let stopped = Arc::new(AtomicBool::new(false));
+        let thread_stopped = stopped.clone();
+        let (shutdown, shutdown_requested) = oneshot::channel();
+        let thread = std::thread::spawn(move || {
+            let _ = shutdown_requested.blocking_recv();
+            thread_stopped.store(true, Ordering::SeqCst);
+        });
+
+        {
+            let mut state = controller.lock();
+            state.running = true;
+            state.shutdown = Some(shutdown);
+            state.thread = Some(thread);
+        }
+
+        controller.shutdown_and_wait().unwrap();
+
+        assert!(stopped.load(Ordering::SeqCst));
+        let state = controller.lock();
+        assert!(!state.running);
+        assert!(state.shutdown.is_none());
+        assert!(state.thread.is_none());
     }
 }
